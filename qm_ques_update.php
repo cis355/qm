@@ -63,7 +63,7 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 		if($fileSize > 0) { // if file was updated, update all fields
 			$pdo = Database::connect();
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = "UPDATE qm_ques_list  set quiz_id = ?, ques_name = ?, ques_text = ? WHERE id = ?";
+			$sql = "UPDATE qm_questions  set quiz_id = ?, ques_name = ?, ques_text = ? WHERE id = ?";
 			$q = $pdo->prepare($sql);
 			$q->execute(array($quiz_id, $ques_name, $ques_text, $id));
 			Database::disconnect();
@@ -72,7 +72,7 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 		else { // otherwise, update all fields EXCEPT file fields
 			$pdo = Database::connect();
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = "UPDATE qm_ques_list  set quiz_id = ?, ques_name = ?, ques_text = ? WHERE id = ?";
+			$sql = "UPDATE qm_questions  set quiz_id = ?, ques_name = ?, ques_text = ? WHERE id = ?";
 			$q = $pdo->prepare($sql);
 			$q->execute(array($quiz_id, $ques_name, $ques_text, $id));
 			Database::disconnect();
@@ -140,7 +140,7 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 				<div class="control-group <?php echo !empty($ques_textError)?'error':'';?>">
 					<label class="control-label">Question Text</label>
 					<div class="controls">
-						<input name="ques_name" type="text" placeholder="Question Text" value="<?php echo !empty($ques_text)?$ques_text:'';?>">
+						<input name="ques_text" type="text" placeholder="Question Text" value="<?php echo !empty($ques_text)?$ques_text:'';?>">
 						<?php if (!empty($ques_textError)): ?>
 							<span class="help-inline"><?php echo $ques_textError;?></span>
 						<?php endif;?>
