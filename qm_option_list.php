@@ -1,7 +1,7 @@
 <?php
 /* ---------------------------------------------------------------------------
  * filename    : qm_option_list2.php
- * author      : Scott Angst, sdangst@gmail.com
+ * author      : Dewayne Beard
  * description : This program displays a list of Options
  * ---------------------------------------------------------------------------
  */
