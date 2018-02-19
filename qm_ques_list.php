@@ -31,10 +31,10 @@ include '../../database/header.php';
 			<table class="table table-striped table-bordered" style="background-color: lightgrey !important">
 				<thead>
 					<tr>
-						<th>Name</th>
-						<th>Email</th>
-						<th>Mobile</th>
-						<th>Action</th>
+						<th>Question</th>
+						<th>Quiz Number</th>
+						<th>Question Name</th>
+						<th>Question Text</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -45,8 +45,10 @@ include '../../database/header.php';
 						
 						foreach ($pdo->query($sql) as $row) {
 							echo '<tr>';
-							echo '<td>'. trim($row['lname']) . '<td>';
-							echo '<td>'. trim($row['fname']) . '<td>';
+							echo '<td>'. trim($row['id']) . '<td>';
+							echo '<td>'. trim($row['quiz_id']) . '<td>';
+							echo '<td>'. trim($row['ques_name']) . '<td>';
+							echo '<td>'. trim($row['ques_text']) . '<td>';
 								
 						}
 						Database::disconnect();
