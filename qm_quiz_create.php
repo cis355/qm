@@ -17,8 +17,8 @@ if(!isset($_SESSION["fr_person_id"])){ // if "user" not set,
 	exit;
 }
 */
-require '../../database/database.php';
-
+//require '../../database/database.php';
+require '/home/gpcorser/public_html/database/database.php';
 if ( !empty($_POST)) { // if not first time through
 
 	// initialize user input validation variables
