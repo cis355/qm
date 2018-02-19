@@ -22,7 +22,7 @@
 		</div>
 		<div class="row">
 			<p>
-					<a href="qm_per_create.php" class="btn btn-primary">Create Quiz</a>
+					<a href="qm_quiz_create.php"<!--was: qm_per_create.php--> class="btn btn-primary">Create Quiz</a> <!--Ryan I (Nathan Gaffney) edited this portion  -->
 			</p>
 				
 			<table class="table table-striped table-bordered" style="background-color: lightgrey !important">
