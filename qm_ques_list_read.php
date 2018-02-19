@@ -1,8 +1,8 @@
 <?php 
 /* ---------------------------------------------------------------------------
- * filename    : fr_per_read.php
- * author      : George Corser, gcorser@gmail.com
- * description : This program displays one volunteer's details (table: fr_persons)
+ * filename    : qm_ques_list_read.php
+ * author      : Wyatt Towne, wmtowne@svsu.edu
+ * description : This program displays the question list for a quiz
  * ---------------------------------------------------------------------------
  */
 /*session_start();
@@ -63,7 +63,7 @@ Database::disconnect();
 						</label>
 					</div>
 					
-					<label class="control-label">Qestion Name</label>
+					<label class="control-label">Question Name</label>
 					<div class="controls">
 						<label class="checkbox">
 							<?php echo $data['ques_name'];?>
