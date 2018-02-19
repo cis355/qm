@@ -75,7 +75,9 @@ Database::disconnect();
 						</label>
 					</div>     
 					
-					
+					<div class="form-actions">
+						<a class="btn" href="qm_ques_list.php">Back</a>
+					</div>
 				
 			</div>  <!-- end div: class="form-horizontal" 
 
