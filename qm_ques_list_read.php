@@ -13,6 +13,7 @@ if(!isset($_SESSION["fr_person_id"])){ // if "user" not set,
 	exit;
 }
 */
+include 'home/gpcorser/public_html/database/database.php';
 
 require '../../database/database.php';
 require 'functions.php';
