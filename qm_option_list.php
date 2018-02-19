@@ -1,6 +1,6 @@
 <?php
 /* ---------------------------------------------------------------------------
- * filename    : qm_option_list2.php
+ * filename    : qm_option_list.php
  * author      : Dewayne Beard
  * description : This program displays a list of Options
  * ---------------------------------------------------------------------------
