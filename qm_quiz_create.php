@@ -17,8 +17,8 @@ if(!isset($_SESSION["fr_person_id"])){ // if "user" not set,
 	exit;
 }
 */
-require '../../database/database.php';
-
+//require '../../database/database.php';
+require '/home/gpcorser/public_html/database/database.php';
 if ( !empty($_POST)) { // if not first time through
 
 	// initialize user input validation variables
@@ -63,7 +63,8 @@ if ( !empty($_POST)) { // if not first time through
 		header("Location: qm_quiz.php");
 	}
 }
-include '../../database/header.php'; //html <head> section
+//include '../../database/header.php'; //html <head> section
+include '/home/gpcorser/public_html/database/header.php'; //html <head> section
 ?>
 <body>
     <div class="container">
@@ -88,7 +89,7 @@ include '../../database/header.php'; //html <head> section
 				<div class="control-group <?php echo !empty($per_idError)?'error':'';?>">
 					<label class="control-label">Persons ID</label>
 					<div class="controls">
-						<input name="per_id" type="text" placeholder="Time" value="<?php echo !empty($time)?$time:'';?>">
+						<input name="per_id" type="text" placeholder="Persons ID" value="<?php echo !empty($time)?$time:'';?>">
 						<?php if (!empty($per_idError)): ?>
 							<span class="help-inline"><?php echo $per_idError;?></span>
 						<?php endif;?>
@@ -98,7 +99,7 @@ include '../../database/header.php'; //html <head> section
 				<div class="control-group <?php echo !empty($quiz_nameError)?'error':'';?>">
 					<label class="control-label">Quiz Name</label>
 					<div class="controls">
-						<input name="quiz_name" type="text" placeholder="Location" value="<?php echo !empty($location)?$location:'';?>">
+						<input name="quiz_name" type="text" placeholder="Quiz Name" value="<?php echo !empty($location)?$location:'';?>">
 						<?php if (!empty($quiz_nameError)): ?>
 							<span class="help-inline"><?php echo $quiz_nameError;?></span>
 						<?php endif;?>
