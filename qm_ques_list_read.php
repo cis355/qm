@@ -1,8 +1,8 @@
 <?php 
 /* ---------------------------------------------------------------------------
- * filename    : fr_per_read.php
- * author      : George Corser, gcorser@gmail.com
- * description : This program displays one volunteer's details (table: fr_persons)
+ * filename    : qm_ques_list_read.php
+ * author      : Wyatt Towne, wmtowne@svsu.edu
+ * description : This program displays the question list for a quiz
  * ---------------------------------------------------------------------------
  */
 /*session_start();
@@ -33,14 +33,12 @@ Database::disconnect();
 		<meta charset="utf-8">
 		<link   href="css/bootstrap.min.css" rel="stylesheet">
 		<script src="js/bootstrap.min.js"></script>
-		<link rel="icon" href="cardinal_logo.png" type="image/png" />
+		<!--<link rel="icon" href="cardinal_logo.png" type="image/png" />-->
 	</head>
 
-	<body>
+	<body style="background-color: lightblue !important";>
 		<div class="container">
-			<?php
-				Functions::logoDisplay2();
-			?>
+			
 			<div class="row">
 				<h3>Question List</h3>
 			</div>
@@ -63,7 +61,7 @@ Database::disconnect();
 						</label>
 					</div>
 					
-					<label class="control-label">Qestion Name</label>
+					<label class="control-label">Question Name</label>
 					<div class="controls">
 						<label class="checkbox">
 							<?php echo $data['ques_name'];?>
