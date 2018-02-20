@@ -2,7 +2,8 @@
 /* ---------------------------------------------------------------------------
  * filename    : qm_Quizzes_read.php
  * author      : Christine Torres, cmtorre1@svsu.edu
- * description : This program displays one assignment's details (table: fr_assignments)
+ * description : This program displays the read page for quiz database 
+ *               (table: qm_quizes, qm_persons)
  * ---------------------------------------------------------------------------
  */
  
@@ -19,29 +20,29 @@ $id = $_GET['id'];
 $pdo = Database::connect();
 
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-# get quiz ids
+# get quiz ids, 
 $sql = "SELECT * FROM qm_quizzes where id = ?";
 $q = $pdo->prepare($sql);
-$q->execute(array($data['id']));
-$quiz_id_data = $q->fetch(PDO::FETCH_ASSOC);
+$q->execute(array($quizdata['id']));
+$quizdata = $q->fetch(PDO::FETCH_ASSOC);
 
 # get person id
 $sql = "SELECT * FROM qm_persons where id = ?";
 $q = $pdo->prepare($sql);
-$q->execute(array($data['per_id']));
-$per_id_data = $q->fetch(PDO::FETCH_ASSOC);
+$q->execute(array($quizdata['per_id']));
+$quizdata = $q->fetch(PDO::FETCH_ASSOC);
 
 # get quiz name
 $sql = "SELECT * FROM qm_quizzes where id = ?";
 $q = $pdo->prepare($sql);
-$q->execute(array($data['quiz_name']));
-$quiz_name_data = $q->fetch(PDO::FETCH_ASSOC);
+$q->execute(array($quizdata['quiz_name']));
+$quizdata = $q->fetch(PDO::FETCH_ASSOC);
 
 # get quiz description
 $sql = "SELECT * FROM qm_quizzes where id = ?";
 $q = $pdo->prepare($sql);
-$q->execute(array($data['quiz_description']));
-$quiz_description_data = $q->fetch(PDO::FETCH_ASSOC);
+$q->execute(array($quizdata['quiz_description']));
+$quizdata = $q->fetch(PDO::FETCH_ASSOC);
 
 
 Database::disconnect();
