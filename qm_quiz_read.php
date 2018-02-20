@@ -11,12 +11,13 @@ if(!isset($_SESSION["fr_person_id"])){ // if "user" not set,
 	session_destroy();
 	header('Location: login.php');     // go to login page
 	exit;
-}
-require '../database/database.php';
-require 'functions.php';
+}*/
+
+require '/home/gpcorser/public_html/database/database.php';
+//require 'functions.php';
 $id = $_GET['id'];
 $pdo = Database::connect();
-*/
+
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 # get quiz ids
 $sql = "SELECT * FROM qm_quizzes where id = ?";
@@ -43,14 +44,15 @@ $q->execute(array($data['quiz_description']));
 $quiz_description_data = $q->fetch(PDO::FETCH_ASSOC);
 
 
-//Database::disconnect();
+Database::disconnect();
 
-include '../../database/header.php'; //html <head> section
+//include '../../database/header.php'; //html <head> section
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
+<head>
+</head>
 <body>
     <div class="container">
     		<?php 
