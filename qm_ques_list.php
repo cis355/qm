@@ -14,7 +14,7 @@ if(!isset($_SESSION["fr_person_id"])){ // if "user" not set,
 }
 $sessionid = $_SESSION['fr_person_id'];
 */
-include '../../database/header.php';
+include '/home/gpcorser/public_html/database/header.php';
 ?>
 
 <body style="background-color: lightblue !important";>
@@ -31,22 +31,24 @@ include '../../database/header.php';
 			<table class="table table-striped table-bordered" style="background-color: lightgrey !important">
 				<thead>
 					<tr>
-						<th>Name</th>
-						<th>Email</th>
-						<th>Mobile</th>
-						<th>Action</th>
+						<th>Question</th>
+						<th>Quiz Number</th>
+						<th>Question Name</th>
+						<th>Question Text</th>
 					</tr>
 				</thead>
 				<tbody>
 					<?php 
-						include '../../database/database.php';
+						include '/home/gpcorser/public_html/database/database.php';
 						$pdo = Database::connect();
 						$sql = 'SELECT * FROM qm_questions';
 						
 						foreach ($pdo->query($sql) as $row) {
 							echo '<tr>';
-							echo '<td>'. trim($row['lname']) . '<td>';
-							echo '<td>'. trim($row['fname']) . '<td>';
+							echo '<td>'. trim($row['id']) . '</td>';
+							echo '<td>'. trim($row['quiz_id']) . '</td>';
+							echo '<td>'. trim($row['ques_name']) . '</td>';
+							echo '<td>'. trim($row['ques_text']) . '</td>';
 								
 						}
 						Database::disconnect();

@@ -36,65 +36,51 @@ Database::disconnect();
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<link   href="css/bootstrap.min.css" rel="stylesheet">
-		<script src="js/bootstrap.min.js"></script>
+		<link   href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 		
 	</head>
 
 	<body>
-		<div class="container">
-			
-      echo "This is working";
-      
-			<div class="row">
-				<h3>View Student Details</h3>
-			</div>
-			 
-			<div class="form-horizontal" >
-				
-				<div class="control-group col-md-6">
-				
-					<label class="control-label">First Name</label>
-					<div class="controls ">
-						<label class="checkbox">
-							<?php echo $data['fname'];?> 
-						</label>
-					</div>
-					
-					<label class="control-label">Last Name</label>
-					<div class="controls ">
-						<label class="checkbox">
-							<?php echo $data['lname'];?> 
-						</label>
-					</div>
-					
-					<label class="control-label">Email</label>
-					<div class="controls">
-						<label class="checkbox">
-							<?php echo $data['email'];?>
-						</label>
-					</div>
-					
-					
-					<!-- password omitted on Read/View -->
-					
-					<div class="form-actions">
-						<a class="btn" href="fr_persons.php">Back</a>
-					</div>
-					
-				</div>
-				
-				
-				
-				<div class="row">
-					<h4>Quizzes for which this Volunteer has been assigned</h4>
-				</div>
-				
-        
-			</div>  <!-- end div: class="form-horizontal" -->
-
-		</div> <!-- end div: class="container" -->
-		
-	</body> 
+    <div class="container">
+            <div class="row">
+                <h2>Events For Winter 2018 </h2>
+                </br>
+            </div>
+            <div class="row">
+			    <p>
+                    <a href="create_events.php" class="btn btn-success">Create Event</a>
+                </p>
+                <table class="table table-striped table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Person Id</th>
+                      <th>First Name</th>
+                      <th>Last Name</th>
+                      <th>Email </th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  <?php
+                   include '/home/gpcorser/public_html/database/database.php';
+                   $pdo = Database::connect();
+                   $sql = 'SELECT * FROM qm_persons ORDER BY id DESC';
+                   foreach ($pdo->query($sql) as $row) {
+                            echo '<tr>';
+                            echo '<td>'. $row['id'] . '</td>';
+                            echo '<td>'. $row['fname'] . '</td>';
+                            echo '<td>'. $row['lname'] . '</td>';
+                            echo '<td>'. $row['email'] . '</td>';
+                            echo '<td><a class="btn" href="qm_persons_read.php?id='.$row['id'].'">Read</a></td>';
+                            echo '</tr>';
+                   }
+                   Database::disconnect();
+                  ?>                  
+                  </tbody>
+            </table>
+        </div>
+    </div> <!-- /container -->
+  </body> 
 	
 </html>
