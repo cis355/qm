@@ -12,8 +12,8 @@ if(!isset($_SESSION["qm_person_id"])){ // if "user" not set,
 	exit;
 }
 */
-include '../../database/header.php'; // html <head> section
-require '../database/database.php';
+include '/home/gpcorser/public_html/database/header.php'; // html <head> section
+require '/home/gpcorser/public_html/database/database.php';
 require 'functions.php';
 $id = $_GET['id'];
 if ( !empty($_POST)) { // if user clicks "yes" (sure to delete), delete record
