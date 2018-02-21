@@ -89,7 +89,7 @@ include '/home/gpcorser/public_html/database/header.php'; //html <head> section
 				<h3>Add New Quiz Attempt</h3>
 			</div>
 	
-			<form class="form-horizontal" action="qm_quiz_create.php" method="post">
+			<form class="form-horizontal" action="qm_qa_create.php" method="post">
 			
 				<div class="control-group <?php echo !empty($idError)?'error':'';?>">
 					<label class="control-label">id</label>
