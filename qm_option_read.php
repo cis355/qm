@@ -36,7 +36,7 @@
 					<label class="control-label">Question ID</label>
 					<div class="controls ">
 						<label class="checkbox">
-							<?php echo $data['ques_id'];?> 
+							<?php echo $data['quest_id'];?> 
 						</label>
 					</div>
 					<label class="control-label">Option Text</label>
