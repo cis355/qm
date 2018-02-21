@@ -6,7 +6,7 @@
  * ---------------------------------------------------------------------------
  */
  include  '../../database/header.php'; // html <head> section 
- require '../../database/databse.php';
+ require '../../database/database.php';
  
  $id = $_GET['id'];
  
