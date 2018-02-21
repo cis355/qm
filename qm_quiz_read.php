@@ -47,15 +47,23 @@ $quizdata = $q->fetch(PDO::FETCH_ASSOC);
 
 Database::disconnect();
 
-//include '../../database/header.php'; //html <head> section
+include '/home/~gpcorser/public_html/database/database/header.php'; //html <head> section
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-</head>
+	<!--<meta charset="utf-8">
+	//<link   href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+   // <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+-->
+   </head>
 <body>
     <div class="container">
+	            <div class="row">
+                <h2>Quizes </h2>
+                </br>
+            </div>
     		<?php 
 			//gets logo
 			//functions::logoDisplay();
@@ -101,7 +109,9 @@ Database::disconnect();
 				</div>
 				
 			</div> <!-- end div: class="form-horizontal" -->
-			
+				    <div class="form-actions">
+						  <a class="btn" href="qm_quiz_list.php">Back</a>
+				    </div>
 		</div> <!-- end div: class="span10 offset1" -->
 				
     </div> <!-- end div: class="container" -->
