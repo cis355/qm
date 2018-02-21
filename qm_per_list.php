@@ -46,7 +46,12 @@ include '../../database/header.php'; // html <head> section
 							echo '<td>'. trim($row['lname']) . '</td>'; 
 							echo '<td>'. trim($row['fname']) . '</td>'; 
 							echo '<td>'. trim($row['email']) . '</td>'; 
-							echo '<td>'. 'read update delete' . '</td>'; 
+							echo '<a class="btn" href="qm_option_read.php?id='.$row['id'].'">Read</a>';
+                                echo ' ';
+                                echo '<a class="btn btn-success" href="qm_option_update.php?id='.$row['id'].'">Update</a>';
+                                echo ' ';
+                                echo '<a class="btn btn-danger" href="qm_option_delete.php?id='.$row['id'].'">Delete</a>';
+                                echo '</td>';
 						}
 						Database::disconnect();
 					?>
