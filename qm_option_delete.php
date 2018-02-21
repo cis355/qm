@@ -55,8 +55,8 @@ include '../../database/header.php';
     <script src="js/bootstrap.min.js"></script>
 	<link rel="icon" href="cardinal_logo.png" type="image/png" />
 </head>
--->
 
+-->
 <body>
     <div class="container">
 
