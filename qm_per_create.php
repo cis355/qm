@@ -54,10 +54,9 @@ include '/home/gpcorser/public_html/database/header.php'; // html <head> section
         if ($valid) {
             $pdo = Database::connect();
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            //$sql = "INSERT INTO qm_persons (fname, lname, email) values(?, ?, ?)";
-			$sql = "SELECT * FROM qm_persons WHERE fname = *";
+            $sql = "INSERT INTO qm_persons (fname, lname, email) values(?, ?, ?)";
             $q = $pdo->prepare($sql);
-            $q->execute(array($name,$email));
+            $q->execute(array($fname, $lname, $email));
             Database::disconnect();
             //header("Location: index.php");
         }
