@@ -5,7 +5,7 @@
  * description : 
  * ---------------------------------------------------------------------------
  */
- /*
+ 
 session_start();
 if(!isset($_SESSION["fr_person_id"])){ // if "user" not set,
 	session_destroy();
@@ -14,7 +14,7 @@ if(!isset($_SESSION["fr_person_id"])){ // if "user" not set,
 }
 $sessionid = $_SESSION['fr_person_id'];
 */
-include '../../database/header.php'; // html <head> section
+include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 ?>
 
 <body style="background-color: lightblue !important";>
@@ -24,7 +24,7 @@ include '../../database/header.php'; // html <head> section
 		</div>
 		<div class="row">
 			<p>
-				<a href="qm_per_create.php" class="btn btn-primary">Add Person</a>'
+				<a href="qm_per_create.php" class="btn btn-primary">Add Person</a>
 			</p>
 				
 			<table class="table table-striped table-bordered" style="background-color: lightgrey !important">
@@ -38,7 +38,7 @@ include '../../database/header.php'; // html <head> section
 				</thead>
 				<tbody>
 					<?php 
-						include '../../database/database.php';
+						include '/home/gpcorser/public_html/database/database.php';
 						$pdo = Database::connect();
 						$sql = 'SELECT * FROM qm_persons';
 
@@ -47,7 +47,10 @@ include '../../database/header.php'; // html <head> section
 							echo '<td>'. trim($row['lname']) . '</td>'; 
 							echo '<td>'. trim($row['fname']) . '</td>'; 
 							echo '<td>'. trim($row['email']) . '</td>'; 
-							echo '<td>'. 'read update delete' . '</td>'; 
+							echo '<td>'. 'read update delete' .
+								' <a href="qm_quiz_list.php?per_id=' . $row['id'] .
+								'">quizzes</a>' .
+							'</td>'; 
 						}
 						Database::disconnect();
 					?>

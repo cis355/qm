@@ -1,11 +1,12 @@
+<!-- /* * * * * * *  * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+*  Filename:     qm_option_list3.php
+*  Author:        Michael Drayton
+*  Description:  Program manages a list of quiz question options
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */ -->
+
+
 <?php
-/* ---------------------------------------------------------------------------
- * filename    : qm_option_list2.php
- * author      : sdangst, sdangst@svsu.edu
- * description : This program displays a list of Options from the table qm_options
- * ---------------------------------------------------------------------------
- */
- /*
+/*
 session_start();
 if(!isset($_SESSION["qm_person_id"])){ // if "user" not set,
 	session_destroy();
@@ -14,6 +15,7 @@ if(!isset($_SESSION["qm_person_id"])){ // if "user" not set,
 }
 $sessionid = $_SESSION['qm_person_id'];
 */
+
 include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 ?>
 
@@ -31,8 +33,8 @@ include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 					<tr>
 						<th>ID</th>
 						<th>Question ID</th>
-						<th>Option-Text</th>
-						<th>Valid</th>
+						<th>Option Text</th>
+						<th>Option Validity</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -52,8 +54,7 @@ include '/home/gpcorser/public_html/database/header.php'; // html <head> section
                                 echo '<a class="btn btn-success" href="qm_option_update.php?id='.$row['id'].'">Update</a>';
                                 echo ' ';
                                 echo '<a class="btn btn-danger" href="qm_option_delete.php?id='.$row['id'].'">Delete</a>';
-                                echo '<a href="qm_ques_list.php?id='.$row['quest_id'].'">Question</a>';
-								echo '</td>';
+                                echo '</td>';
                             echo '</tr>';
 						}
 						Database::disconnect();

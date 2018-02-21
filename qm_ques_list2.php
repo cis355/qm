@@ -15,28 +15,31 @@ if(!isset($_SESSION["qm_person_id"])){ // if "user" not set,
 	header('Location: login.php');   // go to login page
 	exit;
 }
+*/
 $id = $_GET['id']; 
-$sessionid = $_SESSION['qm_person_id'];
- */
-include '/home/gpcorser/public_html/database/header.php'
+$per_id = $_GET['per_id'];
+// $sessionid = $_SESSION['qm_person_id'];
+ 
+include '/home/gpcorser/public_html/database/header.php' // Add html header
 ?>
 
 
 <body>
 	<div class="container">
 		<div class="row">
-			<h3>Quiz List</h3>
+			<h3>Questions List</h3>
 			</br>
 		</div>
 		<div class="row">
 			<p>
-				<a href="qm_quiz_create.php" class="btn btn-success">Create Quiz</a>
+				<a href="qm_ques_create.php" class="btn btn-primary">Add Question</a>
 			</p>
 		<table class="table table-striped table-bordered" style="background-color: lightgrey !important">
 				<thead>
 					<tr>
 						<th>ID</th>
-						<th>Quiz</th>
+						<th>Quiz ID</th>
+						<th>Quiz Name</th>
 						<th>Name</th>
 						<th>Text</th>
 					</tr>
@@ -46,15 +49,16 @@ include '/home/gpcorser/public_html/database/header.php'
 					include '/home/gpcorser/public_html/database/database.php';
 					$pdo = Database::connect();
 					
-					$sql = "SELECT qm_questions.*,qm_quizzes.quiz_name FROM qm_questions,qm_quizzes WHERE qm_questions.quiz_id = qm_quizzes.id";
-					
+// 					$sql = "SELECT qm_questions.*,qm_quizzes.quiz_name FROM qm_questions,qm_quizzes WHERE qm_questions.quiz_id = qm_quizzes.id";
+					$sql = "SELECT qs.*, qz.* FROM qm_questions qs, qm_quizzes qz WHERE qs.quiz_id = qz.id AND qz.per_id = $per_id";
 					foreach ($pdo->query($sql) as $row) {
 						echo '<tr>';
 						echo '<td>'. $row['id'] . '</td>';
+						echo '<td>'. $row['quiz_id'] . '</td>';
 						echo '<td>'. $row['quiz_name'] . '</td>';
 						echo '<td>'. $row['ques_name'] . '</td>';
 						echo '<td>'. $row['ques_text'] . '</td>';
-						echo '<td width=300>';
+						echo '<td width=258>';
 						# use $row[0] because there are 3 fields called "id"
 						echo '<a class="btn btn-primary" href="qm_ques_read.php?id='.$row[0].'">Details</a>';
 						/*if ($_SESSION['qm_person_title']=='Administrator' )*/

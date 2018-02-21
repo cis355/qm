@@ -16,7 +16,7 @@
 
 */
 
-require '../../database/database.php';
+require '/home/gpcorser/public_html/database/database.php';
 
 
 $id = $_GET['id'];
