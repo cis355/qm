@@ -61,7 +61,8 @@ include 'functions.php';
                             echo '<a class="btn btn-success" href="qm_per_update.php?id='.$row['id'].'">Update</a>';
 							echo ' ';
 							echo '<a class="btn btn-danger" href="qm_per_delete.php?id='.$row['id'].'">Delete</a>';
-							
+							echo ' ';
+							echo '<a class="btn btn-danger" href="qm_quiz_list.php?per_id='.$row['id'].'">Quizzes</a>';							
 							echo '</td>';
 							echo '</tr>';
 						}
