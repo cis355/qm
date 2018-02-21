@@ -88,7 +88,7 @@ include '/home/gpcorser/public_html/database/header.php'; //html <head> section
 				<div class="control-group <?php echo !empty($quiz_nameError)?'error':'';?>">
 					<label class="control-label">Quiz ID</label>
 					<div class="controls">
-						<input name="per_id" type="text" placeholder="Quiz ID" value="<?php echo !empty($qid)?$qid:'';?>">
+						<input name="quiz_id" type="text" placeholder="Quiz ID" value="<?php echo !empty($qid)?$qid:'';?>">
 						<?php if (!empty($quiz_nameError)): ?>
 							<span class="help-inline"><?php echo $quiz_nameError;?></span>
 						<?php endif;?>
@@ -98,7 +98,7 @@ include '/home/gpcorser/public_html/database/header.php'; //html <head> section
 				<div class="control-group <?php echo !empty($ques_nameError)?'error':'';?>">
 					<label class="control-label">Question Name</label>
 					<div class="controls">
-						<input name="quiz_name" type="text" placeholder="Question Name" value="<?php echo !empty($qName)?$qName:'';?>">
+						<input name="ques_name" type="text" placeholder="Question Name" value="<?php echo !empty($qName)?$qName:'';?>">
 						<?php if (!empty($ques_nameError)): ?>
 							<span class="help-inline"><?php echo $ques_nameError;?></span>
 						<?php endif;?>
@@ -108,7 +108,7 @@ include '/home/gpcorser/public_html/database/header.php'; //html <head> section
 				<div class="control-group <?php echo !empty($ques_textError)?'error':'';?>">
 					<label class="control-label">Question Text</label>
 					<div class="controls">
-						<input name="quiz_description" type="text" placeholder="Ask Your Question" value="<?php echo !empty($qText)?$qText:'';?>">
+						<input name="ques_text" type="text" placeholder="Ask Your Question" value="<?php echo !empty($qText)?$qText:'';?>">
 						<?php if (!empty($ques_textError)): ?>
 							<span class="help-inline"><?php echo $ques_textError;?></span>
 						<?php endif;?>
