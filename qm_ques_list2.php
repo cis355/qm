@@ -18,19 +18,19 @@ if(!isset($_SESSION["qm_person_id"])){ // if "user" not set,
 $id = $_GET['id']; 
 $sessionid = $_SESSION['qm_person_id'];
  */
-include '/home/gpcorser/public_html/database/header.php'
+include '/home/gpcorser/public_html/database/header.php' // Add html header
 ?>
 
 
 <body>
 	<div class="container">
 		<div class="row">
-			<h3>Quiz List</h3>
+			<h3>Questions List</h3>
 			</br>
 		</div>
 		<div class="row">
 			<p>
-				<a href="qm_quiz_create.php" class="btn btn-success">Create Quiz</a>
+				<!-- <a href="qm_quiz_create.php" class="btn btn-success">Create Quiz</a> -->
 			</p>
 		<table class="table table-striped table-bordered" style="background-color: lightgrey !important">
 				<thead>
