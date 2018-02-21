@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <?php
 /*-----------------------------------------------
  *filename	: qm_per_create.php
@@ -14,26 +15,29 @@ if(!isset($_SESSION["fr_person_id"])){ // if "user" not set,
 }
 $sessionid = $_SESSION['fr_person_id'];
 */
-include '../../database/header.php'; // html <head> section
+include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 
 
- require 'database.php';
  
     if ( !empty($_POST)) {
         // keep track validation errors
-        $nameError = null;
+        $fnameError = null;
+		$lnameError = null;
         $emailError = null;
-        $mobileError = null;
          
         // keep track post values
-        $name = $_POST['name'];
+        $fname = $_POST['fname'];
+		$lname = $_POST['lname'];
         $email = $_POST['email'];
-        $mobile = $_POST['mobile'];
          
         // validate input
         $valid = true;
-        if (empty($name)) {
-            $nameError = 'Please enter Name';
+        if (empty($fname)) {
+            $fnameError = 'Please enter First Name';
+            $valid = false;
+        }
+		if (empty($lname)) {
+            $lnameError = 'Please enter Last Name';
             $valid = false;
         }
          
@@ -45,20 +49,16 @@ include '../../database/header.php'; // html <head> section
             $valid = false;
         }
          
-        if (empty($mobile)) {
-            $mobileError = 'Please enter Mobile Number';
-            $valid = false;
-        }
          
         // insert data
         if ($valid) {
             $pdo = Database::connect();
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $sql = "INSERT INTO customers (name,email,mobile) values(?, ?, ?)";
+            $sql = "INSERT INTO qm_persons (name,email) values(?, ?)";
             $q = $pdo->prepare($sql);
-            $q->execute(array($name,$email,$mobile));
+            $q->execute(array($name,$email));
             Database::disconnect();
-            header("Location: index.php");
+            //header("Location: index.php");
         }
     }
  
@@ -72,21 +72,21 @@ include '../../database/header.php'; // html <head> section
 			<h3>Create a Person</h3>
 		</div>
 			 <form class="form-horizontal" action="qm_per_create.php" method="post">
-                      <div class="control-group <?php echo !empty($nameError)?'error':'';?>">
+                      <div class="control-group <?php echo !empty($fError)?'error':'';?>">
                         <label class="control-label">First Name</label>
                         <div class="controls">
-                            <input required name="firstname" type="text"  placeholder="First Name" value="<?php echo !empty($firstname)?$firstname:'';?>">
-                            <?php if (!empty($nameError)): ?>
-                                <span class="help-inline"><?php echo $nameError;?></span>
+                            <input required name="fname" type="text"  placeholder="First Name" value="<?php echo !empty($fname)?$fname:'';?>">
+                            <?php if (!empty($fnameError)): ?>
+                                <span class="help-inline"><?php echo $fnameError;?></span>
                             <?php endif; ?>
                         </div>
                       </div>
-					  <div class="control-group <?php echo !empty($nameError)?'error':'';?>">
+					  <div class="control-group <?php echo !empty($lnameError)?'error':'';?>">
                         <label class="control-label">Last Name</label>
                         <div class="controls">
-                            <input required name="lastname" type="text"  placeholder="Last Name" value="<?php echo !empty($lastname)?$lastname:'';?>">
-                            <?php if (!empty($nameError)): ?>
-                                <span class="help-inline"><?php echo $nameError;?></span>
+                            <input required name="lname" type="text"  placeholder="Last Name" value="<?php echo !empty($lname)?$lname:'';?>">
+                            <?php if (!empty($lError)): ?>
+                                <span class="help-inline"><?php echo $lnameError;?></span>
                             <?php endif; ?>
                         </div>
                       </div>
@@ -102,7 +102,7 @@ include '../../database/header.php'; // html <head> section
 					  <br>
                       <div class="form-actions">
                           <button type="submit" class="btn btn-success">Create</button>
-                          <a class="btn btn-danger" href="index.php">Back</a>
+                          <a class="btn btn-danger" href="qm_per_list3.php">Back</a>
                         </div>
                     </form>
 	</div>
