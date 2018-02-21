@@ -1,8 +1,7 @@
 <?php 
 /* ---------------------------------------------------------------------------
  * filename    : qm_per_update.php
- * author      : George Corser, gcorser@gmail.com
- * updated by  : Frank Duvendack, fcduvend@svsu.edu
+ * author      : Frank Duvendack, fcduvend@svsu.edu
  * description : This program updates one person in Quiz Manager
  * ---------------------------------------------------------------------------
  */
@@ -19,25 +18,16 @@ $id = $_GET['id'];
 
 if ( !empty($_POST)) { // if $_POST filled then process the form
 
-	# initialize/validate (same as file: fr_per_create.php)
-
-  //qm_persons
-  //id
-  //fname
-  //lname
-  //email
-  //password_hash
-
 	// initialize user input validation variables
-	$fnameError = null;
-	$lnameError = null;
-	$emailError = null;
+	$fnameError    = null;
+	$lnameError    = null;
+	$emailError    = null;
 	$passwordError = null;
 	
 	// initialize $_POST variables
-	$fname = $_POST['fname'];
-	$lname = $_POST['lname'];
-	$email = $_POST['email'];
+	$fname    = $_POST['fname'];
+	$lname    = $_POST['lname'];
+	$email    = $_POST['email'];
 	$password = $_POST['password'];
 
 	// validate user input
@@ -46,6 +36,7 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 		$fnameError = 'Please enter First Name';
 		$valid = false;
 	}
+
 	if (empty($lname)) {
 		$lnameError = 'Please enter Last Name';
 		$valid = false;
@@ -96,10 +87,9 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 ?>
 
-<body>
+  <body>
     <div class="container">
-
-		<div class="span10 offset1">
+      <div class="span10 offset1">
 			
 			<?php
 				//require 'functions.php';
@@ -114,6 +104,7 @@ include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 			
 				<!-- Form elements (same as file: qm_per_create.php) -->
 
+        <!-- FIRST NAME -->
 				<div class="control-group <?php echo !empty($fnameError)?'error':'';?>">
 					<label class="control-label">First Name</label>
 					<div class="controls">
@@ -124,6 +115,7 @@ include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 					</div>
 				</div>
 				
+        <!-- LAST NAME -->
 				<div class="control-group <?php echo !empty($lnameError)?'error':'';?>">
 					<label class="control-label">Last Name</label>
 					<div class="controls">
@@ -134,6 +126,7 @@ include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 					</div>
 				</div>
 				
+        <!-- EMAIL -->
 				<div class="control-group <?php echo !empty($emailError)?'error':'';?>">
 					<label class="control-label">Email</label>
 					<div class="controls">
@@ -144,6 +137,7 @@ include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 					</div>
 				</div>
 				
+        <!-- PASSWORD -->
         <div class="control-group <?php echo !empty($passwordError)?'error':'';?>">
 					<label class="control-label">Password</label>
 					<div class="controls">
@@ -154,15 +148,15 @@ include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 					</div>
 				</div>
 						  
+        <!-- BUTTONS -->
         <div class="form-actions">
 					<button type="submit" class="btn btn-success">Update</button>
 					<a class="btn" href="qm_per_list.php">Back</a>
 				</div>
-				
 			</form>
-		</div><!-- end div: class="span10 offset1" -->
+
+		  </div><!-- end div: class="span10 offset1" -->
 		
     </div> <!-- end div: class="container" -->
-	
-</body>
+  </body>
 </html>
