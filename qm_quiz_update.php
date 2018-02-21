@@ -12,7 +12,7 @@
 	// exit;
 // }
 	
-require '/home/~gpcorser/public_html/database/database.php';
+require '/home/gpcorser/public_html/database/database.php';
 $id = $_GET['id'];
 if ( !empty($_POST)) { // if $_POST filled then process the form
 	# initialize/validate (same as file: fr_per_create.php)
