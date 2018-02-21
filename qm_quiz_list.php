@@ -1,3 +1,10 @@
+/* ---------------------------------------------------------------------------
+ * filename    : qm_quiz_list.php
+ * author      : Dakota Ward, dlward@svsu.edu
+ * description : Shows the list of all Quizzes on the database.
+ * ---------------------------------------------------------------------------
+ */
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
