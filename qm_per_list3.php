@@ -5,7 +5,7 @@
  * description : 
  * ---------------------------------------------------------------------------
  */
- /*
+ 
 session_start();
 if(!isset($_SESSION["fr_person_id"])){ // if "user" not set,
 	session_destroy();

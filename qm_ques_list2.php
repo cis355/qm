@@ -17,6 +17,7 @@ if(!isset($_SESSION["qm_person_id"])){ // if "user" not set,
 }
 */
 $id = $_GET['id']; 
+$per_id = $_GET['per_id'];
 // $sessionid = $_SESSION['qm_person_id'];
  
 include '/home/gpcorser/public_html/database/header.php' // Add html header
@@ -49,7 +50,7 @@ include '/home/gpcorser/public_html/database/header.php' // Add html header
 					$pdo = Database::connect();
 					
 // 					$sql = "SELECT qm_questions.*,qm_quizzes.quiz_name FROM qm_questions,qm_quizzes WHERE qm_questions.quiz_id = qm_quizzes.id";
-					$sql = "SELECT qs.*, qz.* FROM qm_questions qs, qm_quizzes qz WHERE qs.quiz_id = qz.id AND qz.id = $id";
+					$sql = "SELECT qs.*, qz.* FROM qm_questions qs, qm_quizzes qz WHERE qs.quiz_id = qz.id AND qz.per_id = $per_id";
 					foreach ($pdo->query($sql) as $row) {
 						echo '<tr>';
 						echo '<td>'. $row['id'] . '</td>';

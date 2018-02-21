@@ -1,6 +1,6 @@
 <?php
 /* ---------------------------------------------------------------------------
- * filename    : qm_per_list3.php
+ * filename    : qm_per_list.php
  * author      : Guadalupe Ruiz, gruiz@svsu.edu
  * description : 
  * ---------------------------------------------------------------------------
