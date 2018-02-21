@@ -20,11 +20,11 @@ include '../../database/header.php'; // html <head> section
 <body style="background-color: lightblue !important";>
     <div class="container">
 		<div class="row">
-			<h3>Person</h3>
+			<h3>Persons</h3>
 		</div>
 		<div class="row">
 			<p>
-				<a href="qm_per_create.php" class="btn btn-primary">Add Person</a>'
+				<a href="qm_per_create.php" class="btn btn-primary">Add Person</a>
 			</p>
 				
 			<table class="table table-striped table-bordered" style="background-color: lightgrey !important">
@@ -38,7 +38,7 @@ include '../../database/header.php'; // html <head> section
 				</thead>
 				<tbody>
 					<?php 
-						include '../../database/database.php';
+						include '/home/gpcorser/public_html/database/database.php';
 						$pdo = Database::connect();
 						$sql = 'SELECT * FROM qm_persons';
 						foreach ($pdo->query($sql) as $row) {
