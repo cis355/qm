@@ -16,11 +16,17 @@ $sessionid = $_SESSION['fr_person_id'];
 */
 include '../../database/header.php'; // html <head> section
 ?>
+<head>
+    <meta charset="utf-8">
+    <link   href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<link rel="icon" href="cardinal_logo.png" type="image/png" />
+</head>
 
 <body style="background-color: lightblue !important";>
     <div class="container">
 		<div class="row">
-			<h3>Persons</h3>
+			<h3>Person3</h3>
 		</div>
 		<div class="row">
 			<p>
@@ -46,12 +52,7 @@ include '../../database/header.php'; // html <head> section
 							echo '<td>'. trim($row['lname']) . '</td>'; 
 							echo '<td>'. trim($row['fname']) . '</td>'; 
 							echo '<td>'. trim($row['email']) . '</td>'; 
-							echo '<a class="btn" href="qm_option_read.php?id='.$row['id'].'">Read</a>';
-                                echo ' ';
-                                echo '<a class="btn btn-success" href="qm_option_update.php?id='.$row['id'].'">Update</a>';
-                                echo ' ';
-                                echo '<a class="btn btn-danger" href="qm_option_delete.php?id='.$row['id'].'">Delete</a>';
-                                echo '</td>';
+							echo '<td>'. 'read update delete' . '</td>'; 
 						}
 						Database::disconnect();
 					?>
