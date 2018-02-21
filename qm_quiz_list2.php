@@ -34,7 +34,7 @@
 						<th>ID</th>
 						<th>Quiz Name</th>
 						<th>Options</th>
-					    <th>Questions<th>
+					    <th>Questions</th>
 					</tr>
 				</thead>
 				<tbody>
