@@ -60,16 +60,16 @@ include '/home/~gpcorser/public_html/database/database/header.php'; //html <head
    </head>
 <body>
     <div class="container">
-	            <div class="row">
-                <h2>Quizes </h2>
-                </br>
-            </div>
-    		<?php 
+
+    	<?php 
 			//gets logo
 			//functions::logoDisplay();
 		?>
 		<div class="span10 offset1">
-	
+		    <div class="row">
+                <h2>Read a Quiz </h2>
+                </br>
+				</div>
 			<div class="form-horizontal" >
 			
 				<div class="control-group">
@@ -107,11 +107,11 @@ include '/home/~gpcorser/public_html/database/database/header.php'; //html <head
 						</label>
 					</div>
 				</div>
-				
-			</div> <!-- end div: class="form-horizontal" -->
 				    <div class="form-actions">
 						  <a class="btn" href="qm_quiz_list.php">Back</a>
 				    </div>
+			</div> <!-- end div: class="form-horizontal" -->
+				
 		</div> <!-- end div: class="span10 offset1" -->
 				
     </div> <!-- end div: class="container" -->
