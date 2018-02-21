@@ -35,6 +35,7 @@ include '/home/gpcorser/public_html/database/header.php';
 						<th>Quiz Number</th>
 						<th>Question Name</th>
 						<th>Question Text</th>
+						<th>Action</th>
 					</tr>
 				</thead>
 				<tbody>
