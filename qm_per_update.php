@@ -77,7 +77,7 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 			$q = $pdo->prepare($sql);
 			$q->execute(array($fname, $lname, $email, $password, $id));
 			Database::disconnect();
-			header("Location: fr_persons.php");
+			header("Location: qm_per_list.php");
   }
 } else { // if $_POST NOT filled then pre-populate the form
 	$pdo = Database::connect();
@@ -110,9 +110,9 @@ include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 				<h3>Update Person</h3>
 			</div>
 	
-			<form class="form-horizontal" action="fr_per_update.php?id=<?php echo $id?>" method="post" enctype="multipart/form-data">
+			<form class="form-horizontal" action="qm_per_update.php?id=<?php echo $id?>" method="post" enctype="multipart/form-data">
 			
-				<!-- Form elements (same as file: fr_per_create.php) -->
+				<!-- Form elements (same as file: qm_per_create.php) -->
 
 				<div class="control-group <?php echo !empty($fnameError)?'error':'';?>">
 					<label class="control-label">First Name</label>
@@ -156,7 +156,7 @@ include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 						  
         <div class="form-actions">
 					<button type="submit" class="btn btn-success">Update</button>
-					<a class="btn" href="fr_persons.php">Back</a>
+					<a class="btn" href="qm_per_list.php">Back</a>
 				</div>
 				
 			</form>
