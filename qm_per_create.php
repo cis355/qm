@@ -15,6 +15,7 @@ if(!isset($_SESSION["fr_person_id"])){ // if "user" not set,
 }
 $sessionid = $_SESSION['fr_person_id'];
 */
+include '/home/gpcorser/public_html/database/database.php'; // html <head> section
 include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 
 
@@ -52,18 +53,21 @@ include '/home/gpcorser/public_html/database/header.php'; // html <head> section
          
         // insert data
         if ($valid) {
+			
             $pdo = Database::connect();
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $sql = "INSERT INTO qm_persons (name,email) values(?, ?)";
+            $sql = "INSERT INTO qm_persons (fname, lname, email) values(?, ?, ?)";
             $q = $pdo->prepare($sql);
-            $q->execute(array($name,$email));
+            $q->execute(array($fname, $lname, $email));
             Database::disconnect();
-            //header("Location: index.php");
+            header("Location: qm_per_list.php");
         }
     }
  
 
 ?>
+
+
  
  
  <body style="background-color: lightblue !important";>
@@ -72,7 +76,7 @@ include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 			<h3>Create a Person</h3>
 		</div>
 			 <form class="form-horizontal" action="qm_per_create.php" method="post">
-                      <div class="control-group <?php echo !empty($fError)?'error':'';?>">
+                      <div class="control-group <?php echo !empty($fnameError)?'error':'';?>">
                         <label class="control-label">First Name</label>
                         <div class="controls">
                             <input required name="fname" type="text"  placeholder="First Name" value="<?php echo !empty($fname)?$fname:'';?>">
@@ -85,7 +89,7 @@ include '/home/gpcorser/public_html/database/header.php'; // html <head> section
                         <label class="control-label">Last Name</label>
                         <div class="controls">
                             <input required name="lname" type="text"  placeholder="Last Name" value="<?php echo !empty($lname)?$lname:'';?>">
-                            <?php if (!empty($lError)): ?>
+                            <?php if (!empty($lnameError)): ?>
                                 <span class="help-inline"><?php echo $lnameError;?></span>
                             <?php endif; ?>
                         </div>
@@ -102,7 +106,7 @@ include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 					  <br>
                       <div class="form-actions">
                           <button type="submit" class="btn btn-success">Create</button>
-                          <a class="btn btn-danger" href="qm_per_list3.php">Back</a>
+                          <a class="btn btn-danger" href="qm_per_list.php">Back</a>
                         </div>
                     </form>
 	</div>

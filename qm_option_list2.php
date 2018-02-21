@@ -52,7 +52,8 @@ include '/home/gpcorser/public_html/database/header.php'; // html <head> section
                                 echo '<a class="btn btn-success" href="qm_option_update.php?id='.$row['id'].'">Update</a>';
                                 echo ' ';
                                 echo '<a class="btn btn-danger" href="qm_option_delete.php?id='.$row['id'].'">Delete</a>';
-                                echo '</td>';
+                                echo '<a href="qm_ques_list.php?id='.$row['quest_id'].'">Question</a>';
+								echo '</td>';
                             echo '</tr>';
 						}
 						Database::disconnect();
