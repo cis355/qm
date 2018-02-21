@@ -73,7 +73,7 @@ include '/home/gpcorser/public_html/database/header.php'; //html <head> section
 				<h3>Add New Question</h3>
 			</div>
 	
-			<form class="form-horizontal" action="qm_quiz_create.php" method="post">
+			<form class="form-horizontal" action="qm_ques_create.php" method="post">
 			
 				<div class="control-group <?php echo !empty($idError)?'error':'';?>">
 					<label class="control-label">Question ID</label>
@@ -117,7 +117,7 @@ include '/home/gpcorser/public_html/database/header.php'; //html <head> section
 				
 				<div class="form-actions">
 					<button type="submit" class="btn btn-success">Create</button>
-					<a class="btn" href="qm_quiz.php">Back</a>
+					<a class="btn" href="qm_ques_list.php">Back</a>
 				</div>
 				
 			</form>
