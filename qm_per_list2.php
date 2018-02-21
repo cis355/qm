@@ -8,7 +8,7 @@
 session_start();
 if(!isset($_SESSION["qm_per_id"])){ // if "user" not set,
 	session_destroy();
-	header('Location: login.php');     // go to login page
+	//header('Location: login.php');     // go to login page
 	exit;
 }
 $sessionid = $_SESSION['qm_per_id'];
@@ -22,9 +22,7 @@ include 'functions.php';
 			//functions::logoDisplay2();
 			//probably won't work yet
 		?>
-		
-		
-		
+
 		<div class="row">
 			<h3>Person2</h3>
 		</div>
