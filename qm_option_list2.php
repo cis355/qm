@@ -1,8 +1,8 @@
 <?php
 /* ---------------------------------------------------------------------------
  * filename    : qm_option_list2.php
- * author      : Scott Angst, sdangst@gmail.com
- * description : This program displays a list of Options
+ * author      : Scott Angst, sdangst@svsu.edu
+ * description : This program displays a list of Options from the table qm_options
  * ---------------------------------------------------------------------------
  */
  /*
