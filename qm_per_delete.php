@@ -41,55 +41,46 @@ else { // otherwise, pre-populate fields to show data to be deleted
 <!DOCTYPE html>
 <html lang="en">
 
-<body>
+<body style ="background-color: lightblue !important";>
     <div class="container">
 		<div class="row">
 			<h3>Delete Person</h3>
 		</div>
+	</div>
+		<br>
 		
-		<form class="form-horizontal" action="qm_per_delete.php" method="post">
-			<input type="hidden" name="id" value="<?php echo $id;?>"/>
-			<p class="alert alert-error">Are you sure you want to delete?</p>
-			<div class="form-actions">
-				<button type="submit" class="btn btn-danger">Yes</button>
-				<a class="btn" href="qm_per_list.php">No</a>
-			</div>
-		</form>
-		
-		<!-- Display same information as in file: qm_per_read.php -->
-		
-		<div class="form-horizontal" >
+		<table class="table table-striped table-bordered" style="background-color: lightgrey !important">
+				<thead>
+					<tr>
+						<th>Lastname</th>
+						<th>Firstname</th>
+						<th>Email</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><?php echo $data['lname'];?></td>
+						<td><?php echo $data['fname'];?></td>
+						<td><?php echo $data['email'];?></td>
+					</tr>
+					<tr>
+						<th>Action</th>
+					</tr>
+					<tr>
+						<td><form class="form-horizontal" action="qm_per_delete.php" method="post">
+							<input type="hidden" name="id" value="<?php echo $id;?>"/>
+							<p class="alert alert-error">Are you sure you want to delete?</p>
+							<div class="form-actions">
+								<button type="submit" class="btn btn-success">Yes</button>
+								<a class="btn btn-danger" href="qm_per_list.php">No</a>
+							</div>
+						</form></td>
+					</tr>
+				</tbody>
+		</table>
 				
-			<div class="control-group col-md-6">
-			
-				<label class="control-label">First Name</label>
-				<div class="controls ">
-					<label class="checkbox">
-						<?php echo $data['fname'];?> 
-					</label>
-				</div>
 				
-				<label class="control-label">Last Name</label>
-				<div class="controls ">
-					<label class="checkbox">
-						<?php echo $data['lname'];?> 
-					</label>
-				</div>
 				
-				<label class="control-label">Email</label>
-				<div class="controls">
-					<label class="checkbox">
-						<?php echo $data['email'];?>
-					</label>
-				</div>
-				
-				<!-- password omitted on Read/View -->
-				
-			</div>
-				
-		</div>  <!-- end div: class="form-horizontal" -->
 
-    </div> <!-- end div: class="container" -->
-	
 </body>
 </html>
