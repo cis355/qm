@@ -108,7 +108,7 @@ include '/home/gpcorser/public_html/database/header.php'; //html <head> section
 				<div class="control-group <?php echo !empty($ques_textError)?'error':'';?>">
 					<label class="control-label">Question Text</label>
 					<div class="controls">
-						<input name="quiz_description" type="text" placeholder="Question" value="<?php echo !empty($ques_text)?$ques_text:'';?>">
+						<input name="quiz_description" type="text" placeholder="Ask Your Question" value="<?php echo !empty($ques_text)?$ques_text:'';?>">
 						<?php if (!empty($ques_textError)): ?>
 							<span class="help-inline"><?php echo $ques_textError;?></span>
 						<?php endif;?>
