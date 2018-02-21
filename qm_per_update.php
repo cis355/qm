@@ -1,7 +1,7 @@
 <?php 
 /* ---------------------------------------------------------------------------
  * filename    : qm_per_update.php
- * author      : Frank Duvendack, fcduvend@svsu.edu
+ * author      : Frank Duvendack (fcduvend), fcduvend@svsu.edu
  * description : This program updates one person in Quiz Manager
  * ---------------------------------------------------------------------------
  */
