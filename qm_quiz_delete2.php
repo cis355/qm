@@ -64,7 +64,7 @@ else { // otherwise, pre-populate fields to show data to be deleted
 		</form>
 		
 		<!-- Display same information as in file: qm_per_read.php -->
-	
+
 		<div class="form-horizontal" >
 				
 			<div class="control-group col-md-6">

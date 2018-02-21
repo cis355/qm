@@ -44,7 +44,7 @@ include 'functions.php';
 				</thead>
 				<tbody>
 					<?php 
-						include '../../database/database.php';
+						include '/home/gpcorser/public_html/database/database.php';
 						$pdo = Database::connect();
 						$sql = 'SELECT FROM qr_persons';
 						foreach ($pdo->query($sql) as $row) {
@@ -61,7 +61,8 @@ include 'functions.php';
                             echo '<a class="btn btn-success" href="qm_per_update.php?id='.$row['id'].'">Update</a>';
 							echo ' ';
 							echo '<a class="btn btn-danger" href="qm_per_delete.php?id='.$row['id'].'">Delete</a>';
-							
+							echo ' ';
+							echo '<a class="btn btn-danger" href="qm_quiz_list.php?per_id='.$row['id'].'">Quizzes</a>';							
 							echo '</td>';
 							echo '</tr>';
 						}
