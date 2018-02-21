@@ -42,19 +42,43 @@ else { // otherwise, pre-populate fields to show data to be deleted
 }
 */
 
-if ( !empty($_GET['id'])) {
-	$id = $_REQUEST['id'];
-	}
-	if ( !empty($_POST)) {
-		$id = $_POST['id'];
-		$pdo = Database::connect();
-		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = "DELETE FROM qm_options WHERE id = ?";
-		$q = $pdo->prepare($sql);
-		$q->execute(array($id));
-		Database::disconnect();
-		/*header("Location: index.php"); */
-		}
+$id = $_GET['id'];
+if ( !empty($_POST)) { // if user clicks "yes" (sure to delete), delete record
+	$id = $_POST['id'];
+	
+	// delete data
+	$pdo = Database::connect();
+	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	$sql = "DELETE FROM qm_option_list  WHERE id = ?";
+	$q = $pdo->prepare($sql);
+	$q->execute(array($id));
+	Database::disconnect();
+	header("Location: qm_option_list.php");
+} 
+else { // otherwise, pre-populate fields to show data to be deleted
+	$pdo = Database::connect();
+	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	
+	# get assignment details
+	$sql = "SELECT * FROM qm_option_list where id = ?";
+	$q = $pdo->prepare($sql);
+	$q->execute(array($id));
+	$data = $q->fetch(PDO::FETCH_ASSOC);
+	/*
+	# get volunteer details
+	$sql = "SELECT * FROM fr_persons where id = ?";
+	$q = $pdo->prepare($sql);
+	$q->execute(array($data['assign_per_id']));
+	$perdata = $q->fetch(PDO::FETCH_ASSOC);
+	
+	# get event details
+	$sql = "SELECT * FROM fr_events where id = ?";
+	$q = $pdo->prepare($sql);
+	$q->execute(array($data['assign_event_id']));
+	$eventdata = $q->fetch(PDO::FETCH_ASSOC);
+	*/
+	Database::disconnect();
+}
 ?>
 
 
@@ -115,7 +139,7 @@ if ( !empty($_GET['id'])) {
 			<?php
 			/*
 				$pdo = Database::connect();
-				$sql = "SELECT * FROM fr_assignments, fr_persons WHERE assign_per_id = fr_persons.id AND assign_event_id = " . $data['id'] . ' ORDER BY lname ASC, fname ASC';
+				$sql = "SELECT * FROM qm_option_list, fr_persons WHERE assign_per_id = fr_persons.id AND assign_event_id = " . $data['id'] . ' ORDER BY lname ASC, fname ASC';
 				$countrows = 0;
 				foreach ($pdo->query($sql) as $row) {
 					echo $row['lname'] . ', ' . $row['fname'] . ' - ' . $row['mobile'] . '<br />';
