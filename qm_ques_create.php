@@ -30,7 +30,7 @@ if ( !empty($_POST)) { // if not first time through
 	$id = $_POST['id'];
 	$qid = $_POST['quiz_id'];
 	$qName = $_POST['ques_name'];
-	$description = $_POST['ques_text'];		
+	$qText = $_POST['ques_text'];		
 	
 	// validate user input
 	$valid = true;
