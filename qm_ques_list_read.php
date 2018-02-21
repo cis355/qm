@@ -15,7 +15,7 @@ if(!isset($_SESSION["fr_person_id"])){ // if "user" not set,
 */
 include 'home/gpcorser/public_html/database/database.php';
 
-require '../../database/database.php';
+require '/home/gpcroser/public_html/database/database.php';
 require 'functions.php';
 $id = $_GET['id'];
 $pdo = Database::connect();

@@ -43,7 +43,7 @@ include '/home/gpcorser/public_html/database/header.php';
 						include '/home/gpcorser/public_html/database/database.php';
 						$pdo = Database::connect();
 						$sql = 'SELECT * FROM qm_questions';
-						
+						// $sql = 'SELECT * FROM qm_questions WHERE quiz_id = ' . $_GET['quiz_id'];
 						foreach ($pdo->query($sql) as $row) {
 							echo '<tr>';
 							echo '<td>'. trim($row['id']) . '</td>';
@@ -51,7 +51,7 @@ include '/home/gpcorser/public_html/database/header.php';
 							echo '<td>'. trim($row['ques_name']) . '</td>';
 							echo '<td>'. trim($row['ques_text']) . '</td>';
 							echo '<td width=250>';
-							    echo '<a class="btn" href="qm_ques_read.php?id='.$row['id'].'">Read</a>';
+							    echo '<a class="btn" href="qm_ques_list_read.php?id='.$row['id'].'">Read</a>';
                                 echo ' ';
                                 echo '<a class="btn btn-success" href="qm_ques_update.php?id='.$row['id'].'">Update</a>';
                                 echo ' ';

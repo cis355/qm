@@ -1,6 +1,6 @@
 <?php
 /* ---------------------------------------------------------------------------
- * filename    : qm_per_list.php
+ * filename    : qm_per_list3.php
  * author      : Guadalupe Ruiz, gruiz@svsu.edu
  * description : 
  * ---------------------------------------------------------------------------
@@ -14,7 +14,7 @@ if(!isset($_SESSION["fr_person_id"])){ // if "user" not set,
 }
 $sessionid = $_SESSION['fr_person_id'];
 */
-include '../../database/header.php'; // html <head> section
+include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 ?>
 
 <body style="background-color: lightblue !important";>
@@ -41,17 +41,25 @@ include '../../database/header.php'; // html <head> section
 						include '/home/gpcorser/public_html/database/database.php';
 						$pdo = Database::connect();
 						$sql = 'SELECT * FROM qm_persons';
+
 						foreach ($pdo->query($sql) as $row) {
 							echo '<tr>';
 							echo '<td>'. trim($row['lname']) . '</td>'; 
 							echo '<td>'. trim($row['fname']) . '</td>'; 
 							echo '<td>'. trim($row['email']) . '</td>'; 
-							echo '<a class="btn" href="qm_option_read.php?id='.$row['id'].'">Read</a>';
-                                echo ' ';
-                                echo '<a class="btn btn-success" href="qm_option_update.php?id='.$row['id'].'">Update</a>';
-                                echo ' ';
-                                echo '<a class="btn btn-danger" href="qm_option_delete.php?id='.$row['id'].'">Delete</a>';
-                                echo '</td>';
+							 
+							
+							//echo '<td width=250>';
+							echo '<td>';
+							echo '<a class="btn" href="qm_per_read.php?id='.$row['id'].'">Read</a>';
+							echo ' ';
+                            echo '<a class="btn btn-success" href="qm_per_update.php?id='.$row['id'].'">Update</a>';
+							echo ' ';
+							echo '<a class="btn btn-danger" href="qm_per_delete.php?id='.$row['id'].'">Delete</a>';
+							echo ' ';
+							echo '<a class="btn btn-primary" href="qm_quiz_list.php?per_id='.$row['id'].'">Quizzes</a>';							
+							echo '</td>';
+							echo '</tr>';
 						}
 						Database::disconnect();
 					?>
