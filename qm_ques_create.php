@@ -64,6 +64,7 @@ if ( !empty($_POST)) { // if not first time through
 //include '../../database/header.php'; //html <head> section
 include '/home/gpcorser/public_html/database/header.php'; //html <head> section
 ?>
+<html>
 <body>
     <div class="container">
 		<div class="span10 offset1">
