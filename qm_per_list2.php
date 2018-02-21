@@ -44,7 +44,7 @@ include 'functions.php';
 				</thead>
 				<tbody>
 					<?php 
-						include '../../database/database.php';
+						include '/home/gpcorser/public_html/database/database.php';
 						$pdo = Database::connect();
 						$sql = 'SELECT FROM qr_persons';
 						foreach ($pdo->query($sql) as $row) {
