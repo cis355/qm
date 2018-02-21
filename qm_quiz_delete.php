@@ -21,7 +21,7 @@ if ( !empty($_POST)) { // if user clicks "yes" (sure to delete), delete record
 	
 	$pdo = Database::connect();
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	$sql = "DELETE FROM qm_quiz_list  WHERE id = ?";
+	$sql = "DELETE FROM qm_quizzes  WHERE id = ?";
 	$q = $pdo->prepare($sql);
 	$q->execute(array($id));
 	Database::disconnect();
