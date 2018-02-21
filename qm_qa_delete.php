@@ -24,7 +24,7 @@ if ( !empty($_POST)) { // if user clicks "yes" (sure to delete), delete record
 	$q = $pdo->prepare($sql);
 	$q->execute(array($id));
 	Database::disconnect();
-	header("Location: qm_per_list.php");
+	header("Location: qm_qa_list.php");
 	
 } 
 else { // otherwise, pre-populate fields to show data to be deleted
