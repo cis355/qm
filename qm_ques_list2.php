@@ -30,7 +30,7 @@ include '/home/gpcorser/public_html/database/header.php' // Add html header
 		</div>
 		<div class="row">
 			<p>
-				<!-- <a href="qm_quiz_create.php" class="btn btn-success">Create Quiz</a> -->
+				<a href="qm_ques_create.php" class="btn btn-primary">Add Question</a>
 			</p>
 		<table class="table table-striped table-bordered" style="background-color: lightgrey !important">
 				<thead>

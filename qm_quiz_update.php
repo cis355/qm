@@ -1,7 +1,7 @@
 <?php 
 /* ---------------------------------------------------------------------------
  * filename    : qm_quiz_update.php
- * author      : tslovas
+ * author      : Todd Lovas III - tslovas
  * description : code for updating a quiz
  * ---------------------------------------------------------------------------
  */

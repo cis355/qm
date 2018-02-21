@@ -17,7 +17,8 @@ if(!isset($_SESSION["fr_person_id"])){ // if "user" not set,
 	exit;
 }
 */
-require '../../database/database.php';
+//require '../../database/database.php';
+require '/home/gpcorser/public_html/database/database.php';
 if ( !empty($_POST)) { // if not first time through
 	// initialize user input validation variables
   $idError = null;
@@ -60,8 +61,10 @@ if ( !empty($_POST)) { // if not first time through
 		header("Location: qm_ques_create.php");
 	}
 }
-include '../../database/header.php'; //html <head> section
+//include '../../database/header.php'; //html <head> section
+include '/home/gpcorser/public_html/database/header.php'; //html <head> section
 ?>
+<html>
 <body>
     <div class="container">
 		<div class="span10 offset1">
