@@ -50,7 +50,7 @@ include '/home/gpcorser/public_html/database/header.php' // Add html header
 					$pdo = Database::connect();
 					
 // 					$sql = "SELECT qm_questions.*,qm_quizzes.quiz_name FROM qm_questions,qm_quizzes WHERE qm_questions.quiz_id = qm_quizzes.id";
-					$sql = "SELECT qs.*, qz.* FROM qm_questions qs, qm_quizzes qz WHERE qs.quiz_id = qz.id AND qz.per_id = $per_id";
+					$sql = "SELECT qs.*, qz.* FROM qm_questions qs, qm_quizzes qz WHERE qs.quiz_id = qz.id AND qz.id = $id";
 					foreach ($pdo->query($sql) as $row) {
 						echo '<tr>';
 						echo '<td>'. $row['id'] . '</td>';
@@ -58,7 +58,7 @@ include '/home/gpcorser/public_html/database/header.php' // Add html header
 						echo '<td>'. $row['quiz_name'] . '</td>';
 						echo '<td>'. $row['ques_name'] . '</td>';
 						echo '<td>'. $row['ques_text'] . '</td>';
-						echo '<td width=258>';
+						echo '<td width=270>';
 						# use $row[0] because there are 3 fields called "id"
 						echo '<a class="btn btn-primary" href="qm_ques_read.php?id='.$row[0].'">Details</a>';
 						/*if ($_SESSION['qm_person_title']=='Administrator' )*/
