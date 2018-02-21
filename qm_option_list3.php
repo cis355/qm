@@ -1,11 +1,11 @@
-/* * * * * * *  * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+<!-- /* * * * * * *  * * * * * * * * * * * * * * * * * * * * * * * * * * * 
 *  Filename:     qm_option_list3.php
 *  Author:        Michael Drayton
 *  Description:  Program manages a list of quiz question options
-* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */ -->
 
 
-
+<?php
 /*
 session_start();
 if(!isset($_SESSION["qm_person_id"])){ // if "user" not set,
