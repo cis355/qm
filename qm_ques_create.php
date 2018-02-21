@@ -76,7 +76,7 @@ include '/home/gpcorser/public_html/database/header.php'; //html <head> section
 			<form class="form-horizontal" action="qm_quiz_create.php" method="post">
 			
 				<div class="control-group <?php echo !empty($idError)?'error':'';?>">
-					<label class="control-label">id</label>
+					<label class="control-label">Question ID</label>
 					<div class="controls">
 						<input name="id" type="text"  placeholder="ID" value="<?php echo !empty($id)?$id:'';?>">
 						<?php if (!empty($idError)): ?>
