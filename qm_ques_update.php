@@ -1,8 +1,7 @@
 <?php 
 /* ---------------------------------------------------------------------------
  * filename    : qm_ques_update.php
- * author      : 
- * description : 
+ * author      : Aashish Shrestha (ashrest8@svsu.edu)
  * ---------------------------------------------------------------------------
  */
 // session_start();
@@ -103,7 +102,7 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 	<link rel="icon" href="cardinal_logo.png" type="image/png" />
 </head>
 
-<body>
+<body style="background-color: lightblue !important";>
     <div class="container">
 
 		<div class="span10 offset1">
@@ -120,7 +119,7 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 				<div class="control-group <?php echo !empty($quiz_idError)?'error':'';?>">
 					<label class="control-label">Quiz ID</label>
 					<div class="controls">
-						<input name="quiz_id" type="text"  placeholder="Quiz ID" value="<?php echo !empty($quiz_id)?$quiz_id:'';?>">
+						<input style="background-color: lightgrey !important" name="quiz_id" type="text"  placeholder="Quiz ID" value="<?php echo !empty($quiz_id)?$quiz_id:'';?>">
 						<?php if (!empty($quiz_idError)): ?>
 							<span class="help-inline"><?php echo $quiz_idError;?></span>
 						<?php endif; ?>
@@ -130,7 +129,7 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 				<div class="control-group <?php echo !empty($ques_name)?'error':'';?>">
 					<label class="control-label">Question Name</label>
 					<div class="controls">
-						<input name="ques_name" type="text"  placeholder="Question Name" value="<?php echo !empty($ques_name)?$ques_name:'';?>">
+						<input style="background-color: lightgrey !important" name="ques_name" type="text"  placeholder="Question Name" value="<?php echo !empty($ques_name)?$ques_name:'';?>">
 						<?php if (!empty($ques_nameError)): ?>
 							<span class="help-inline"><?php echo $ques_nameError;?></span>
 						<?php endif; ?>
@@ -140,17 +139,18 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 				<div class="control-group <?php echo !empty($ques_textError)?'error':'';?>">
 					<label class="control-label">Question Text</label>
 					<div class="controls">
-						<input name="ques_text" type="text" placeholder="Question Text" value="<?php echo !empty($ques_text)?$ques_text:'';?>">
+						<input style="background-color: lightgrey !important" name="ques_text" type="text" placeholder="Question Text" value="<?php echo !empty($ques_text)?$ques_text:'';?>">
 						<?php if (!empty($ques_textError)): ?>
 							<span class="help-inline"><?php echo $ques_textError;?></span>
 						<?php endif;?>
 					</div>
 				</div>
 				
+				<br />
 				
 				<div class="form-actions">
 					<button type="submit" class="btn btn-success">Update</button>
-					<a class="btn btn-secondary" href="qm_ques_list.php">Back</a>
+					<a class="btn btn-primary" href="qm_ques_list.php">Back</a>
 				</div>
 				
 			</form>
