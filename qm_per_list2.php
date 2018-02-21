@@ -6,12 +6,12 @@
  * ---------------------------------------------------------------------------
  */
 session_start();
-if(!isset($_SESSION["qm_per_id"])){ // if "user" not set,
+/*if(!isset($_SESSION["qm_per_id"])){ // if "user" not set,
 	session_destroy();
-	//header('Location: login.php');     // go to login page
+	header('Location: login.php');     // go to login page
 	exit;
 }
-$sessionid = $_SESSION['qm_per_id'];
+$sessionid = $_SESSION['qm_per_id']; */
 include 'functions.php';
 ?>
 
@@ -44,7 +44,7 @@ include 'functions.php';
 				</thead>
 				<tbody>
 					<?php 
-						include '/home/gpcorser/public_html/database/database.php';
+						include '../../database/database.php';
 						$pdo = Database::connect();
 						$sql = 'SELECT FROM qr_persons';
 						foreach ($pdo->query($sql) as $row) {
