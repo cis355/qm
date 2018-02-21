@@ -56,7 +56,7 @@ if ( !empty($_POST)) { // if not first time through
 	if ($valid) {
 		$pdo = Database::connect();
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = "INSERT INTO qm_quizs (id, per_id, quiz_name, quiz_description) values(?, ?, ?, ?)";
+		$sql = "INSERT INTO qm_quizzes (id, per_id, quiz_name, quiz_description) values(?, ?, ?, ?)";
 		$q = $pdo->prepare($sql);
 		$q->execute(array($id,$pid,$qName,$description));
 		Database::disconnect();
@@ -118,7 +118,7 @@ include '/home/gpcorser/public_html/database/header.php'; //html <head> section
 				
 				<div class="form-actions">
 					<button type="submit" class="btn btn-success">Create</button>
-					<a class="btn" href="qm_quiz.php">Back</a>
+					<a class="btn" href="qm_quiz_list.php">Back</a>
 				</div>
 				
 			</form>

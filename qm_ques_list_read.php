@@ -33,14 +33,12 @@ Database::disconnect();
 		<meta charset="utf-8">
 		<link   href="css/bootstrap.min.css" rel="stylesheet">
 		<script src="js/bootstrap.min.js"></script>
-		<link rel="icon" href="cardinal_logo.png" type="image/png" />
+		<!--<link rel="icon" href="cardinal_logo.png" type="image/png" />-->
 	</head>
 
-	<body>
+	<body style="background-color: lightblue !important";>
 		<div class="container">
-			<?php
-				Functions::logoDisplay2();
-			?>
+			
 			<div class="row">
 				<h3>Question List</h3>
 			</div>
@@ -77,7 +75,9 @@ Database::disconnect();
 						</label>
 					</div>     
 					
-					
+					<div class="form-actions">
+						<a class="btn" href="qm_ques_list.php">Back</a>
+					</div>
 				
 			</div>  <!-- end div: class="form-horizontal" 
 
