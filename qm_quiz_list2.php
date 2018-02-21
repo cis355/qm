@@ -37,7 +37,7 @@
 				</thead>
 				<tbody>
 					<?php 
-						include '../database/database.php';
+						include '/home/gpcorser/public_html/database/database.php';
 						$pdo = Database::connect();
 						$sql = 'SELECT * FROM qm_quizzes ORDER BY id DESC';
 						
