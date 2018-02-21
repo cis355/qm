@@ -19,7 +19,7 @@
                 <table class="table table-striped table-bordered">
                   <thead>
                     <tr>
-                      <th>ID</th>
+                      <th>Person Name</th>
                       <th>Quiz Name</th>
 					  <th>Options</th>
 					  <th>Questions<th>
@@ -29,10 +29,10 @@
                   <?php
                    include '/home/gpcorser/public_html/database/database.php';
                    $pdo = Database::connect();
-                   $sql = 'SELECT * FROM qm_quizzes ORDER BY id';
+                   $sql = 'SELECT * FROM qm_quizzes WHERE per_id =' .$_GET['per_id'].' ORDER BY quiz_name'; 
                    foreach ($pdo->query($sql) as $row) {
                             echo '<tr>';
-                            echo '<td>'. $row['id'] . '</td>';
+                            echo '<td>'. $row['per_name'] . '</td>';
                             echo '<td width=500>'. $row['quiz_name'] . '</td>';
 							echo '<td width=250>';
                             echo '<a class="btn" href="qm_quiz_read.php?id='.$row['id'].'">Read</a>';
@@ -42,7 +42,7 @@
                             echo '<a class="btn btn-danger" href="qm_quiz_delete.php?id='.$row['id'].'">Delete</a>';
 							echo ' ';
                             echo '</td>';
-							echo '<td><a class="btn" href="qm_ques_list.php?id='.$row['id'].'">Questions List</a></td>';
+							echo '<td><a class="btn" href="qm_ques_list.php?per_id='.$row['per_id'].'">Questions List</a></td>';
                             echo '</tr>';
                    }
                    Database::disconnect();

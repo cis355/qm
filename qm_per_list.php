@@ -1,6 +1,6 @@
 <?php
 /* ---------------------------------------------------------------------------
- * filename    : qm_per_list.php
+ * filename    : qm_per_list3.php
  * author      : Guadalupe Ruiz, gruiz@svsu.edu
  * description : 
  * ---------------------------------------------------------------------------
@@ -14,14 +14,8 @@ if(!isset($_SESSION["fr_person_id"])){ // if "user" not set,
 }
 $sessionid = $_SESSION['fr_person_id'];
 */
-include '../../database/header.php'; // html <head> section
+include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 ?>
-<head>
-    <meta charset="utf-8">
-    <link   href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-	<link rel="icon" href="cardinal_logo.png" type="image/png" />
-</head>
 
 <body style="background-color: lightblue !important";>
     <div class="container">
@@ -46,13 +40,14 @@ include '../../database/header.php'; // html <head> section
 					<?php 
 						include '/home/gpcorser/public_html/database/database.php';
 						$pdo = Database::connect();
-						$sql = 'SELECT FROM qr_persons';
+						$sql = 'SELECT * FROM qm_persons';
+
 						foreach ($pdo->query($sql) as $row) {
 							echo '<tr>';
-							echo '<td>'. $row['id'] . '</td>';
-							echo '<td>'. $row['fname'] . '</td>';
-							echo '<td>'. $row['lname'] . '</td>';
-							
+							echo '<td>'. trim($row['lname']) . '</td>'; 
+							echo '<td>'. trim($row['fname']) . '</td>'; 
+							echo '<td>'. trim($row['email']) . '</td>'; 
+							 
 							
 							//echo '<td width=250>';
 							echo '<td>';
@@ -62,7 +57,7 @@ include '../../database/header.php'; // html <head> section
 							echo ' ';
 							echo '<a class="btn btn-danger" href="qm_per_delete.php?id='.$row['id'].'">Delete</a>';
 							echo ' ';
-							echo '<a class="btn btn-danger" href="qm_quiz_list.php?per_id='.$row['id'].'">Quizzes</a>';							
+							echo '<a class="btn btn-primary" href="qm_quiz_list.php?per_id='.$row['id'].'">Quizzes</a>';							
 							echo '</td>';
 							echo '</tr>';
 						}
