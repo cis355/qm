@@ -36,7 +36,10 @@
                   <?php
                    include '/home/gpcorser/public_html/database/database.php';
                    $pdo = Database::connect();
-                   $sql = 'SELECT * FROM qm_quizzes ORDER BY id';
+                   // $sql = 'SELECT * FROM qm_quizzes ORDER BY id';
+				   $sql = 'SELECT * FROM qm_quizzes WHERE per_id = ' .
+						$_GET['per_id'] . ' ORDER BY quiz_name';
+					// echo $_GET['per_id']; exit();
                    foreach ($pdo->query($sql) as $row) {
                             echo '<tr>';
                             echo '<td>'. $row['id'] . '</td>';
