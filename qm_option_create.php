@@ -5,16 +5,8 @@
  * description : This program adds/inserts a new option (table: qm_options)
  * ---------------------------------------------------------------------------
  */
-//session_start();
-//if(!isset($_SESSION["fr_person_id"])){ // if "user" not set,
-//	session_destroy();
-//	header('Location: login.php');     // go to login page
-//	exit;
-//}
-include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 
-
-
+require '/home/gpcorser/public_html/database/database.php';
 
 if ( !empty($_POST)) { // if not first time through
 
@@ -29,17 +21,8 @@ if ( !empty($_POST)) { // if not first time through
 	$option_isCorrect = $_POST['option_isCorrect'];
 
 	// validate user input
-	$valid = true;
-	if (empty($ques_id)) {
-		$ques_idError = 'Please enter Question ID';
-		$valid = false;
-	}
 	if (empty($option_text)) {
 		$option_textError = 'Please enter Question Text';
-		$valid = false;
-	}
-	if (empty($option_isCorrect)) {
-		$option_isCorrectError = 'Please enter Correct Option';
 		$valid = false;
 	}
 
@@ -51,9 +34,12 @@ if ( !empty($_POST)) { // if not first time through
 		$q = $pdo->prepare($sql);
 		$q->execute(array($ques_id,$option_text,$option_isCorrect));
 		Database::disconnect();
-		header("Location: qm_options.php");
+		header("Location: qm_option_list.php");
 	}
 }
+
+include '/home/gpcorser/public_html/database/header.php'; //html <head> section
+
 ?>
 
 <!DOCTYPE html>
@@ -77,15 +63,14 @@ if ( !empty($_POST)) { // if not first time through
 			<form class="form-horizontal" action="qm_option_create.php" method="post">
 
 				<div class="control-group <?php echo !empty($ques_idError)?'error':'';?>">
-					<label class="control-label">Question ID</label>
+					<label class="control-label">Question</label>
 					<div class="controls">
 						<select name="ques_id" type="text">
 							<?php
-								include '/home/gpcorser/public_html/database/database.php';
 								$pdo = Database::connect();
 								$sql = 'SELECT * FROM qm_questions';
 								foreach ($pdo->query($sql) as $row) {
-									echo '<option value="' . "$id" . '">' . "$id" . '</option>';
+									echo '<option value="' . $row['id'] . '">' . $row['id'] . ' ' . $row['ques_text'] . '</option>';
 								}
 								Database::disconnect();
 							?>
@@ -104,21 +89,19 @@ if ( !empty($_POST)) { // if not first time through
 					</div>
 				</div>
 
-				<div class="control-group <?php echo !empty($option_isCorrectError)?'error':'';?>">
-					<br>
-					<label class="control-label">Is This Option the Correct Answer?</label>
+				<div class="control-group <?php echo !empty($option_isCorrectError)?'error':'';?>"><br>
+					<label class="control-label">Is this Option the Correct Answer?</label>
 					<div class="controls">
-						<select name="option_isCorrect" type="text">
-							<option value = "1">Yes</option>
-							<option value = "2">No</option>
-						</select>
+						<div class="controls">
+						  <input type="checkbox" name="option_isCorrect" value="true"> This is the Correct Answer<br>
+						</div>
 					</div>
 				</div>
 
 				<div class="form-actions">
 					<br><br>
 					<button type="submit" class="btn btn-success">Create</button>
-					<a class="btn" href="qm_option_list.php">Back</a>
+					<a class="btn btn-secondary" href="qm_option_list.php">Back</a>
 				</div>
 
 			</form>
