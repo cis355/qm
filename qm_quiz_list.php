@@ -1,3 +1,10 @@
+<!-- 
+---------------------------------------------------------------------------
+ filename    : qm_quiz_list.php
+ author      : Dakota Ward, dlward@svsu.edu
+ description : Shows the list of all Quizzes on the database.
+ ---------------------------------------------------------------------------
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,7 +29,7 @@
                       <th>ID</th>
                       <th>Quiz Name</th>
 					  <th>Options</th>
-					  <th>Questions<th>
+					  <th>Quiz Questions<th>
                     </tr>
                   </thead>
                   <tbody>
