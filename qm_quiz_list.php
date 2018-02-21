@@ -35,8 +35,15 @@
                   <?php
                    include '/home/gpcorser/public_html/database/database.php';
                    $pdo = Database::connect();
+<<<<<<< HEAD
                    $sql = 'SELECT * FROM qm_quizzes WHERE per_id =' .$_GET['per_id'].' ORDER BY quiz_name'; 
 				   //ON qm_quizzes.id = qm_persons.id
+=======
+
+                   $sql = 'SELECT * FROM qm_quizzes WHERE per_id =' . 
+				        $_GET['per_id'].' ORDER BY quiz_name'; 
+
+>>>>>>> 52f1fea64226d2248c8cacc0715764657166d272
                    foreach ($pdo->query($sql) as $row) {
                             echo '<tr>';
                             

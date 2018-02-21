@@ -5,7 +5,7 @@
  * description : 
  * ---------------------------------------------------------------------------
  */
- /*
+ 
 session_start();
 if(!isset($_SESSION["fr_person_id"])){ // if "user" not set,
 	session_destroy();
@@ -47,7 +47,10 @@ include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 							echo '<td>'. trim($row['lname']) . '</td>'; 
 							echo '<td>'. trim($row['fname']) . '</td>'; 
 							echo '<td>'. trim($row['email']) . '</td>'; 
-							echo '<td>'. 'read update delete' . '</td>'; 
+							echo '<td>'. 'read update delete' .
+								' <a href="qm_quiz_list.php?per_id=' . $row['id'] .
+								'">quizzes</a>' .
+							'</td>'; 
 						}
 						Database::disconnect();
 					?>
