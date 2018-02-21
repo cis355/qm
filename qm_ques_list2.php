@@ -65,7 +65,7 @@ include '/home/gpcorser/public_html/database/header.php' // Add html header
 							echo '&nbsp;<a class="btn btn-success" href="qm_ques_update.php?id='.$row[0].'">Update</a>';
 						/*if ($_SESSION['qm_person_title']=='Administrator' 
 							|| $_SESSION['qm_person_id']==$row['quiz_per_id'])*/
-							echo '&nbsp;<a class="btn btn-danger" href="fr_assign_delete.php?id='.$row[0].'">Delete</a>';
+							echo '&nbsp;<a class="btn btn-danger" href="qm_ques_delete.php?id='.$row[0].'">Delete</a>';
 						/*if($_SESSION["fr_person_id"] == $row['assign_per_id']) 
 							echo " &nbsp;&nbsp;Me";*/
 						echo '</td>';
