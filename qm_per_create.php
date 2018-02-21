@@ -109,7 +109,7 @@ include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 					  <br>
                       <div class="form-actions">
                           <button type="submit" class="btn btn-success">Create</button>
-                          <a class="btn btn-danger" href="qm_per_list3.php">Back</a>
+                          <a class="btn btn-danger" href="qm_per_list.php">Back</a>
                         </div>
                     </form>
 	</div>
