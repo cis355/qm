@@ -3,6 +3,7 @@
  * filename    : qm_quiz_create.php
  * author      : Nathan Gaffney, gaffney.nathan@svsu.edu
  * description : This php file will create a new quiz (table: qm_quiz)
+ * Schema:
  * id   [auto incremented]
  * per_id
  * quiz_name
@@ -60,7 +61,7 @@ if ( !empty($_POST)) { // if not first time through
 		$q = $pdo->prepare($sql);
 		$q->execute(array($id,$pid,$qName,$description));
 		Database::disconnect();
-		header("Location: qm_quiz.php");
+		header("Location: qm_quiz_list.php");
 	}
 }
 //include '../../database/header.php'; //html <head> section
