@@ -33,7 +33,7 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 	$tmpName  = $_FILES['userfile']['tmp_name'];
 	$fileSize = $_FILES['userfile']['size'];
 	$fileType = $_FILES['userfile']['type'];
-	$content = file_get_contents($tmpName);
+	//$content = file_get_contents($tmpName);
 	// validate user input
 	$valid = true;
 	if (empty($quiz_id)) {
