@@ -58,7 +58,7 @@ if ( !empty($_POST)) { // if not first time through
 		$q = $pdo->prepare($sql);
 		$q->execute(array($id,$qid,$qName,$qText));
 		Database::disconnect();
-		header("Location: qm_ques_create.php");
+		header("Location: qm_ques_list.php");
 	}
 }
 //include '../../database/header.php'; //html <head> section
