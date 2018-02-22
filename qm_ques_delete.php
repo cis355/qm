@@ -55,19 +55,16 @@ else { // otherwise, pre-populate fields to show data to be deleted
 						<th>Question ID</th>
 						<th>Question Name</th>
 						<th>Question Text</th>
+						<th>Action</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<td><?php echo $data['ques_id'];?></td>
+						<td><?php echo $data['quiz_id'];?></td>
 						<td><?php echo $data['ques_name'];?></td>
 						<td><?php echo $data['ques_text'];?></td>
-					</tr>
-					<tr>
-						<th>Action</th>
-					</tr>
-					<tr>
-						<td><form class="form-horizontal" action="qm_ques_delete.php" method="post">
+						<td>
+						<form class="form-horizontal" action="qm_ques_delete.php" method="post">
 							<input type="hidden" name="id" value="<?php echo $id;?>"/>
 							<p class="alert alert-error">Are you sure you want to delete?</p>
 							<div class="form-actions">
@@ -75,7 +72,10 @@ else { // otherwise, pre-populate fields to show data to be deleted
 								<a class="btn btn-danger" href="qm_ques_list.php">No</a>
 							</div>
 						</form></td>
+						
 					</tr>
+					
+					
 				</tbody>
 		</table>
 				
