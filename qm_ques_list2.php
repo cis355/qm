@@ -17,6 +17,7 @@ if(!isset($_SESSION["qm_person_id"])){ // if "user" not set,
 }
 */
 $id = $_GET['id']; 
+$per_id = $_GET['per_id'];
 // $sessionid = $_SESSION['qm_person_id'];
  
 include '/home/gpcorser/public_html/database/header.php' // Add html header
@@ -57,14 +58,14 @@ include '/home/gpcorser/public_html/database/header.php' // Add html header
 						echo '<td>'. $row['quiz_name'] . '</td>';
 						echo '<td>'. $row['ques_name'] . '</td>';
 						echo '<td>'. $row['ques_text'] . '</td>';
-						echo '<td width=258>';
+						echo '<td width=270>';
 						# use $row[0] because there are 3 fields called "id"
 						echo '<a class="btn btn-primary" href="qm_ques_read.php?id='.$row[0].'">Details</a>';
 						/*if ($_SESSION['qm_person_title']=='Administrator' )*/
 							echo '&nbsp;<a class="btn btn-success" href="qm_ques_update.php?id='.$row[0].'">Update</a>';
 						/*if ($_SESSION['qm_person_title']=='Administrator' 
 							|| $_SESSION['qm_person_id']==$row['quiz_per_id'])*/
-							echo '&nbsp;<a class="btn btn-danger" href="fr_assign_delete.php?id='.$row[0].'">Delete</a>';
+							echo '&nbsp;<a class="btn btn-danger" href="qm_ques_delete.php?id='.$row[0].'">Delete</a>';
 						/*if($_SESSION["fr_person_id"] == $row['assign_per_id']) 
 							echo " &nbsp;&nbsp;Me";*/
 						echo '</td>';
