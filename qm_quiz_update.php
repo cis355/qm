@@ -23,7 +23,7 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 	
 	// initialize $_POST variables
 	$quiz_id = $_POST['quiz_id'];
-	$ques_name = $_POST['ques_name'];
+	$ques_name = $_POST['qm_persons'];
 	$ques_text = $_POST['ques_text'];
 	
 	//
@@ -102,7 +102,7 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 				<h3>Update Quizzes</h3>
 			</div>
 	
-			<form class="form-horizontal" action="qm_ques_update.php?id=<?php echo $id?>" method="post" enctype="multipart/form-data">
+			<form class="form-horizontal" action="qm_quiz_update.php?id=<?php echo $id?>" method="post" enctype="multipart/form-data">
 			
 				
 
@@ -141,7 +141,7 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 				
 				<div class="form-actions">
 					<button type="submit" class="btn btn-success">Update</button>
-					<a class="btn btn-primary" href="qm_ques_list.php">Back</a>
+					<a class="btn btn-primary" href="qm_quiz_list.php">Back</a>
 				</div>
 				
 			</form>
