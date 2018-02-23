@@ -11,8 +11,8 @@ require '/home/gpcorser/public_html/database/database.php';
 
 $id = $_GET['id'];
 
-	$quest_id = $_POST['quest_id'];
-	$option_text = $_POST['option_text'];
+	$ques_id = $_POST['ques_id'];
+	$opt_text = $_POST['opt_text'];
 
 if ( !empty($_POST)) { // if user clicks "yes" (sure to delete), delete record
 	$id = $_POST['id'];
@@ -36,8 +36,8 @@ else { // otherwise, pre-populate fields to show data to be deleted
 	$q->execute(array($id));
 	$data = $q->fetch(PDO::FETCH_ASSOC);
 	
-	$quest_id = $data['quest_id'];
-	$option_text = $data['option_text'];
+	$ques_id = $data['ques_id'];
+	$opt_text = $data['opt_text'];
 	
 	Database::disconnect();
 }
@@ -79,7 +79,7 @@ else { // otherwise, pre-populate fields to show data to be deleted
 					<label class="control-label">Question ID</label>
 					<div class="controls">
 						<label class="checkbox">
-							<?php echo $quest_id;?>
+							<?php echo $ques_id;?>
 						</label>
 					</div>
 				</div>
@@ -88,7 +88,7 @@ else { // otherwise, pre-populate fields to show data to be deleted
 					<label class="control-label">Option Text</label>
 					<div class="controls">
 						<label class="checkbox">
-							<?php echo $option_text;?>
+							<?php echo $opt_text;?>
 						</label>
 					</div>
 				</div>
