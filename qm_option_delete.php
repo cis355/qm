@@ -1,62 +1,48 @@
 <?php 
-/* ---------------------------------------------------------------------------
+/* -----------------------------------------------------------------------------------------------------------
  * filename    : qm_option_delete.php
- * author      : Robert Zinger
+ * author      : Robert Zinger, rjzinger@svsu.edu. Derived from George Corser's fr_assign_delete.php
  * description : This program deletes one option thats selected
- * ---------------------------------------------------------------------------
+ * -----------------------------------------------------------------------------------------------------------
  */
  
- /*
-session_start();
-if(!isset($_SESSION["fr_person_id"])){ // if "user" not set,
-	session_destroy();
-	header('Location: login.php');     // go to login page
-	exit;
-}
-*/
-
 include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 require '/home/gpcorser/public_html/database/database.php';
-/*
+
 $id = $_GET['id'];
+
+	$ques_id = $_POST['ques_id'];
+	$opt_text = $_POST['opt_text'];
+
 if ( !empty($_POST)) { // if user clicks "yes" (sure to delete), delete record
 	$id = $_POST['id'];
 	
+	// delete data
 	$pdo = Database::connect();
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	$sql = "DELETE FROM qm_option  WHERE id = ?";
+	$sql = "DELETE FROM qm_options  WHERE id = ?";
 	$q = $pdo->prepare($sql);
 	$q->execute(array($id));
 	Database::disconnect();
-	header("Location: qm_option_list.php");
-	
+	header("Location: qm_options.php");
 } 
 else { // otherwise, pre-populate fields to show data to be deleted
 	$pdo = Database::connect();
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	$sql = "SELECT * FROM qm_option where id = ?";
+	
+	# get option details
+	$sql = "SELECT * FROM qm_options where id = ?";
 	$q = $pdo->prepare($sql);
 	$q->execute(array($id));
 	$data = $q->fetch(PDO::FETCH_ASSOC);
+	
+	$ques_id = $data['ques_id'];
+	$opt_text = $data['opt_text'];
+	
 	Database::disconnect();
 }
-*/
 
-if ( !empty($_GET['id'])) {
-	$id = $_REQUEST['id'];
-	}
-	if ( !empty($_POST)) {
-		$id = $_POST['id'];
-		$pdo = Database::connect();
-		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = "DELETE FROM qm_options WHERE id = ?";
-		$q = $pdo->prepare($sql);
-		$q->execute(array($id));
-		Database::disconnect();
-		/*header("Location: index.php"); */
-		}
 ?>
-
 
 <body>
     <div class="container">
@@ -76,7 +62,7 @@ if ( !empty($_GET['id'])) {
 				</div>
 			</form>
 			
-			<!-- Display same information as in file: fr_event_read.php -->
+			<!-- Display same information as in file: qm_option_list.php -->
 			
 			<div class="form-horizontal" >
 			
@@ -93,7 +79,7 @@ if ( !empty($_GET['id'])) {
 					<label class="control-label">Question ID</label>
 					<div class="controls">
 						<label class="checkbox">
-							<?php echo $quest_id;?>
+							<?php echo $ques_id;?>
 						</label>
 					</div>
 				</div>
@@ -102,28 +88,10 @@ if ( !empty($_GET['id'])) {
 					<label class="control-label">Option Text</label>
 					<div class="controls">
 						<label class="checkbox">
-							<?php echo $option_text;?>
+							<?php echo $opt_text;?>
 						</label>
 					</div>
 				</div>
-
-				
-			<!--<div class="row">
-				<h4>Volunteers Assigned to This Shift</h4>
-			</div>
-			-->
-			<?php
-			/*
-				$pdo = Database::connect();
-				$sql = "SELECT * FROM fr_assignments, fr_persons WHERE assign_per_id = fr_persons.id AND assign_event_id = " . $data['id'] . ' ORDER BY lname ASC, fname ASC';
-				$countrows = 0;
-				foreach ($pdo->query($sql) as $row) {
-					echo $row['lname'] . ', ' . $row['fname'] . ' - ' . $row['mobile'] . '<br />';
-					$countrows++;
-				}
-				if ($countrows == 0) echo 'none.';
-				*/
-			?>
 			
 			</div> <!-- end div: class="form-horizontal" -->
 			

@@ -6,115 +6,71 @@
  *               (table: qm_quizes, qm_persons)
  * ---------------------------------------------------------------------------
  */
- 
-/*session_start();
-if(!isset($_SESSION["fr_person_id"])){ // if "user" not set,
-	session_destroy();
-	header('Location: login.php');     // go to login page
-	exit;
-}*/
-
-require '/home/gpcorser/public_html/database/database.php';
-//require 'functions.php';
-$id = $_GET['id'];
-$pdo = Database::connect();
-
-$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-# get quiz ids, 
-$sql = "SELECT * FROM qm_quizzes where id = ?";
-$q = $pdo->prepare($sql);
-$q->execute(array($quizdata['id']));
-$quizdata = $q->fetch(PDO::FETCH_ASSOC);
-
-# get person id
-$sql = "SELECT * FROM qm_persons where id = ?";
-$q = $pdo->prepare($sql);
-$q->execute(array($quizdata['per_id']));
-$quizdata = $q->fetch(PDO::FETCH_ASSOC);
-
-# get quiz name
-$sql = "SELECT * FROM qm_quizzes where id = ?";
-$q = $pdo->prepare($sql);
-$q->execute(array($quizdata['quiz_name']));
-$quizdata = $q->fetch(PDO::FETCH_ASSOC);
-
-# get quiz description
-$sql = "SELECT * FROM qm_quizzes where id = ?";
-$q = $pdo->prepare($sql);
-$q->execute(array($quizdata['quiz_description']));
-$quizdata = $q->fetch(PDO::FETCH_ASSOC);
-
-
-Database::disconnect();
-
-include '/home/~gpcorser/public_html/database/database/header.php'; //html <head> section
+ 	require '/home/gpcorser/public_html/database/database.php';
+    $id = null;
+    if ( !empty($_GET['id'])) {
+        $id = $_REQUEST['id'];
+    }
+     
+    if ( null==$id ) {
+        header("Location: qm_quiz_list.php");
+    } else {
+        $pdo = Database::connect();
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sql = "SELECT * FROM qm_quizzes where id = ?";
+        $q = $pdo->prepare($sql);
+        $q->execute(array($id));
+        $data = $q->fetch(PDO::FETCH_ASSOC);
+        Database::disconnect();
+    }
+//include '/home/~gpcorser/public_html/database/database/header.php'; //html <head> section
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<!--<meta charset="utf-8">
-	//<link   href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
-   // <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
--->
-   </head>
+	<meta charset="utf-8">
+	<link   href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
 <body>
     <div class="container">
 
-    	<?php 
-			//gets logo
-			//functions::logoDisplay();
-		?>
-		<div class="span10 offset1">
 		    <div class="row">
-                <h2>Read a Quiz </h2>
-                </br>
+                <h3>Read a Quiz </h3>
 				</div>
-			<div class="form-horizontal" >
 			
 				<div class="control-group">
-					<label class="control-label">Quiz ID</label>
+					<label class="control-label">Quiz ID: </label>
 					<div class="controls">
-						<label class="checkbox">
-							<?php echo $quizdata['id'] ;?>
-						</label>
+						<?php echo $data['id'] ;?>
 					</div>
 				</div>
 
 				<div class="control-group">
-					<label class="control-label">Person's ID</label>
+					<label class="control-label">Person's ID:</label>
 					<div class="controls">
-						<label class="checkbox">
-							<?php echo $quizdata['per_id'] ;?>
-						</label>
+						<?php echo $data['per_id'] ;?>
 					</div>
 				</div>
 				
 				<div class="control-group">
-					<label class="control-label">Quiz Name</label>
+					<label class="control-label">Quiz Name:</label>
 					<div class="controls">
-						<label class="checkbox">
-							<?php echo trim($quizdata['quiz_name']);?>
-						</label>
+						<?php echo ($data['quiz_name']);?>
 					</div>
 				</div>
 				
 				<div class="control-group">
-					<label class="control-label">Quiz Description</label>
+					<label class="control-label">Quiz Description:</label>
 					<div class="controls">
-						<label class="checkbox">
-							<?php echo ($quizdata['quiz_description']);?>
-						</label>
+						<?php echo ($data['quiz_description']);?>
 					</div>
 				</div>
 				    <div class="form-actions">
 						  <a class="btn" href="qm_quiz_list.php">Back</a>
 				    </div>
-			</div> <!-- end div: class="form-horizontal" -->
-				
-		</div> <!-- end div: class="span10 offset1" -->
-				
+		
     </div> <!-- end div: class="container" -->
-	
 </body>
 </html>

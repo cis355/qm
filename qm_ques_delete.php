@@ -1,8 +1,8 @@
 <?php 
 /* ---------------------------------------------------------------------------
- * filename    : qm_per_delete.php
- * author      : Kyle Graham, kyle.graham11@gmail.com - taken from george corser original code fr_per_delete.php
- * description : This program deletes one person's details (table: qm_persons)
+ * filename    : qm_ques_delete.php
+ * author      : mimajumd
+ * description : 
  * ---------------------------------------------------------------------------
  *
 session_start();
@@ -20,17 +20,17 @@ if ( !empty($_POST)) { // if user clicks "yes" (sure to delete), delete record
 	
 	$pdo = Database::connect();
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	$sql = "DELETE FROM qm_persons  WHERE id = ?";
+	$sql = "DELETE FROM qm_questions  WHERE id = ?";
 	$q = $pdo->prepare($sql);
 	$q->execute(array($id));
 	Database::disconnect();
-	header("Location: qm_per_list.php");
+	header("Location: qm_ques_list.php");
 	
 } 
 else { // otherwise, pre-populate fields to show data to be deleted
 	$pdo = Database::connect();
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	$sql = "SELECT * FROM qm_persons where id = ?";
+	$sql = "SELECT * FROM qm_questions where id = ?";
 	$q = $pdo->prepare($sql);
 	$q->execute(array($id));
 	$data = $q->fetch(PDO::FETCH_ASSOC);
@@ -44,7 +44,7 @@ else { // otherwise, pre-populate fields to show data to be deleted
 <body style ="background-color: lightblue !important";>
     <div class="container">
 		<div class="row">
-			<h3>Delete Person</h3>
+			<h3>Delete Questions</h3>
 		</div>
 	</div>
 		<br>
@@ -52,30 +52,30 @@ else { // otherwise, pre-populate fields to show data to be deleted
 		<table class="table table-striped table-bordered" style="background-color: lightgrey !important">
 				<thead>
 					<tr>
-						<th>Lastname</th>
-						<th>Firstname</th>
-						<th>Email</th>
+						<th>Question ID</th>
+						<th>Question Name</th>
+						<th>Question Text</th>
+						<th>Action</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<td><?php echo $data['lname'];?></td>
-						<td><?php echo $data['fname'];?></td>
-						<td><?php echo $data['email'];?></td>
-					</tr>
-					<tr>
-						<th>Action</th>
-					</tr>
-					<tr>
-						<td><form class="form-horizontal" action="qm_per_delete.php" method="post">
+						<td><?php echo $data['quiz_id'];?></td>
+						<td><?php echo $data['ques_name'];?></td>
+						<td><?php echo $data['ques_text'];?></td>
+						<td>
+						<form class="form-horizontal" action="qm_ques_delete.php" method="post">
 							<input type="hidden" name="id" value="<?php echo $id;?>"/>
 							<p class="alert alert-error">Are you sure you want to delete?</p>
 							<div class="form-actions">
 								<button type="submit" class="btn btn-success">Yes</button>
-								<a class="btn btn-danger" href="qm_per_list.php">No</a>
+								<a class="btn btn-danger" href="qm_ques_list.php">No</a>
 							</div>
 						</form></td>
+						
 					</tr>
+					
+					
 				</tbody>
 		</table>
 				

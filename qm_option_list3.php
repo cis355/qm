@@ -33,6 +33,7 @@ include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 					<tr>
 						<th>ID</th>
 						<th>Question ID</th>
+						<th>Question Name</th>
 						<th>Option Text</th>
 						<th>Option Validity</th>
 					</tr>
@@ -41,11 +42,13 @@ include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 					<?php 
 						include '/home/gpcorser/public_html/database/database.php';
 						$pdo = Database::connect();
-						$sql = 'SELECT * FROM qm_options';
+						//$sql = 'SELECT * FROM qm_options';
+						$sql = 'SELECT * FROM qm_options INNER JOIN qm_questions ON qm_options.id = qm_questions.id';
 						foreach ($pdo->query($sql) as $row) {
 							echo '<tr>';
 							echo '<td>'. trim($row['id']) . '</td>'; 
-							echo '<td>'. trim($row['quest_id']) . '</td>'; 
+							echo '<td>'. trim($row['quest_id']) . '</td>';
+							echo '<td>'. trim($row['ques_name']) . '</td>'; 
 							echo '<td>'. trim($row['option_text']) . '</td>'; 
 							echo '<td>'. trim($row['option_isCorrect']) . '</td>'; 
 							echo '<td width=250>';
