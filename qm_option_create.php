@@ -12,28 +12,28 @@
 //	exit;
 //}
 include '/home/gpcorser/public_html/database/header.php'; // html <head> section
-
-
-
+include '/home/gpcorser/public_html/database/database.php'; // gpcorser
 
 if ( !empty($_POST)) { // if not first time through
 
 	// initialize user input validation variables
-	$ques_idError = null;
+	// $ques_idError = null; // gpcorser: never let user choose id
 	$option_textError = null;
 	$option_isCorrectError = null;
 
 	// initialize $_POST variables
-	$ques_id = $_POST['ques_id'];
+	// $ques_id = $_POST['ques_id']; // gpcorser: never let user choose id
 	$option_text = $_POST['option_text'];
 	$option_isCorrect = $_POST['option_isCorrect'];
 
 	// validate user input
 	$valid = true;
+	/* // gpcorser: never let user choose id
 	if (empty($ques_id)) {
 		$ques_idError = 'Please enter Question ID';
 		$valid = false;
 	}
+	*/
 	if (empty($option_text)) {
 		$option_textError = 'Please enter Question Text';
 		$valid = false;
@@ -47,23 +47,14 @@ if ( !empty($_POST)) { // if not first time through
 	if ($valid) {
 		$pdo = Database::connect();
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = "INSERT INTO qm_options (ques_id, option_text, option_isCorrect) values(?, ?, ?)";
+		$sql = "INSERT INTO qm_options (opt_text, opt_isCorrect) values(?, ?)"; // gpcorser: never let user choose id
 		$q = $pdo->prepare($sql);
-		$q->execute(array($ques_id,$option_text,$option_isCorrect));
+		$q->execute(array($option_text,$option_isCorrect));
 		Database::disconnect();
-		header("Location: qm_options.php");
+		header("Location: qm_option_list.php"); // gpcorser
 	}
 }
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <link   href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-	<link rel="icon" href="cardinal_logo.png" type="image/png" />
-</head>
 
 <body style="background-color: lightblue">
     <div class="container">
@@ -75,23 +66,6 @@ if ( !empty($_POST)) { // if not first time through
 			</div>
 
 			<form class="form-horizontal" action="qm_option_create.php" method="post">
-
-				<div class="control-group <?php echo !empty($ques_idError)?'error':'';?>">
-					<label class="control-label">Question ID</label>
-					<div class="controls">
-						<select name="ques_id" type="text">
-							<?php
-								include '/home/gpcorser/public_html/database/database.php';
-								$pdo = Database::connect();
-								$sql = 'SELECT * FROM qm_questions';
-								foreach ($pdo->query($sql) as $row) {
-									echo '<option value="' . "$id" . '">' . "$id" . '</option>';
-								}
-								Database::disconnect();
-							?>
-						</select>
-					</div>
-				</div>
 
 				<div class="control-group <?php echo !empty($option_textError)?'error':'';?>">
 					<br>

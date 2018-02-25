@@ -42,7 +42,7 @@ include '/home/gpcorser/public_html/database/header.php';
 					<?php 
 						include '/home/gpcorser/public_html/database/database.php';
 						$pdo = Database::connect();
-						$sql = 'SELECT * FROM qm_questions ORDER BY quiz_id';
+						$sql = 'SELECT * FROM qm_questions ORDER BY id';
 						// $sql = 'SELECT * FROM qm_questions WHERE quiz_id = ' . $_GET['quiz_id'];
 						foreach ($pdo->query($sql) as $row) {
 							echo '<tr>';

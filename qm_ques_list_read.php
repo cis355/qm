@@ -13,14 +13,14 @@ if(!isset($_SESSION["fr_person_id"])){ // if "user" not set,
 	exit;
 }
 */
-include 'home/gpcorser/public_html/database/database.php';
+//include 'home/gpcorser/public_html/database/database.php';    //home/gpcorser/public_html/databasePHP/
 
-require '/home/gpcroser/public_html/database/database.php';
-require 'functions.php';
+require '/home/gpcorser/public_html/database/database.php';
+//require 'functions.php';
 $id = $_GET['id'];
 $pdo = Database::connect();
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-$sql = "SELECT * FROM qm_questions";
+$sql = "SELECT * FROM qm_questions WHERE id = " . $_GET['id'];
 $q = $pdo->prepare($sql);
 $q->execute(array($id));
 $data = $q->fetch(PDO::FETCH_ASSOC);
@@ -47,28 +47,28 @@ Database::disconnect();
 				
 				<div class="control-group col-md-6">
 				
-					<label class="control-label">ID</label>
+					<label class="control-label"><b>ID</b></label>
 					<div class="controls ">
 						<label class="checkbox">
 							<?php echo $data['id'];?> 
 						</label>
 					</div>
 					
-					<label class="control-label">Quiz ID</label>
+					<label class="control-label"><b>Quiz ID</b></label>
 					<div class="controls ">
 						<label class="checkbox">
 							<?php echo $data['quiz_id'];?> 
 						</label>
 					</div>
 					
-					<label class="control-label">Question Name</label>
+					<label class="control-label"><b>Question Name</b></label>
 					<div class="controls">
 						<label class="checkbox">
 							<?php echo $data['ques_name'];?>
 						</label>
 					</div>
 					
-					<label class="control-label">Question Text</label>
+					<label class="control-label"><b>Question Text</b></label>
 					<div class="controls">
 						<label class="checkbox">
 							<?php echo $data['ques_text'];?>
