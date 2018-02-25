@@ -5,8 +5,8 @@
  * description : This reads and displays a selected record.
  * ---------------------------------------------------------------------------
  */
- include  '../../database/header.php'; // html <head> section 
- require '../../database/databse.php';
+ include  '/home/gpcorser/public_html/database/header.php'; // html <head> section 
+ require '/home/gpcorser/public_html/database/database.php';
  
  $id = $_GET['id'];
  
@@ -36,7 +36,7 @@
 					<label class="control-label">Question ID</label>
 					<div class="controls ">
 						<label class="checkbox">
-							<?php echo $data['ques_id'];?> 
+							<?php echo $data['quest_id'];?> 
 						</label>
 					</div>
 					<label class="control-label">Option Text</label>

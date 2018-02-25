@@ -1,8 +1,8 @@
 <?php
 /* ---------------------------------------------------------------------------
  * filename    : qm_option_list2.php
- * author      : Scott Angst, sdangst@gmail.com
- * description : This program displays a list of Options
+ * author      : sdangst, sdangst@svsu.edu
+ * description : This program displays a list of Options from the table qm_options
  * ---------------------------------------------------------------------------
  */
  /*
@@ -43,16 +43,17 @@ include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 						foreach ($pdo->query($sql) as $row) {
 							echo '<tr>';
 							echo '<td>'. trim($row['id']) . '</td>'; 
-							echo '<td>'. trim($row['quest_id']) . '</td>'; 
-							echo '<td>'. trim($row['option_text']) . '</td>'; 
-							echo '<td>'. trim($row['option_isCorrect']) . '</td>'; 
+							echo '<td>'. trim($row['ques_id']) . '</td>'; 
+							echo '<td>'. trim($row['opt_text']) . '</td>'; 
+							echo '<td>'. trim($row['opt_isCorrect']) . '</td>'; 
 							echo '<td width=250>';
                                 echo '<a class="btn" href="qm_option_read.php?id='.$row['id'].'">Read</a>';
                                 echo ' ';
                                 echo '<a class="btn btn-success" href="qm_option_update.php?id='.$row['id'].'">Update</a>';
                                 echo ' ';
                                 echo '<a class="btn btn-danger" href="qm_option_delete.php?id='.$row['id'].'">Delete</a>';
-                                echo '</td>';
+                                echo '<a href="qm_ques_list2.php?id='.$row['ques_id'].'">Question</a>';
+								echo '</td>';
                             echo '</tr>';
 						}
 						Database::disconnect();

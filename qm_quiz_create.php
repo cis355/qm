@@ -3,6 +3,7 @@
  * filename    : qm_quiz_create.php
  * author      : Nathan Gaffney, gaffney.nathan@svsu.edu
  * description : This php file will create a new quiz (table: qm_quiz)
+ * Schema:
  * id   [auto incremented]
  * per_id
  * quiz_name
@@ -22,23 +23,16 @@ require '/home/gpcorser/public_html/database/database.php';
 if ( !empty($_POST)) { // if not first time through
 
 	// initialize user input validation variables
-  $idError = null;
 	$per_idError = null;
 	$quiz_nameError = null;
 	$quiz_descriptionError = null;
 	
 	// initialize $_POST variables
-	$id = $_POST['id'];
 	$pid = $_POST['per_id'];
 	$qName = $_POST['quiz_name'];
 	$description = $_POST['quiz_description'];		
-	
-	// validate user input
 	$valid = true;
-	if (empty($id)) {
-		$idError = 'Please enter ID of quiz';
-		$valid = false;
-	}
+	// validate user input
 	if (empty($pid)) {
 		$per_idError = 'Please enter Person ID';
 		$valid = false;
@@ -56,11 +50,11 @@ if ( !empty($_POST)) { // if not first time through
 	if ($valid) {
 		$pdo = Database::connect();
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = "INSERT INTO qm_quizs (id, per_id, quiz_name, quiz_description) values(?, ?, ?, ?)";
+		$sql = "INSERT INTO qm_quizzes (per_id, quiz_name, quiz_description) values(?, ?, ?)";
 		$q = $pdo->prepare($sql);
-		$q->execute(array($id,$pid,$qName,$description));
+		$q->execute(array($pid,$qName,$description));
 		Database::disconnect();
-		header("Location: qm_quiz.php");
+		header("Location: qm_quiz_list.php");
 	}
 }
 //include '../../database/header.php'; //html <head> section
@@ -75,16 +69,6 @@ include '/home/gpcorser/public_html/database/header.php'; //html <head> section
 			</div>
 	
 			<form class="form-horizontal" action="qm_quiz_create.php" method="post">
-			
-				<div class="control-group <?php echo !empty($idError)?'error':'';?>">
-					<label class="control-label">id</label>
-					<div class="controls">
-						<input name="id" type="text"  placeholder="ID" value="<?php echo !empty($id)?$id:'';?>">
-						<?php if (!empty($idError)): ?>
-							<span class="help-inline"><?php echo $idError;?></span>
-						<?php endif; ?>
-					</div>
-				</div>
 			  
 				<div class="control-group <?php echo !empty($per_idError)?'error':'';?>">
 					<label class="control-label">Persons ID</label>
@@ -118,7 +102,7 @@ include '/home/gpcorser/public_html/database/header.php'; //html <head> section
 				
 				<div class="form-actions">
 					<button type="submit" class="btn btn-success">Create</button>
-					<a class="btn" href="qm_quiz.php">Back</a>
+					<a class="btn" href="qm_quiz_list.php">Back</a>
 				</div>
 				
 			</form>

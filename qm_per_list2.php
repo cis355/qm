@@ -6,12 +6,12 @@
  * ---------------------------------------------------------------------------
  */
 session_start();
-if(!isset($_SESSION["qm_per_id"])){ // if "user" not set,
+/*if(!isset($_SESSION["qm_per_id"])){ // if "user" not set,
 	session_destroy();
 	header('Location: login.php');     // go to login page
 	exit;
 }
-$sessionid = $_SESSION['qm_per_id'];
+$sessionid = $_SESSION['qm_per_id']; */
 include 'functions.php';
 ?>
 
@@ -22,9 +22,7 @@ include 'functions.php';
 			//functions::logoDisplay2();
 			//probably won't work yet
 		?>
-		
-		
-		
+
 		<div class="row">
 			<h3>Person2</h3>
 		</div>
@@ -63,7 +61,8 @@ include 'functions.php';
                             echo '<a class="btn btn-success" href="qm_per_update.php?id='.$row['id'].'">Update</a>';
 							echo ' ';
 							echo '<a class="btn btn-danger" href="qm_per_delete.php?id='.$row['id'].'">Delete</a>';
-							
+							echo ' ';
+							echo '<a class="btn btn-danger" href="qm_quiz_list.php?per_id='.$row['id'].'">Quizzes</a>';							
 							echo '</td>';
 							echo '</tr>';
 						}

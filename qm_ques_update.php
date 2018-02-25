@@ -1,8 +1,7 @@
 <?php 
 /* ---------------------------------------------------------------------------
  * filename    : qm_ques_update.php
- * author      : 
- * description : 
+ * author      : Aashish Shrestha (ashrest8@svsu.edu)
  * ---------------------------------------------------------------------------
  */
 // session_start();
@@ -12,7 +11,7 @@
 	// exit;
 // }
 	
-require '../../database/database.php';
+require '/home/gpcorser/public_html/database/database.php';
 
 $id = $_GET['id'];
 
@@ -21,23 +20,17 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 	# initialize/validate (same as file: fr_per_create.php)
 
 	// initialize user input validation variables
-	$fnameError = null;
-	$lnameError = null;
-	$emailError = null;
-	$mobileError = null;
-	$passwordError = null;
-	$titleError = null;
-	$pictureError = null; // not used
+	$quiz_idError = null;
+	$ques_nameError = null;
+	$ques_textError = null;
+	
 	
 	// initialize $_POST variables
-	$fname = $_POST['fname'];
-	$lname = $_POST['lname'];
-	$email = $_POST['email'];
-	$mobile = $_POST['mobile'];
-	$password = $_POST['password'];
-	$title =  $_POST['title'];
-	$picture = $_POST['picture']; // not used
+	$quiz_id = $_POST['quiz_id'];
+	$ques_name = $_POST['ques_name'];
+	$ques_text = $_POST['ques_text'];
 	
+	//
 	// initialize $_FILES variables
 	$fileName = $_FILES['userfile']['name'];
 	$tmpName  = $_FILES['userfile']['tmp_name'];
@@ -47,45 +40,21 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 
 	// validate user input
 	$valid = true;
-	if (empty($fname)) {
-		$fnameError = 'Please enter First Name';
+	if (empty($quiz_id)) {
+		$quiz_idError = 'Please enter Quiz ID';
 		$valid = false;
 	}
-	if (empty($lname)) {
-		$lnameError = 'Please enter Last Name';
-		$valid = false;
-	}
-
-	if (empty($email)) {
-		$emailError = 'Please enter valid Email Address (REQUIRED)';
-		$valid = false;
-	} else if ( !filter_var($email,FILTER_VALIDATE_EMAIL) ) {
-		$emailError = 'Please enter a valid Email Address';
+	if (empty($ques_name)) {
+		$ques_nameError = 'Please enter Question Name';
 		$valid = false;
 	}
 
-	// email must contain only lower case letters
-	if (strcmp(strtolower($email),$email)!=0) {
-		$emailError = 'email address can contain only lower case letters';
+	if (empty($ques_text)) {
+		$ques_textError = 'Please enter Question text';
 		$valid = false;
-	}
+	} 
 
-	if (empty($mobile)) {
-		$mobileError = 'Please enter Mobile Number (or "none")';
-		$valid = false;
-	}
-	if(!preg_match("/^[0-9]{3}-[0-9]{3}-[0-9]{4}$/", $mobile)) {
-		$mobileError = 'Please write Mobile Number in form 000-000-0000';
-		$valid = false;
-	}
-	if (empty($password)) {
-		$passwordError = 'Please enter valid Password';
-		$valid = false;
-	}
-	if (empty($title)) {
-		$titleError = 'Please enter valid Title';
-		$valid = false;
-	}
+	
 	// restrict file types for upload
 	
 	if ($valid) { // if valid user input update the database
@@ -93,35 +62,32 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 		if($fileSize > 0) { // if file was updated, update all fields
 			$pdo = Database::connect();
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = "UPDATE fr_persons  set fname = ?, lname = ?, email = ?, mobile = ?, password = ?, title = ?, filename = ?,filesize = ?,filetype = ?,filecontent = ? WHERE id = ?";
+			$sql = "UPDATE qm_questions  set quiz_id = ?, ques_name = ?, ques_text = ? WHERE id = ?";
 			$q = $pdo->prepare($sql);
-			$q->execute(array($fname, $lname, $email, $mobile, $password, $title, $fileName,$fileSize,$fileType,$content, $id));
+			$q->execute(array($quiz_id, $ques_name, $ques_text, $id));
 			Database::disconnect();
-			header("Location: fr_persons.php");
+			header("Location: qm_ques_list.php");
 		}
 		else { // otherwise, update all fields EXCEPT file fields
 			$pdo = Database::connect();
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = "UPDATE fr_persons  set fname = ?, lname = ?, email = ?, mobile = ?, password = ?, title = ? WHERE id = ?";
+			$sql = "UPDATE qm_questions  set quiz_id = ?, ques_name = ?, ques_text = ? WHERE id = ?";
 			$q = $pdo->prepare($sql);
-			$q->execute(array($fname, $lname, $email, $mobile, $password, $title,  $id));
+			$q->execute(array($quiz_id, $ques_name, $ques_text, $id));
 			Database::disconnect();
-			header("Location: fr_persons.php");
+			header("Location: qm_ques_list.php");
 		}
 	}
 } else { // if $_POST NOT filled then pre-populate the form
 	$pdo = Database::connect();
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	$sql = "SELECT * FROM fr_persons where id = ?";
+	$sql = "SELECT * FROM qm_questions where id = ?";
 	$q = $pdo->prepare($sql);
 	$q->execute(array($id));
 	$data = $q->fetch(PDO::FETCH_ASSOC);
-	$fname = $data['fname'];
-	$lname = $data['lname'];
-	$email = $data['email'];
-	$mobile = $data['mobile'];
-	$password = $data['password'];
-	$title =  $data['title'];
+	$quiz_id = $data['quiz_id'];
+	$ques_name = $data['ques_name'];
+	$ques_text = $data['ques_text'];
 	Database::disconnect();
 }
 ?>
@@ -136,119 +102,61 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 	<link rel="icon" href="cardinal_logo.png" type="image/png" />
 </head>
 
-<body>
+<body style="background-color: lightblue !important";>
     <div class="container">
 
 		<div class="span10 offset1">
-			
-			
-				// require 'functions.php';
-				// Functions::logoDisplay2();
-			
+
 		
 			<div class="row">
-				<h3>Update Volunteer Details</h3>
+				<h3>Update Questions</h3>
 			</div>
 	
-			<form class="form-horizontal" action="fr_per_update.php?id=<?php echo $id?>" method="post" enctype="multipart/form-data">
+			<form class="form-horizontal" action="qm_ques_update.php?id=<?php echo $id?>" method="post" enctype="multipart/form-data">
 			
-				<!-- Form elements (same as file: fr_per_create.php) -->
+				
 
-				<div class="control-group <?php echo !empty($fnameError)?'error':'';?>">
-					<label class="control-label">First Name</label>
+				<div class="control-group <?php echo !empty($quiz_idError)?'error':'';?>">
+					<label class="control-label"><h6>Quiz ID</h6></label>
 					<div class="controls">
-						<input name="fname" type="text"  placeholder="First Name" value="<?php echo !empty($fname)?$fname:'';?>">
-						<?php if (!empty($fnameError)): ?>
-							<span class="help-inline"><?php echo $fnameError;?></span>
+						<input style="background-color: lightgrey !important; width: 40%;" name="quiz_id" type="text"  placeholder="Quiz ID" value="<?php echo !empty($quiz_id)?$quiz_id:'';?>">
+						<?php if (!empty($quiz_idError)): ?>
+							<span class="help-inline"><?php echo $quiz_idError;?></span>
+						<?php endif; ?>
+						
+					</div>
+				</div>
+				
+				<div class="control-group <?php echo !empty($ques_name)?'error':'';?>">
+					<label class="control-label"><h6>Question Name</h6></label>
+					<div class="controls">
+						<input style="background-color: lightgrey !important; width: 40%;" name="ques_name" type="text"  placeholder="Question Name" value="<?php echo !empty($ques_name)?$ques_name:'';?>">
+						<?php if (!empty($ques_nameError)): ?>
+							<span class="help-inline"><?php echo $ques_nameError;?></span>
 						<?php endif; ?>
 					</div>
 				</div>
 				
-				<div class="control-group <?php echo !empty($lnameError)?'error':'';?>">
-					<label class="control-label">Last Name</label>
+				<div class="control-group <?php echo !empty($ques_textError)?'error':'';?>">
+					<label class="control-label"><h6>Question Text</h6></label>
 					<div class="controls">
-						<input name="lname" type="text"  placeholder="Last Name" value="<?php echo !empty($lname)?$lname:'';?>">
-						<?php if (!empty($lnameError)): ?>
-							<span class="help-inline"><?php echo $lnameError;?></span>
-						<?php endif; ?>
-					</div>
-				</div>
-				
-				<div class="control-group <?php echo !empty($emailError)?'error':'';?>">
-					<label class="control-label">Email</label>
-					<div class="controls">
-						<input name="email" type="text" placeholder="Email Address" value="<?php echo !empty($email)?$email:'';?>">
-						<?php if (!empty($emailError)): ?>
-							<span class="help-inline"><?php echo $emailError;?></span>
+						<input style="background-color: lightgrey !important; width: 40%;" name="ques_text" type="text" placeholder="Question Text" value="<?php echo !empty($ques_text)?$ques_text:'';?>">
+						<?php if (!empty($ques_textError)): ?>
+							<span class="help-inline"><?php echo $ques_textError;?></span>
 						<?php endif;?>
 					</div>
 				</div>
 				
-				<div class="control-group <?php echo !empty($mobileError)?'error':'';?>">
-					<label class="control-label">Mobile Number</label>
-					<div class="controls">
-						<input name="mobile" type="text"  placeholder="Mobile Phone Number" value="<?php echo !empty($mobile)?$mobile:'';?>">
-						<?php if (!empty($mobileError)): ?>
-							<span class="help-inline"><?php echo $mobileError;?></span>
-						<?php endif;?>
-					</div>
-				</div>
+				<br />
 				
-				<div class="control-group <?php echo !empty($passwordError)?'error':'';?>">
-					<label class="control-label">Password</label>
-					<div class="controls">
-						<input id="password" name="password" type="text"  placeholder="Password" value="<?php echo !empty($password)?$password:'';?>">
-						<?php if (!empty($passwordError)): ?>
-							<span class="help-inline"><?php echo $passwordError;?></span>
-						<?php endif;?>
-					</div>
-				</div>
-				
-				<div class="control-group">
-					<label class="control-label">Title</label>
-					<div class="controls">
-						<select class="form-control" name="title">
-							<?php 
-							# editor is a volunteer only allow volunteer option
-							if (0==strcmp($_SESSION['fr_person_title'],'Volunteer')) echo '<option selected value="Volunteer" >Volunteer</option>';
-							else if($title==Volunteer) echo 
-							'<option selected value="Volunteer" >Volunteer</option><option value="Administrator" >Administrator</option>';
-							else echo
-							'<option value="Volunteer">Volunteer</option>
-							<option selected value="Administrator" >Administrator</option>';
-							?>
-						</select>
-					</div>
-				</div>
-			  
-				<div class="control-group <?php echo !empty($pictureError)?'error':'';?>">
-					<label class="control-label">Picture</label>
-					<div class="controls">
-						<input type="hidden" name="MAX_FILE_SIZE" value="16000000">
-						<input name="userfile" type="file" id="userfile">
-					</div>
-				</div>
-			  
 				<div class="form-actions">
 					<button type="submit" class="btn btn-success">Update</button>
-					<a class="btn" href="fr_persons.php">Back</a>
+					<a class="btn btn-primary" href="qm_ques_list.php">Back</a>
 				</div>
 				
 			</form>
 			
-				<!-- Display photo, if any --> 
-
-				<div class='control-group col-md-6'>
-					<div class="controls ">
-					<?php 
-					if ($data['filesize'] > 0) 
-						echo '<img  height=5%; width=15%; src="data:image/jpeg;base64,' . 
-							base64_encode( $data['filecontent'] ) . '" />'; 
-					else 
-						echo 'No photo on file.';
-					?><!-- converts to base 64 due to the need to read the binary files code and display img -->
-					</div>
-				</div>
+				
 				
 		</div><!-- end div: class="span10 offset1" -->
 		
