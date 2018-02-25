@@ -1,7 +1,7 @@
 <?php
 /* ---------------------------------------------------------------------------
  * filename    : qm_ques_list.php
- * author      : clfrost
+ * author      : Cody Frost, clfrost
  * description : Question list
  * ---------------------------------------------------------------------------
  */
