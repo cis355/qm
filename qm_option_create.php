@@ -5,35 +5,28 @@
  * description : This program adds/inserts a new option (table: qm_options)
  * ---------------------------------------------------------------------------
  */
-<<<<<<< HEAD
+
 
 require '/home/gpcorser/public_html/database/database.php';
-=======
-//session_start();
-//if(!isset($_SESSION["fr_person_id"])){ // if "user" not set,
-//	session_destroy();
-//	header('Location: login.php');     // go to login page
-//	exit;
-//}
+
 include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 include '/home/gpcorser/public_html/database/database.php'; // gpcorser
->>>>>>> 07fd39b125319fa2002aa09ac38dbc414b4c769c
+
 
 if ( !empty($_POST)) { // if not first time through
 
 	// initialize user input validation variables
 	// $ques_idError = null; // gpcorser: never let user choose id
-	$option_textError = null;
-	$option_isCorrectError = null;
+	$opt_textError = null;
+	$opt_isCorrectError = null;
 
 	// initialize $_POST variables
 	// $ques_id = $_POST['ques_id']; // gpcorser: never let user choose id
-	$option_text = $_POST['opt_text'];
-	$option_isCorrect = $_POST['opt_isCorrect'];
+	$opt_text = $_POST['opt_text'];
+	$opt_isCorrect = $_POST['opt_isCorrect'];
 
 	// validate user input
-<<<<<<< HEAD
-=======
+
 	$valid = true;
 	/* // gpcorser: never let user choose id
 	if (empty($ques_id)) {
@@ -41,9 +34,9 @@ if ( !empty($_POST)) { // if not first time through
 		$valid = false;
 	}
 	*/
->>>>>>> 07fd39b125319fa2002aa09ac38dbc414b4c769c
-	if (empty($option_text)) {
-		$option_textError = 'Please enter Question Text';
+
+	if (empty($opt_text)) {
+		$opt_textError = 'Please enter Question Text';
 		$valid = false;
 	}
 
@@ -53,13 +46,11 @@ if ( !empty($_POST)) { // if not first time through
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		$sql = "INSERT INTO qm_options (opt_text, opt_isCorrect) values(?, ?)"; // gpcorser: never let user choose id
 		$q = $pdo->prepare($sql);
-		$q->execute(array($option_text,$option_isCorrect));
+		$q->execute(array($opt_text,$opt_isCorrect));
 		Database::disconnect();
-<<<<<<< HEAD
+
 		header("Location: qm_option_list.php");
-=======
-		header("Location: qm_option_list.php"); // gpcorser
->>>>>>> 07fd39b125319fa2002aa09ac38dbc414b4c769c
+
 	}
 }
 
@@ -78,7 +69,7 @@ include '/home/gpcorser/public_html/database/header.php'; //html <head> section
 
 			<form class="form-horizontal" action="qm_option_create.php" method="post">
 
-<<<<<<< HEAD
+
 				<div class="control-group <?php echo !empty($ques_idError)?'error':'';?>">
 					<label class="control-label">Question</label>
 					<div class="controls">
@@ -95,20 +86,19 @@ include '/home/gpcorser/public_html/database/header.php'; //html <head> section
 					</div>
 				</div>
 
-=======
->>>>>>> 07fd39b125319fa2002aa09ac38dbc414b4c769c
-				<div class="control-group <?php echo !empty($option_textError)?'error':'';?>">
+
+				<div class="control-group <?php echo !empty($opt_textError)?'error':'';?>">
 					<br>
 					<label class="control-label">Option Text</label>
 					<div class="controls">
-						<input name="opt_text" type="text" placeholder="Option Text" value="<?php echo !empty($option_text)?$option_text:'';?>">
-						<?php if (!empty($option_textError)): ?>
-							<span class="help-inline"><?php echo $option_textError;?></span>
+						<input name="opt_text" type="text" placeholder="Option Text" value="<?php echo !empty($opt_text)?$opt_text:'';?>">
+						<?php if (!empty($opt_textError)): ?>
+							<span class="help-inline"><?php echo $opt_textError;?></span>
 						<?php endif;?>
 					</div>
 				</div>
 
-				<div class="control-group <?php echo !empty($option_isCorrectError)?'error':'';?>"><br>
+				<div class="control-group <?php echo !empty($opt_isCorrectError)?'error':'';?>"><br>
 					<label class="control-label">Is this Option the Correct Answer?</label>
 					<div class="controls">
 						<div class="controls">
