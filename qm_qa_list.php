@@ -30,9 +30,12 @@ include '../../database/header.php'; // html <head> section
 			<table class="table table-striped table-bordered" style="background-color: lightgrey !important">
 				<thead>
 					<tr>
-						<th>Lastname</th>
-						<th>Firstname</th>
-						<th>Email</th>
+						<th>AttemptNumber</th>
+						<th>Quiz Score</th>
+						<th>Start Date</th>
+            <th>Start Time</th>
+            <th>End Date</th>
+            <th>End Time</th>
 						<th>Action</th>
 					</tr>
 				</thead>
@@ -46,7 +49,7 @@ include '../../database/header.php'; // html <head> section
 							echo '<td>'. trim($row['lname']) . '</td>';
 							echo '<td>'. trim($row['fname']) . '</td>';
 							echo '<td>'. trim($row['email']) . '</td>';
-							echo '<td>'. 'read update delete' . '</td>';
+							echo '<td>'. 'read update delete' . '<a href=qm_qa_read.php?quiz_id></a>' . '</td>';
 						}
 						Database::disconnect();
 					?>
