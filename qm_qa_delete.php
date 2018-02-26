@@ -43,13 +43,13 @@ else { // otherwise, pre-populate fields to show data to be deleted
 
 <html lang="en">
 
-<link rel="icon" href="ohno.jpg" type="image/jpg" />
+<!--<link rel="icon" href="ohno.jpg" type="image/jpg" />-->
 
 <body>
     <div class="container">
 		<div class="row">
 			<h3><br><br>Delete Quiz Attempt</h3>
-			<h2>&nbsp&nbsp<img src="ohno.jpg" alt="Oh No Dude"/></h2>
+			<!--<h2>&nbsp&nbsp<img src="ohno.jpg" alt="Oh No Dude"/></h2>-->
 		</div>
 		
 		<form class="form-horizontal" action="qm_qa_delete.php" method="post">
