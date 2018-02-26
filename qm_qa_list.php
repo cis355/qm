@@ -29,7 +29,6 @@ include '../../database/header.php'; // html <head> section
       $data = $q->fetch(PDO::FETCH_ASSOC);
       echo 'Quiz Attemts on Quiz:' . $data['quiz_name'] . 'made by: ' . $data['lname'] . ', ' . $data['fname'];
       ?>
-			<h3>Person</h3>
 		</div>
 		<div class="row">
 			<p>
