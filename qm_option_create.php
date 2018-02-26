@@ -7,9 +7,9 @@
  */
 
 
-require '/home/gpcorser/public_html/database/database.php';
+//require '/home/gpcorser/public_html/database/database.php';
 
-//include '/home/gpcorser/public_html/database/header.php'; // html <head> section
+include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 include '/home/gpcorser/public_html/database/database.php'; // gpcorser
 
 
@@ -53,8 +53,6 @@ if ( !empty($_POST)) { // if not first time through
 
 	}
 }
-
-include '/home/gpcorser/public_html/database/header.php'; //html <head> section
 
 ?>
 
@@ -102,7 +100,8 @@ include '/home/gpcorser/public_html/database/header.php'; //html <head> section
 					<label class="control-label">Is this Option the Correct Answer?</label>
 					<div class="controls">
 						<div class="controls">
-						  <input type="checkbox" name="opt_isCorrect" value="1"> This is the Correct Answer<br>
+							<input type="hidden" name="opt_isCorrect" value="0" />
+							<input type="checkbox" name="opt_isCorrect" value="1"> This is the Correct Answer<br>
 						</div>
 					</div>
 				</div>
