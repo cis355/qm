@@ -42,13 +42,13 @@
 					<label class="control-label">Option Text</label>
 					<div class="controls ">
 						<label class="checkbox">
-							<?php echo $data['option_text'];?> 
+							<?php echo $data['opt_text'];?> 
 						</label>
 					</div>
 					<label class="control-label">Option is Correct?</label>
 					<div class="controls ">
 						<label class="checkbox">
-							<?php echo $data['option_isCorrect'];?> 
+							<?php echo $data['opt_isCorrect'];?> 
 						</label>
 					</div>
 					<div class="form-actions">
