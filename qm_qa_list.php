@@ -23,7 +23,7 @@ include '../../database/header.php'; // html <head> section
       <?php
       require '../../database/database.php';
       $pdo = Database::connect();
-      $sql = 'SELECT quiz_name, fname, lname FROM qm_attempts WHERE qm_attempts.quiz_id = ? Join qm_quizzes on qm_attempts.quiz_id = qm_quizzes.quiz_id Join qm_persons on qm_quizzes.per_id = qm_persons.id'
+      $sql = 'SELECT quiz_name, fname, lname FROM qm_attempts WHERE qm_attempts.quiz_id = ? Join qm_quizzes on qm_attempts.quiz_id = qm_quizzes.quiz_id Join qm_persons on qm_quizzes.per_id = qm_persons.id';
       $q = $pdo->prepare($sql);
       $q->execute(array($id));
       $data = $q->fetch(PDO::FETCH_ASSOC);
