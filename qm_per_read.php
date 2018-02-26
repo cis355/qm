@@ -41,7 +41,7 @@
     color: white;
 }
  </style>
-<body>
+<body style="background-color: lightblue !important"; >
     <div class="container">
      
                 <div class="span10 offset1">
