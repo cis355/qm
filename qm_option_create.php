@@ -9,7 +9,7 @@
 
 require '/home/gpcorser/public_html/database/database.php';
 
-include '/home/gpcorser/public_html/database/header.php'; // html <head> section
+//include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 include '/home/gpcorser/public_html/database/database.php'; // gpcorser
 
 
