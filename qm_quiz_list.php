@@ -5,6 +5,7 @@
  description : Shows the list of all Quizzes on the database.
  ---------------------------------------------------------------------------
 -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,17 +14,28 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </head>
  
-<body>
+<body style="background-color: lightblue !important";>
     <div class="container">
             <div class="row">
-                <h3>Quiz List</h3>
+                <h3>Quiz List For: <?php
+                   include '/home/gpcorser/public_html/database/database.php';
+                   $pdo = Database::connect();
+                   $sql = 'SELECT fname, lname FROM qm_persons WHERE id =' . 
+				        $_GET['per_id']; 
+						foreach ($pdo->query($sql) as $row) {
+							echo $row['fname'], " ", $row['lname']; 
+                   }
+                   Database::disconnect();
+                  ?></h3>
+				</br>
 				</br>
             </div>
             <div class="row">
 			    <p>
                     <a href="qm_quiz_create.php" class="btn btn-success">Create Quiz</a>
                 </p>
-                <table class="table table-striped table-bordered">
+				
+                <table class="table table-striped table-bordered" style="background-color: lightgrey !important">
                   <thead>
                     <tr>
                       <th>Quiz Name</th>
@@ -32,18 +44,12 @@
                     </tr>
                   </thead>
                   <tbody>
+				  
                   <?php
-                   include '/home/gpcorser/public_html/database/database.php';
-                   $pdo = Database::connect();
-<<<<<<< HEAD
-                   $sql = 'SELECT * FROM qm_quizzes WHERE per_id =' .$_GET['per_id'].' ORDER BY quiz_name'; 
-				   //ON qm_quizzes.id = qm_persons.id
-=======
-
                    $sql = 'SELECT * FROM qm_quizzes WHERE per_id =' . 
 				        $_GET['per_id'].' ORDER BY quiz_name'; 
 
->>>>>>> 52f1fea64226d2248c8cacc0715764657166d272
+
                    foreach ($pdo->query($sql) as $row) {
                             echo '<tr>';
                             
@@ -62,7 +68,9 @@
                             echo '</tr>';
                    }
                    Database::disconnect();
+				   
                   ?>
+				  
                   </tbody>
             </table>
         </div>
