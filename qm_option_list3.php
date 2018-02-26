@@ -1,9 +1,17 @@
 <!-- /* * * * * * *  * * * * * * * * * * * * * * * * * * * * * * * * * * * 
 *  Filename:     qm_option_list3.php
-*  Author:        Michael Drayton
+*  Author:        Michael Drayton, mhdrayto@svsu.edu
 *  Description:  Program manages a list of quiz question options
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */ -->
 
+<!-- remnant code from a concept I am still trying to implement:
+
+//$sql = 'SELECT * FROM qm_options INNER JOIN qm_questions ON qm_options.id = qm_questions.id';
+						/*$sql = 'SELECT * FROM qm_options WHERE quest_id =' .
+							$_GET['quest_id'] . ' ORDER BY quiz_name';*/
+							//echo $row['ques_name'];
+							
+-->
 
 <?php
 /*
@@ -42,10 +50,6 @@ include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 						include '/home/gpcorser/public_html/database/database.php';
 						$pdo = Database::connect();
 						$sql = 'SELECT * FROM qm_options';
-						//$sql = 'SELECT * FROM qm_options INNER JOIN qm_questions ON qm_options.id = qm_questions.id';
-						/*$sql = 'SELECT * FROM qm_options WHERE quest_id =' .
-							$_GET['quest_id'] . ' ORDER BY quiz_name';*/
-							//echo $row['ques_name'];
 						foreach ($pdo->query($sql) as $row) {
 							echo '<tr>';
 							echo '<td>'. trim($row['id']) . '</td>'; 
