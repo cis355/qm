@@ -11,13 +11,11 @@ include '/home/gpcorser/public_html/database/database.php'; // gpcorser
 if ( !empty($_POST)) { // if not first time through
 
 	// initialize user input validation variables
-	// $ques_idError = null; // gpcorser: never let user choose id
 	//$ques_idError = null;
 	$opt_textError = null;
 	$opt_isCorrectError = null;
 
 	// initialize $_POST variables
-	// $ques_id = $_POST['ques_id']; // gpcorser: never let user choose id
 	$ques_id = $_POST['ques_id'];
 	$opt_text = $_POST['opt_text'];
 	$opt_isCorrect = $_POST['opt_isCorrect'];
@@ -94,7 +92,8 @@ if ( !empty($_POST)) { // if not first time through
 					<label class="control-label">Is this Option the Correct Answer?</label>
 					<div class="controls">
 						<div class="controls">
-						  <input type="checkbox" name="opt_isCorrect" value="1"> This is the Correct Answer<br>
+							<input type="hidden" name="opt_isCorrect" value="0" />
+							<input type="checkbox" name="opt_isCorrect" value="1"> This is the Correct Answer<br>
 						</div>
 					</div>
 				</div>
