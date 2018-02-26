@@ -104,18 +104,7 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 	
 			<form class="form-horizontal" action="qm_quiz_update.php?id=<?php echo $id?>" method="post" enctype="multipart/form-data">
 			
-				
-
-				<div class="control-group <?php echo !empty($quiz_idError)?'error':'';?>">
-					<label class="control-label"><h6>Quiz ID</h6></label>
-					<div class="controls">
-						<input style="background-color: lightgrey !important; width: 40%;" name="quiz_id" type="text"  placeholder="Quiz ID" value="<?php echo !empty($quiz_id)?$quiz_id:'';?>">
-						<?php if (!empty($quiz_idError)): ?>
-							<span class="help-inline"><?php echo $quiz_idError;?></span>
-						<?php endif; ?>
-						
-					</div>
-				</div>
+			
 				
 				<div class="control-group <?php echo !empty($ques_name)?'error':'';?>">
 					<label class="control-label"><h6>Quiz Name</h6></label>
