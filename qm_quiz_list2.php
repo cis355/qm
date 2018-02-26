@@ -8,6 +8,12 @@
 ?>
 
 <!DOCTYPE html>
+<!--/* ---------------------------------------------------------------------------
+ * filename    : qm_quiz_list2.php
+ * author      : Ryan Ott, raott@svsu.edu
+ * description : This program displays a list of quizzes (table: qm_quizzes)
+ * ---------------------------------------------------------------------------
+ */-->
 <html lang="en">
 <head>
     <meta charset="utf-8">

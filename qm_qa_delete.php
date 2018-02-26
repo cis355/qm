@@ -1,6 +1,6 @@
 <?php 
 /* ---------------------------------------------------------------------------
- * filename    : qm_per_delete.php
+ * filename    : qm_qa_delete.php
  * author      : Ryan Ott, raott@svsu.edu - taken from george corser original code fr_per_delete.php
  * description : This program deletes one quiz attempt's details (table: qm_attempts)
  * ---------------------------------------------------------------------------
@@ -32,8 +32,17 @@ else { // otherwise, pre-populate fields to show data to be deleted
 }
 ?>
 
+<!--/* ---------------------------------------------------------------------------
+ * filename    : qm_qa_delete.php
+ * author      : Ryan Ott, raott@svsu.edu - taken from george corser original code fr_per_delete.php
+ * description : This program deletes one quiz attempt's details (table: qm_attempts)
+ * ---------------------------------------------------------------------------
+ *
+*/ -->
 <!DOCTYPE html>
+
 <html lang="en">
+
 <link rel="icon" href="ohno.jpg" type="image/jpg" />
 
 <body>
