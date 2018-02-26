@@ -14,16 +14,16 @@ if(!isset($_SESSION["fr_person_id"])){ // if "user" not set,
 }
 $sessionid = $_SESSION['fr_person_id'];
 */
-include '../../database/header.php'; // html <head> section
+include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 ?>
 
 <body style="background-color: lightblue !important";>
     <div class="container">
 		<div class="row">
       <?php
-      require '../../database/database.php';
+      include '/home/gpcorser/public_html/database/database.php';
       $pdo = Database::connect();
-      $sql = 'SELECT quiz_name, fname, lname FROM qm_attempts WHERE qm_attempts.quiz_id ='.  $_GET("quiz_id") . 'Join qm_quizzes on qm_attempts.quiz_id = qm_quizzes.quiz_id Join qm_persons on qm_quizzes.per_id = qm_persons.id';
+      $sql = 'SELECT quiz_name, fname, lname FROM qm_attempts WHERE qm_attempts.quiz_id =' .  $_GET("quiz_id") . 'Join qm_quizzes on qm_attempts.quiz_id = qm_quizzes.quiz_id Join qm_persons on qm_quizzes.per_id = qm_persons.id';
       $q = $pdo->prepare($sql);
       $q->execute(array($id));
       $data = $q->fetch(PDO::FETCH_ASSOC);
