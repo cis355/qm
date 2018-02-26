@@ -42,7 +42,7 @@ else { // otherwise, pre-populate fields to show data to be deleted
 <html lang="en">
 
 <body style ="background-color: lightblue !important";>
-    <div class="container">
+    <!-- <div class="container">
 		<div class="row">
 			<h3>Delete Person</h3>
 		</div>
@@ -59,16 +59,16 @@ else { // otherwise, pre-populate fields to show data to be deleted
 				</thead>
 				<tbody>
 					<tr>
-						<td><?php echo $data['lname'];?></td>
-						<td><?php echo $data['fname'];?></td>
-						<td><?php echo $data['email'];?></td>
+						<td></td>
+						<td></td>
+						<td></td>
 					</tr>
 					<tr>
 						<th>Action</th>
 					</tr>
 					<tr>
 						<td><form class="form-horizontal" action="qm_per_delete.php" method="post">
-							<input type="hidden" name="id" value="<?php echo $id;?>"/>
+							<input type="hidden" name="id" value=""/>
 							<p class="alert alert-error">Are you sure you want to delete?</p>
 							<div class="form-actions">
 								<button type="submit" class="btn btn-success">Yes</button>
@@ -77,7 +77,51 @@ else { // otherwise, pre-populate fields to show data to be deleted
 						</form></td>
 					</tr>
 				</tbody>
-		</table>
+		</table> -->
+		 <div class="container">
+		<div class="row">
+			<h3>Delete Person</h3>
+		</div>
+		
+		<form class="form-horizontal" action="qm_per_delete.php" method="post">
+			<input type="hidden" name="id" value="<?php echo $id;?>"/>
+			<p class="alert alert-error">Are you sure you want to delete ?</p>
+			<div class="form-actions">
+				<button type="submit" class="btn btn-success">Yes</button>
+				<a class="btn btn-danger" href="qm_per_list.php">No</a>
+			</div>
+		</form>
+		<br>
+		
+		
+		<div class="form-horizontal" >
+				
+			<div class="control-group col-md-6">
+			
+				<label class="control-label">First Name</label>
+				<div class="controls ">
+					<label class="checkbox">
+						<?php echo $data['fname'];?> 
+					</label>
+				</div>
+				
+				<label class="control-label">Last Name</label>
+				<div class="controls ">
+					<label class="checkbox">
+						<?php echo $data['lname'];?> 
+					</label>
+				</div>
+				
+				<label class="control-label">Email</label>
+				<div class="controls">
+					<label class="checkbox">
+						<?php echo $data['email'];?>
+					</label>
+				</div>
+				  
+				
+				
+			</div>
 				
 				
 				
