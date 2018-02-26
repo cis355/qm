@@ -19,14 +19,14 @@
     <meta charset="utf-8">
     <link   href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-	<link rel="icon" href="thumbsup.jpg" type="image/jpg" />
+	<!--<link rel="icon" href="thumbsup.jpg" type="image/jpg" />-->
 </head>
 
 <body style="background-color: green !important";>
     <div class="container">
 		<div class="row">
 			<h3><br> Quiz List</h3>
-			<h2>&nbsp&nbsp<img src="thumbsup.jpg" alt="Thumbs Up Dude"/></h2>
+			<!--<h2>&nbsp&nbsp<img src="thumbsup.jpg" alt="Thumbs Up Dude"/></h2>-->
 
 		</div>
 		<div class="row">
