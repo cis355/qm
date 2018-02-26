@@ -43,19 +43,24 @@ include '/home/gpcorser/public_html/database/header.php';
 						include '/home/gpcorser/public_html/database/database.php';
 						$pdo = Database::connect();
 						$sql = 'SELECT * FROM qm_questions ORDER BY id';
-						// $sql = 'SELECT * FROM qm_questions WHERE quiz_id = ' . $_GET['quiz_id'];
+					  //  $sql = 'SELECT * FROM qm_questions WHERE quiz_id =' . $_GET['id'];
+					//	 $sql = 'SELECT * FROM qm_questions WHERE id =' . 
+				    //    $_GET['per_id']'; 
 						foreach ($pdo->query($sql) as $row) {
 							echo '<tr>';
 							echo '<td>'. trim($row['id']) . '</td>';
 							echo '<td>'. trim($row['quiz_id']) . '</td>';
 							echo '<td>'. trim($row['ques_name']) . '</td>';
 							echo '<td>'. trim($row['ques_text']) . '</td>';
-							echo '<td width=250>';
+							echo '<td width=340>';
+								
 							    echo '<a class="btn" href="qm_ques_list_read.php?id='.$row['id'].'">Read</a>';
                                 echo ' ';
                                 echo '<a class="btn btn-success" href="qm_ques_update.php?id='.$row['id'].'">Update</a>';
                                 echo ' ';
                                 echo '<a class="btn btn-danger" href="qm_ques_delete.php?id='.$row['id'].'">Delete</a>';
+								echo ' ';
+								echo '<a class="btn" href="qm_option_list.php?id='.$row['id'].'">Options</a>';
                             echo '</td>';
 							echo '</tr>';
 								
