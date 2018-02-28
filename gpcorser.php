@@ -59,7 +59,8 @@ class QmComments {
 	
 }
 
-
+// testing
+$_GET['id']=1;
 if($_GET['oper']==0) {QmComments::listTable();}
 else {echo "error";}
 
