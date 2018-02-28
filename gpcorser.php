@@ -2,57 +2,50 @@
 
 include '/home/gpcorser/public_html/database/header.php';
 include '/home/gpcorser/public_html/database/database.php';
-include 'session.php';
 
-class Foo { 
-    public $aMemberVar = 'aMemberVar Member Variable'; 
-    public $aFuncName = 'aMemberFunc'; 
-    
-    function aMemberFunc() { 
-        print 'Inside `aMemberFunc()`'; 
-    } 
+
+class QmComments { 
 	
-	function perRead($id) { // Person Read
 
-		// get info from database
-		$pdo = Database::connect();
-		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = "SELECT * FROM qm_persons where id = ?";
-		$q = $pdo->prepare($sql);
-		$q->execute(array($id));
-		$data = $q->fetch(PDO::FETCH_ASSOC);
-		Database::disconnect();
+	function listTable() { 
+	
+		// beginning body section 
+		echo '<body> <div class="container">';
 		
-		// display first part of body section 
-		echo '<body> <div class="container"> <div class="span10 offset1"> <div class="row"> <h3>Person Details</h3> </div><div class="form-horizontal" > <div class="control-group"> <label class="control-label">First Name: </label>';
-		echo ' ' . $data['fname'] . '<br />';
-
-	}
-	
-	function perList() { // Person List
-	
-		// beginning body section of person list
-		echo '<body style="background-color: lightblue !important";> <div class="container"><div class="row"><h3>Persons</h3></div><div class="row"><p><a href="qm_per_create.php" class="btn btn-primary">Add Person</a></p><table class="table table-striped table-bordered" style="background-color: lightgrey !important"><thead><tr><th>Lastname</th><th>Firstname</th><th>Email</th><th>Action</th></tr></thead><tbody>';
+		// title of page
+		echo '<div class="row"><h3>Comments</h3></div>';
 		
-		// populate persons List table
+		// create button
+		echo '<div class="row"><p><a href="qm_comments.php?oper=1&per=' . $_GET['per'] . '&ques=' . $_GET['ques'] . '" class="btn btn-primary">Add Comment</a></p>';
+		
+		// beginning of table
+		echo '<table class="table table-striped table-bordered" style="background-color: lightgrey !important"><thead>';
+		echo '<tr><th>com id</th><th>per id</th><th>ques id</th><th>comment</th><th>rating</th><th>actions</th></tr></thead><tbody>';
+		
+		// populate table rows
 		$pdo = Database::connect();
-		$sql = 'SELECT * FROM qm_persons';
+		$sql = 'SELECT * FROM qm_comments WHERE per_id=' . $_GET['per'] . ' AND ques_id=' . $_GET['ques'];
 
 		foreach ($pdo->query($sql) as $row) {
+			
 			echo '<tr>';
-			echo '<td>'. trim($row['lname']) . '</td>'; 
-			echo '<td>'. trim($row['fname']) . '</td>'; 
-			echo '<td>'. trim($row['email']) . '</td>'; 
-			 
+			
+			echo '<td>'. trim($row['id']) . '</td>'; 
+			echo '<td>'. trim($row['per_id']) . '</td>'; 
+			echo '<td>'. trim($row['ques_id']) . '</td>'; 
+			echo '<td>'. trim($row['comment']) . '</td>';
+			echo '<td>'. trim($row['rating']) . '</td>';
+			
+			// actions for each row
 			echo '<td>';
-			echo '<a class="btn" href="gpcorser.php?id='.$row['id'].'&operation=1">Read</a>';
+			echo '<a class="btn btn-secondary" href="qm_comments.php?oper=2&per=' . $_GET['per'] . '&ques=' . $_GET['ques'] .'">Read</a>';
 			echo ' ';
-			echo '<a class="btn btn-success" href="qm_per_update.php?id='.$row['id'].'">Update</a>';
+			echo '<a class="btn btn-success" href="qm_comments.php?oper=3&per=' . $_GET['per'] . '&ques=' . $_GET['ques'] . '&com=' . $row['id'] . '">Update</a>';
 			echo ' ';
-			echo '<a class="btn btn-danger" href="qm_per_delete.php?id='.$row['id'].'">Delete</a>';
+			echo '<a class="btn btn-danger" href="qm_comments.php?oper=4&per=' . $_GET['per'] . '&ques=' . $_GET['ques'] . '&com=' . $row['id'] . '">Delete</a>';
 			echo ' ';
-			echo '<a class="btn btn-primary" href="qm_quiz_list.php?per_id='.$row['id'].'">Quizzes</a>';							
 			echo '</td>';
+			
 			echo '</tr>';
 		}
 		Database::disconnect();
@@ -66,21 +59,9 @@ class Foo {
 	
 }
 
-// Foo::aMemberFunc();
-// echo "<br />";
 
-// $foo = new Foo; 
-
-// $foo->aMemberFunc();
-
-if($_GET['operation']==1) {Foo::perRead($_GET['id']);}
-else {Foo::perList();}
-
-
-
-
-
-
+if($_GET['oper']==0) {QmComments::listTable();}
+else {echo "error";}
 
 
 
