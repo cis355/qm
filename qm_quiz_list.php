@@ -63,7 +63,7 @@
 							echo ' ';
                             echo '</td>';
 							echo '<td>';
-							echo '<a class="btn" href="qm_ques_list.php?id='.$row['id'].'">Questions List</a>';
+							echo '<a class="btn" href="qm_ques_list.php?quiz_id='.$row['id'].'">Questions List</a>';
 							echo '</td>';
                             echo '</tr>';
                    }
