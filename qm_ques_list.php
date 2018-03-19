@@ -35,8 +35,8 @@ include '/home/gpcorser/public_html/database/header.php';
 					<?php 
 						include '/home/gpcorser/public_html/database/database.php';
 						$pdo = Database::connect();
-						$sql = 'SELECT * FROM qm_questions, qm_persons WHERE quiz_id=' . $_GET['quiz_id'] ;
-						
+						//$sql = 'SELECT * FROM qm_questions, qm_persons WHERE quiz_id=' . $_GET['quiz_id'] ;
+						$sql = 'SELECT * FROM qm_questions WHERE quiz_id=' . $_GET['quiz_id'] ;
 						foreach ($pdo->query($sql) as $row) {
 							echo '<tr>';
 							echo '<td>'. trim($row['id']) . '</td>';
@@ -51,8 +51,7 @@ include '/home/gpcorser/public_html/database/header.php';
                                 echo ' ';
                                 echo '<a class="btn btn-danger" href="qm_ques_delete.php?id='.$row['id'].'">Delete</a>';
 								echo ' ';
-								echo '<a class="btn" href="qm_option_list.php?id='.$row['id'].'">Options</a>';
-								// review comments
+								echo '<a class="btn" href="qm_option_list.php?ques_id='.$row['id'].'">Options</a>';
 								echo ' ';
 								echo '<a class="btn" href="gpcorser.php?ques_id=' . $row['id'] . '&per_id=' . $row['per_id'] . '">Comments</a>';
                             echo '</td>';
