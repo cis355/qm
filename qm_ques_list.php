@@ -18,7 +18,7 @@
 		</div>
 		<div class="row">
 			<p>
-				<a href="qm_ques_create.php" class="btn btn-primary">Add Question</a>
+				<a href="qm_ques_create.php?" class="btn btn-primary">Add Question</a>
 
 			</p>
 				
@@ -34,7 +34,7 @@
 				</thead>
 				<tbody>
 					<?php 
-						include '/home/gpcorser/public_html/database/database.php';
+						//include '/home/gpcorser/public_html/database/database.php';
 						$pdo = Database::connect();
 						//$sql = 'SELECT * FROM qm_questions, qm_persons WHERE quiz_id=' . $_GET['quiz_id'] ;
 						$sql = 'SELECT * FROM qm_questions WHERE quiz_id=' . $_GET['quiz_id'] ;

@@ -10,12 +10,12 @@
  * ---------------------------------------------------------------------------
  */
 include 'session.php';
-require '/home/gpcorser/public_html/database/header.php';
-require '/home/gpcorser/public_html/database/database.php';
+include '/home/gpcorser/public_html/database/header.php';
+include '/home/gpcorser/public_html/database/database.php';
 if ( !empty($_POST)) { // if not first time through
 	// initialize user input validation variables
   //$idError = null;
-	$quiz_idError = null;
+	
 	$ques_nameError = null;
 	$ques_textError = null;
 	
