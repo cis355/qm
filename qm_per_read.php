@@ -1,4 +1,14 @@
 <?php
+
+/* ---------------------------------------------------------------------------
+ * filename    : qm_per_read.php
+ * author      : dneupan1
+ * description : Displays the person details
+ * ---------------------------------------------------------------------------
+ */
+ 
+
+
     require '/home/gpcorser/public_html/database/database.php';
     include 'session.php';
     
