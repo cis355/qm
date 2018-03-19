@@ -9,7 +9,8 @@
  * ques_text
  * ---------------------------------------------------------------------------
  */
-
+include 'session.php';
+include '/home/gpcorser/public_html/database/header.php';
 require '/home/gpcorser/public_html/database/database.php';
 if ( !empty($_POST)) { // if not first time through
 	// initialize user input validation variables
@@ -50,15 +51,13 @@ if ( !empty($_POST)) { // if not first time through
 		$q = $pdo->prepare($sql);
 		$q->execute(array($qid,$qName,$qText));
 		Database::disconnect();
-<<<<<<< HEAD
-		header("Location: qm_ques_list.php?quiz_id=" . $quiz_id);
-=======
-		header("Location: qm_ques_list.php?quiz_id=");
->>>>>>> b72fa31113e4993e44f85e5622d62760e0165d76
+
+		header("Location: qm_ques_list.php?quiz_id=" . $qid);
+
 	}
 }
 //include '../../database/header.php'; //html <head> section
-include '/home/gpcorser/public_html/database/header.php'; //html <head> section
+//include '/home/gpcorser/public_html/database/header.php'; //html <head> section
 ?>
 <html>
 <body>
