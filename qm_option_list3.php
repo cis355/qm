@@ -1,9 +1,17 @@
 <!-- /* * * * * * *  * * * * * * * * * * * * * * * * * * * * * * * * * * * 
 *  Filename:     qm_option_list3.php
-*  Author:        Michael Drayton
+*  Author:        Michael Drayton, mhdrayto@svsu.edu
 *  Description:  Program manages a list of quiz question options
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */ -->
 
+<!-- remnant code from a concept I am still trying to implement:
+
+//$sql = 'SELECT * FROM qm_options INNER JOIN qm_questions ON qm_options.id = qm_questions.id';
+						/*$sql = 'SELECT * FROM qm_options WHERE quest_id =' .
+							$_GET['quest_id'] . ' ORDER BY quiz_name';*/
+							//echo $row['ques_name'];
+							
+-->
 
 <?php
 /*
@@ -45,15 +53,16 @@ include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 						foreach ($pdo->query($sql) as $row) {
 							echo '<tr>';
 							echo '<td>'. trim($row['id']) . '</td>'; 
-							echo '<td>'. trim($row['quest_id']) . '</td>'; 
-							echo '<td>'. trim($row['option_text']) . '</td>'; 
-							echo '<td>'. trim($row['option_isCorrect']) . '</td>'; 
+							echo '<td>'. trim($row['ques_id']) . '</td>';
+							echo '<td>'. trim($row['opt_text']) . '</td>'; 
+							echo '<td>'. trim($row['opt_isCorrect']) . '</td>'; 
 							echo '<td width=250>';
                                 echo '<a class="btn" href="qm_option_read.php?id='.$row['id'].'">Read</a>';
                                 echo ' ';
                                 echo '<a class="btn btn-success" href="qm_option_update.php?id='.$row['id'].'">Update</a>';
                                 echo ' ';
                                 echo '<a class="btn btn-danger" href="qm_option_delete.php?id='.$row['id'].'">Delete</a>';
+								echo '<a class="btn" href="qm_ques_list2.php?id='.$row['ques_id'].'">Question</a>';
                                 echo '</td>';
                             echo '</tr>';
 						}

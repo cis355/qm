@@ -1,16 +1,10 @@
 <?php 
 /* ---------------------------------------------------------------------------
- * filename    : qm_per_delete.php
+ * filename    : qm_qa_delete.php
  * author      : Ryan Ott, raott@svsu.edu - taken from george corser original code fr_per_delete.php
- * description : This program deletes one quiz attempt's details (table: qm_persons)
+ * description : This program deletes one quiz attempt's details (table: qm_attempts)
  * ---------------------------------------------------------------------------
  *
-session_start();
-if(!isset($_SESSION["qm_person_id"])){ // if "user" not set,
-	session_destroy();
-	header('Location: login.php');     // go to login page
-	exit;
-}
 */
 include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 require '/home/gpcorser/public_html/database/database.php';
@@ -38,13 +32,24 @@ else { // otherwise, pre-populate fields to show data to be deleted
 }
 ?>
 
+<!--/* ---------------------------------------------------------------------------
+ * filename    : qm_qa_delete.php
+ * author      : Ryan Ott, raott@svsu.edu - taken from george corser original code fr_per_delete.php
+ * description : This program deletes one quiz attempt's details (table: qm_attempts)
+ * ---------------------------------------------------------------------------
+ *
+*/ -->
 <!DOCTYPE html>
+
 <html lang="en">
+
+<!--<link rel="icon" href="ohno.jpg" type="image/jpg" />-->
 
 <body>
     <div class="container">
 		<div class="row">
-			<h3>Delete Quiz Attempt</h3>
+			<h3><br><br>Delete Quiz Attempt</h3>
+			<!--<h2>&nbsp&nbsp<img src="ohno.jpg" alt="Oh No Dude"/></h2>-->
 		</div>
 		
 		<form class="form-horizontal" action="qm_qa_delete.php" method="post">

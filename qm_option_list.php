@@ -43,9 +43,9 @@ include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 						foreach ($pdo->query($sql) as $row) {
 							echo '<tr>';
 							echo '<td>'. trim($row['id']) . '</td>'; 
-							echo '<td>'. trim($row['quest_id']) . '</td>'; 
-							echo '<td>'. trim($row['option_text']) . '</td>'; 
-							echo '<td>'. trim($row['option_isCorrect']) . '</td>'; 
+							echo '<td>'. trim($row['ques_id']) . '</td>'; 
+							echo '<td>'. trim($row['opt_text']) . '</td>'; 
+							echo '<td>'. trim($row['opt_isCorrect']) . '</td>'; 
 							echo '<td width=250>';
                                 echo '<a class="btn" href="qm_option_read.php?id='.$row['id'].'">Read</a>';
                                 echo ' ';

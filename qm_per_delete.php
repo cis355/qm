@@ -41,22 +41,58 @@ else { // otherwise, pre-populate fields to show data to be deleted
 <!DOCTYPE html>
 <html lang="en">
 
-<body>
-    <div class="container">
+<body style ="background-color: lightblue !important";>
+    <!-- <div class="container">
+		<div class="row">
+			<h3>Delete Person</h3>
+		</div>
+	</div>
+		<br>
+		
+		<table class="table table-striped table-bordered" style="background-color: lightgrey !important">
+				<thead>
+					<tr>
+						<th>Lastname</th>
+						<th>Firstname</th>
+						<th>Email</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<th>Action</th>
+					</tr>
+					<tr>
+						<td><form class="form-horizontal" action="qm_per_delete.php" method="post">
+							<input type="hidden" name="id" value=""/>
+							<p class="alert alert-error">Are you sure you want to delete?</p>
+							<div class="form-actions">
+								<button type="submit" class="btn btn-success">Yes</button>
+								<a class="btn btn-danger" href="qm_per_list.php">No</a>
+							</div>
+						</form></td>
+					</tr>
+				</tbody>
+		</table> -->
+		 <div class="container">
 		<div class="row">
 			<h3>Delete Person</h3>
 		</div>
 		
 		<form class="form-horizontal" action="qm_per_delete.php" method="post">
 			<input type="hidden" name="id" value="<?php echo $id;?>"/>
-			<p class="alert alert-error">Are you sure you want to delete?</p>
+			<p class="alert alert-error">Are you sure you want to delete ?</p>
 			<div class="form-actions">
-				<button type="submit" class="btn btn-danger">Yes</button>
-				<a class="btn" href="qm_per_list.php">No</a>
+				<button type="submit" class="btn btn-success">Yes</button>
+				<a class="btn btn-danger" href="qm_per_list.php">No</a>
 			</div>
 		</form>
+		<br>
 		
-		<!-- Display same information as in file: qm_per_read.php -->
 		
 		<div class="form-horizontal" >
 				
@@ -82,14 +118,13 @@ else { // otherwise, pre-populate fields to show data to be deleted
 						<?php echo $data['email'];?>
 					</label>
 				</div>
+				  
 				
-				<!-- password omitted on Read/View -->
 				
 			</div>
 				
-		</div>  <!-- end div: class="form-horizontal" -->
+				
+				
 
-    </div> <!-- end div: class="container" -->
-	
 </body>
 </html>
