@@ -5,14 +5,10 @@
  * description : This program updates one person in Quiz Manager
  * ---------------------------------------------------------------------------
  */
-//session_start();
-//if(!isset($_SESSION["fr_person_id"])){ // if "user" not set,
-//	session_destroy();
-//	header('Location: login.php');     // go to login page
-//	exit;
-//}
-	
+
+require 'session.php';
 require '/home/gpcorser/public_html/database/database.php';
+include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 
 $id = $_GET['id'];
 
@@ -84,10 +80,9 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 	Database::disconnect();
 }
 
-include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 ?>
 
-  <body>
+  <body style="background-color: lightblue !important";>
     <div class="container">
       <div class="span10 offset1">
 			
@@ -141,10 +136,11 @@ include '/home/gpcorser/public_html/database/header.php'; // html <head> section
         <div class="control-group <?php echo !empty($passwordError)?'error':'';?>">
 					<label class="control-label">Password</label>
 					<div class="controls">
-						<input id="password" name="password" type="text"  placeholder="Password" value="<?php echo !empty($password)?$password:'';?>">
+						<input id="password" name="password" type="password"  placeholder="Password" value="<?php echo !empty($password)?$password:'';?>">
 						<?php if (!empty($passwordError)): ?>
 							<span class="help-inline"><?php echo $passwordError;?></span>
 						<?php endif;?>
+            <button type="button" onclick="togglePassword()" class="btn btn-secondary" style="height: 40px">Toggle Password</p>
 					</div>
 				</div>
 						  
@@ -159,5 +155,15 @@ include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 		
     </div> <!-- end div: class="container" -->
     <p>fcduvend</p>
+
+<script>
+
+function togglePassword() {
+  var password = document.getElementById("password");
+  password.type = (password.type == "text" ? "password" : "text");
+}
+
+</script>
+
   </body>
 </html>

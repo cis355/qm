@@ -7,6 +7,7 @@
  */
  
 include '/home/gpcorser/public_html/database/header.php'; // html <head> section
+include '/home/gpcorser/public_html/database/session.php';
 require '/home/gpcorser/public_html/database/database.php';
 
 $id = $_GET['id'];
@@ -16,7 +17,7 @@ if ( !empty($_POST)) { // if user clicks "yes" (sure to delete), delete record
 	
 	$pdo = Database::connect();
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	$sql = "DELETE FROM qm_options  WHERE id = ?";
+	$sql = "DELETE FROM qm_options WHERE id = ?";
 	$q = $pdo->prepare($sql);
 	$q->execute(array($id));
 	Database::disconnect();
@@ -30,16 +31,17 @@ else { // otherwise, pre-populate fields to show data to be deleted
 	$q = $pdo->prepare($sql);
 	$q->execute(array($id));
 	$data = $q->fetch(PDO::FETCH_ASSOC);
+	Database::disconnect();
 	
 	$ques_id = $data['ques_id'];
 	$opt_text = $data['opt_text'];
 	
-	Database::disconnect();
+	
 }
 
 ?>
 
-<body>
+<body style="background-color: lightblue !important";>
     <div class="container">
 
 		<div class="span10 offset1">

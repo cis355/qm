@@ -5,6 +5,8 @@
  * description : This program adds/inserts a new option (table: qm_options)
  * ---------------------------------------------------------------------------
  */
+
+include 'session.php';
 include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 include '/home/gpcorser/public_html/database/database.php'; // gpcorser
 
@@ -110,7 +112,7 @@ if ( !empty($_POST)) { // if not first time through
 
     </div> <!-- div: class="container" -->
 
-		<br><br><h6>Jacob Kaufman, jmkaufma</h6>
+		<br><br><footer>Jacob Kaufman <a href="mailto:jmkaufma@svsu.edu">jmkaufma@svsu.edu</a></footer>
 
 </body>
 </html>

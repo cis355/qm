@@ -8,7 +8,7 @@
 */
 include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 require '/home/gpcorser/public_html/database/database.php';
-$id = $_GET['id'];
+$id = $_GET['quiz_id'];
 if ( !empty($_POST)) { // if user clicks "yes" (sure to delete), delete record
 	$id = $_POST['id'];
 	
@@ -24,7 +24,7 @@ if ( !empty($_POST)) { // if user clicks "yes" (sure to delete), delete record
 else { // otherwise, pre-populate fields to show data to be deleted
 	$pdo = Database::connect();
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	$sql = "SELECT * FROM qm_attempts where id = ?";
+	$sql = "SELECT * FROM qm_attempts where quiz_id = ?";
 	$q = $pdo->prepare($sql);
 	$q->execute(array($id));
 	$data = $q->fetch(PDO::FETCH_ASSOC);
@@ -121,7 +121,7 @@ else { // otherwise, pre-populate fields to show data to be deleted
 			</div>
 				
 		</div>  <!-- end div: class="form-horizontal" -->
-
+		<p>Made by: Ryan Ott raott@svsu.edu</p>
     </div> <!-- end div: class="container" -->
 	
 </body>
