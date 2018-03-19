@@ -46,7 +46,8 @@
      
                 <div class="span10 offset1">
                     <div class="row">
-                        <h3>Person Details</h3>
+                        <h2>Person Details</h2>
+							<div><h3>dneupan1<h3></div>
                     </div>
                      
                     <div class="form-horizontal" >
