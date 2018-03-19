@@ -6,7 +6,7 @@
  *               (table: qm_quizes, qm_persons)
  * ---------------------------------------------------------------------------
  */
-    include session.php;
+    include 'session.php';
 	include '/home/gpcorser/public_html/database/header.php'; //html <head> section
  	require '/home/gpcorser/public_html/database/database.php';
     $id = null;
