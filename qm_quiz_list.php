@@ -5,7 +5,11 @@
  description : Shows the list of all Quizzes on the database.
  ---------------------------------------------------------------------------
 -->
+<?php
+ include '/home/gpcorser/public_html/database/database.php';
+ $_SESSION['per_id'] = $_GET['per_id'];
 
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,7 +22,7 @@
     <div class="container">
             <div class="row">
                 <h3>Quiz List For: <?php
-                   include '/home/gpcorser/public_html/database/database.php';
+                   include '/home/gpcorser/public_html/database/.php';
                    $pdo = Database::connect();
                    $sql = 'SELECT fname, lname FROM qm_persons WHERE id =' . 
 				        $_GET['per_id']; 
@@ -32,7 +36,7 @@
             </div>
             <div class="row">
 			    <p>
-                    <a href="qm_quiz_create.php" class="btn btn-success">Create Quiz</a>
+                    <a href="qm_quiz_create.php?" class="btn btn-success">Create Quiz</a>
                 </p>
 				
                 <table class="table table-striped table-bordered" style="background-color: lightgrey !important">
@@ -41,6 +45,7 @@
                       <th>Quiz Name</th>
 					  <th>Options</th>
 					  <th>Quiz Questions</th>
+					  <th>Quiz Attempts</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -63,12 +68,14 @@
 							echo ' ';
                             echo '</td>';
 							echo '<td>';
-							echo '<a class="btn" href="qm_ques_list.php?quiz_id='.$row['id'].'">Questions List</a>';
+							echo '<a class="btn" href="qm_ques_list.php?id='.$row['id'].'">Questions List</a>';
+							echo '</td>';
+							echo '<td>';
+							echo '<a class="btn" href="qm_qa_list.php?id='.$row['id'].'">Quiz Attempts</a>';
 							echo '</td>';
                             echo '</tr>';
                    }
                    Database::disconnect();
-				   
                   ?>
 				  
                   </tbody>
