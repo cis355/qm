@@ -123,7 +123,9 @@ else { // otherwise, pre-populate fields to show data to be deleted
 				
 			</div>
 				
-				
+			<br><br>
+			
+			<p>Kyle Graham, kjgraham@svsu.edu</p>
 				
 
 </body>
