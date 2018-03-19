@@ -37,7 +37,7 @@ require '/home/gpcorser/public_html/database/database.php';
         echo '<td>'. trim($row['qa_start_time']) . '</td>';
         echo '<td>'. trim($row['qa_end_date']) . '</td>';
         echo '<td>'. trim($row['qa_end_time']) . '</td>';
-        echo '<td>'. '<a href="qm_qa_read.php?quiz_id=' . $_GET['quiz_id'] . '>Read</a>'. '<a href="qm_qa_delete?quiz_id= ' . $_GET['quiz_id'] . ' class="btn btn-danger">Delete</a>' . '</td>';
+        echo '<td>'. '<a href="qm_qa_delete.php?quiz_id=' . $_GET['quiz_id'] . '" class="btn btn-danger">Delete</a>' . '</td>';
         echo '</tr>';
       }
       echo '</tbody></table> </div></div><p>Made by: Brandon Gage bgage@svsu.edu</p>';
