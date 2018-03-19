@@ -99,23 +99,23 @@ else { // otherwise, pre-populate fields to show data to be deleted
 				
 			<div class="control-group col-md-6">
 			
-				<label class="control-label">First Name</label>
-				<div class="controls ">
+				<label class="col-form-label-lg">First Name</label>
+				<div class="col-form-label-sm ">
 					<label class="checkbox">
 						<?php echo $data['fname'];?> 
 					</label>
 				</div>
 				
-				<label class="control-label">Last Name</label>
+				<label class="col-form-label-lg">Last Name</label>
 				<div class="controls ">
-					<label class="checkbox">
+					<label class="col-form-label-sm">
 						<?php echo $data['lname'];?> 
 					</label>
 				</div>
 				
-				<label class="control-label">Email</label>
+				<label class="col-form-label-lg">Email</label>
 				<div class="controls">
-					<label class="checkbox">
+					<label class="col-form-label-sm">
 						<?php echo $data['email'];?>
 					</label>
 				</div>
@@ -126,7 +126,7 @@ else { // otherwise, pre-populate fields to show data to be deleted
 				
 			<br><br>
 			
-			<p>Kyle Graham, kjgraham@svsu.edu</p>
+			<p>Page created by: Kyle Graham, kjgraham@svsu.edu</p>
 				
 
 </body>

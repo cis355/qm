@@ -6,6 +6,8 @@
  *               (table: qm_quizes, qm_persons)
  * ---------------------------------------------------------------------------
  */
+    include 'session.php';
+	include '/home/gpcorser/public_html/database/header.php'; //html <head> section
  	require '/home/gpcorser/public_html/database/database.php';
     $id = null;
     if ( !empty($_GET['id'])) {
@@ -23,16 +25,11 @@
         $data = $q->fetch(PDO::FETCH_ASSOC);
         Database::disconnect();
     }
-//include '/home/~gpcorser/public_html/database/database/header.php'; //html <head> section
+
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="utf-8">
-	<link   href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-</head>
 <body>
     <div class="container">
 
@@ -73,7 +70,7 @@
 		
     </div> <!-- end div: class="container" -->
 	
-	<br></br>
+	<br></br><br></br><br></br>
 	Posted by: Christine Torres <br></br>
 	Contact information: cmtorre1@svsu.edu
 </body>

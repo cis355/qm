@@ -12,6 +12,7 @@ if(!isset($_SESSION["qm_person_id"])){ // if "user" not set,
 	exit;
 }
 */
+include 'session.php';
 include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 require '/home/gpcorser/public_html/database/database.php';
 //require 'functions.php';
