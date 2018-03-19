@@ -38,7 +38,7 @@ if ( !empty($_POST)) { // if not first time through
 	if ($valid) {
 		$pdo = Database::connect();
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = "INSERT INTO qm_options (ques_id, opt_text, opt_isCorrect) values(?, ?, ?)"; 
+		$sql = "INSERT INTO qm_options (ques_id, opt_text, opt_isCorrect) values(?, ?, ?)";
 		$q = $pdo->prepare($sql);
 		$q->execute(array($ques_id, $opt_text,$opt_isCorrect));
 		Database::disconnect();
@@ -109,6 +109,8 @@ if ( !empty($_POST)) { // if not first time through
 		</div> <!-- div: class="container" -->
 
     </div> <!-- div: class="container" -->
+
+		<br><br><h6>Jacob Kaufman, jmkaufma</h6>
 
 </body>
 </html>
