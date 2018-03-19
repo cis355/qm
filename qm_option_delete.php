@@ -7,6 +7,7 @@
  */
  
 include '/home/gpcorser/public_html/database/header.php'; // html <head> section
+include '/home/gpcorser/public_html/database/session.php';
 require '/home/gpcorser/public_html/database/database.php';
 
 $id = $_GET['id'];
@@ -39,7 +40,7 @@ else { // otherwise, pre-populate fields to show data to be deleted
 
 ?>
 
-<body>
+<body style="background-color: lightblue !important";>
     <div class="container">
 
 		<div class="span10 offset1">
