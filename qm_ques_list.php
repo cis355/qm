@@ -66,6 +66,7 @@ include '/home/gpcorser/public_html/database/header.php';
 							echo '</tr>';
 								
 						}
+						
 						Database::disconnect();
 					?>
 				</tbody>
@@ -73,5 +74,6 @@ include '/home/gpcorser/public_html/database/header.php';
 			
     	</div>
     </div> <!-- /container -->
+	<p>Cody Frost, clfrost</p>
   </body>
 </html>

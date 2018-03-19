@@ -81,7 +81,6 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 	Database::disconnect();
 }
 
-echo "tslovas";
 ?>
 
 
@@ -153,4 +152,9 @@ echo "tslovas";
     </div> <!-- end div: class="container" -->
 	
 </body>
+	 <footer>
+  <p>Posted by: Todd Lovas III</p>
+  <p>Contact information: <a href="mailto:tslovas@svsu.edu">
+	tslovas@svsu.edu</a>.</p>
+</footer> 
 </html>
