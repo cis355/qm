@@ -5,15 +5,8 @@
  * description : Question list
  * ---------------------------------------------------------------------------
  */
- /*
-session_start();
-if(!isset($_SESSION["fr_person_id"])){ // if "user" not set,
-	session_destroy();
-	header('Location: login.php');     // go to login page
-	exit;
-}
-$sessionid = $_SESSION['fr_person_id'];
-*/
+
+include 'session.php';
 include '/home/gpcorser/public_html/database/header.php';
 ?>
 
