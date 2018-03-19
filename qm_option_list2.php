@@ -14,6 +14,9 @@ if(!isset($_SESSION["qm_person_id"])){ // if "user" not set,
 }
 $sessionid = $_SESSION['qm_person_id'];
 */
+
+$id = $_GET['id']; 
+$per_id = $_GET['per_id'];
 include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 ?>
 
@@ -39,7 +42,7 @@ include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 					<?php 
 						include '/home/gpcorser/public_html/database/database.php';
 						$pdo = Database::connect();
-						$sql = 'SELECT * FROM qm_options';
+						$sql = 'SELECT * FROM qm_options WHERE id = ' . $id;
 						foreach ($pdo->query($sql) as $row) {
 							echo '<tr>';
 							echo '<td>'. trim($row['id']) . '</td>'; 

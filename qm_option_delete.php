@@ -11,26 +11,21 @@ require '/home/gpcorser/public_html/database/database.php';
 
 $id = $_GET['id'];
 
-	$ques_id = $_POST['ques_id'];
-	$opt_text = $_POST['opt_text'];
-
 if ( !empty($_POST)) { // if user clicks "yes" (sure to delete), delete record
 	$id = $_POST['id'];
 	
-	// delete data
 	$pdo = Database::connect();
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	$sql = "DELETE FROM qm_options  WHERE id = ?";
 	$q = $pdo->prepare($sql);
 	$q->execute(array($id));
 	Database::disconnect();
-	header("Location: qm_options.php");
+	header("Location: qm_options_list.php");
+	
 } 
 else { // otherwise, pre-populate fields to show data to be deleted
 	$pdo = Database::connect();
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	
-	# get option details
 	$sql = "SELECT * FROM qm_options where id = ?";
 	$q = $pdo->prepare($sql);
 	$q->execute(array($id));

@@ -24,7 +24,7 @@ include '/home/gpcorser/public_html/database/header.php' // Add html header
 ?>
 
 
-<body>
+<body style="background-color: lightblue !important">
 	<div class="container">
 		<div class="row">
 			<h3>Questions List</h3>
