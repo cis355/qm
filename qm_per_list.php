@@ -5,15 +5,7 @@
  * description : 
  * ---------------------------------------------------------------------------
  */
- /*
-session_start();
-if(!isset($_SESSION["fr_person_id"])){ // if "user" not set,
-	session_destroy();
-	header('Location: login.php');     // go to login page
-	exit;
-}
-$sessionid = $_SESSION['fr_person_id'];
-*/
+include 'session.php';
 include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 ?>
 
@@ -68,10 +60,5 @@ include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 			
     	</div>
     </div> <!-- /container -->
-	 <footer>
-  <p>Posted by: Guadalupe Ruiz</p>
-  <p>Contact information: <a href="mailto:gruiz@svsu.edu">
-	gruiz@svsu.edu</a>.</p>
-</footer> 
   </body>
 </html>
