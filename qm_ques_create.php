@@ -9,15 +9,8 @@
  * ques_text
  * ---------------------------------------------------------------------------
  */
- /*
-   session_start();
-if(!isset($_SESSION["fr_person_id"])){ // if "user" not set,
-	session_destroy();
-	header('Location: login.php');     // go to login page
-	exit;
-}
-*/
-//require '../../database/database.php';
+include 'session.php';
+require '/home/gpcorser/public_html/database/header.php';
 require '/home/gpcorser/public_html/database/database.php';
 if ( !empty($_POST)) { // if not first time through
 	// initialize user input validation variables
@@ -28,7 +21,7 @@ if ( !empty($_POST)) { // if not first time through
 	
 	// initialize $_POST variables
 	//$id = $_POST['id'];
-	$qid = $_POST['quiz_id'];
+	$qid = $_SESSION['quiz_id'];
 	$qName = $_POST['ques_name'];
 	$qText = $_POST['ques_text'];		
 	
@@ -58,7 +51,7 @@ if ( !empty($_POST)) { // if not first time through
 		$q = $pdo->prepare($sql);
 		$q->execute(array($qid,$qName,$qText));
 		Database::disconnect();
-		header("Location: qm_ques_list.php");
+		header("Location: qm_ques_list.php?quiz_id=");
 	}
 }
 //include '../../database/header.php'; //html <head> section
@@ -74,16 +67,6 @@ include '/home/gpcorser/public_html/database/header.php'; //html <head> section
 			</div>
 	
 			<form class="form-horizontal" action="qm_ques_list.php" method="post">						  
-				<div class="control-group <?php echo !empty($ques_nameError)?'error':'';?>">
-					<label class="control-label">Quiz ID</label>
-					<div class="controls">
-						<input name="quiz_id" type="text" placeholder="Quiz ID" value="<?php echo !empty($qid)?$qid:'';?>">
-						<?php if (!empty($ques_nameError)): ?>
-							<span class="help-inline"><?php echo $quiz_idError;?></span>
-						<?php endif;?>
-					</div>
-				</div>
-				
 				<div class="control-group <?php echo !empty($quiz_nameError)?'error':'';?>">
 					<label class="control-label">Question Name</label>
 					<div class="controls">
