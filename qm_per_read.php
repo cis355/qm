@@ -67,14 +67,14 @@
                         <label class="control-label">First Name: </label> <?php echo $data['fname'];?> <?php echo "</br>";?>
                         
                       <div class="control-group">
-                        <label class="control-label">Last Name : </label> <?php echo $data['lname'];?> <?php echo "</br>";?>
+                        <label class="control-label">Last Name: </label> <?php echo $data['lname'];?> <?php echo "</br>";?>
                       </div>
                       <div class="control-group">
-                        <label class="control-label">Email     : </label> <?php echo $data['email'];?> <?php echo "</br>";?>
+                        <label class="control-label">Email : </label> <?php echo $data['email'];?> <?php echo "</br>";?>
                       </div>
                         <div class="form-actions">
 						                <a class="btn" href="qm_per_list.php">Back</a>
-					                </div>
+				                	</div>
                      
                       
                     </div>
