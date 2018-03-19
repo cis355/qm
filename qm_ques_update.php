@@ -11,6 +11,7 @@
 	// exit;
 // }
 	
+include 'session.php';
 require '/home/gpcorser/public_html/database/database.php';
 
 $id = $_GET['id'];
@@ -66,7 +67,7 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 			$q = $pdo->prepare($sql);
 			$q->execute(array($quiz_id, $ques_name, $ques_text, $id));
 			Database::disconnect();
-			header("Location: qm_ques_list.php");
+			header("Location: qm_ques_list.php?quiz_id=" . $_GET['id']);
 		}
 		else { // otherwise, update all fields EXCEPT file fields
 			$pdo = Database::connect();
@@ -75,7 +76,7 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 			$q = $pdo->prepare($sql);
 			$q->execute(array($quiz_id, $ques_name, $ques_text, $id));
 			Database::disconnect();
-			header("Location: qm_ques_list.php");
+			header("Location: qm_ques_list.php?quiz_id=" . $_GET['id']);
 		}
 	}
 } else { // if $_POST NOT filled then pre-populate the form
