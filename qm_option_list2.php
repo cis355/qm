@@ -66,5 +66,7 @@ include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 			
     	</div>
     </div> <!-- /container -->
+	
+	<p>Scott Angst</p>
   </body>
 </html>
