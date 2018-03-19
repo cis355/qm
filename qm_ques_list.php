@@ -7,7 +7,7 @@
  */
  include 'session.php';
  include '/home/gpcorser/public_html/database/header.php';
- // include '/home/gpcorser/public_html/database/database.php';
+ include '/home/gpcorser/public_html/database/database.php';
  $_SESSION['quiz_id'] = $_GET['quiz_id'];
 ?>
 

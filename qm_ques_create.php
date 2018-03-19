@@ -26,15 +26,12 @@ if ( !empty($_POST)) { // if not first time through
 	$qText = $_POST['ques_text'];		
 	
 	// validate user input
-	//$valid = true;
+	$valid = true;
 	//if (empty($id)) {
 	//	$idError = 'Please enter ID of the question';
 	//	$valid = false;
 	//}
-	if (empty($qid)) {
-		$quiz_idError = 'Please enter Quiz ID';
-		$valid = false;
-	} 		
+		
 	if (empty($qName)) {
 		$ques_nameError = 'Please enter Question Name';
 		$valid = false;
@@ -51,11 +48,11 @@ if ( !empty($_POST)) { // if not first time through
 		$q = $pdo->prepare($sql);
 		$q->execute(array($qid,$qName,$qText));
 		Database::disconnect();
-		header("Location: qm_ques_list.php?quiz_id=");
+		header("Location: qm_ques_list.php?quiz_id=" . $qid);
 	}
 }
 //include '../../database/header.php'; //html <head> section
-include '/home/gpcorser/public_html/database/header.php'; //html <head> section
+ //html <head> section
 ?>
 <html>
 <body>
