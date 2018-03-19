@@ -1,6 +1,6 @@
 <?php 
 /* ---------------------------------------------------------------------------
- * filename    : qm_Quizzes_read.php
+ * filename    : qm_quiz_read.php
  * author      : Christine Torres, cmtorre1@svsu.edu
  * description : This program displays the read page for quiz database 
  *               (table: qm_quizes, qm_persons)
@@ -72,5 +72,9 @@
 				    </div>
 		
     </div> <!-- end div: class="container" -->
+	
+	<br></br>
+	Posted by: Christine Torres <br></br>
+	Contact information: cmtorre1@svsu.edu
 </body>
 </html>

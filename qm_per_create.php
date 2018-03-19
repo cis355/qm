@@ -3,7 +3,7 @@
 /*-----------------------------------------------
  *filename	: qm_per_create.php
  *author	: George Beeman, gabeeman@svsu.edu
- *description: Create page for persons
+ *description: "Create" page for persons
  *-----------------------------------------------
  */
  
@@ -110,6 +110,8 @@ include '/home/gpcorser/public_html/database/header.php'; // html <head> section
                         </div>
                     </form>
 	</div>
+	<h3>qm_per_create done by George Beeman</h3>
+	<p>Contact email: gabeeman@svsu.edu</p>
   </body>
 </html>
  

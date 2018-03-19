@@ -1,4 +1,4 @@
-<?php 
+<?php  
 /* ---------------------------------------------------------------------------
  * filename    : qm_quiz_delete.php
  * author      : Andrew Savage, amsavag2@svsu.edu - taken from george corser original code
@@ -97,6 +97,8 @@ else { // otherwise, pre-populate fields to show data to be deleted
 		</div>  <!-- end div: class="form-horizontal" -->
 
     </div> <!-- end div: class="container" -->
+	
+	<p>Andrew Savage (amsavag2)</p>
 	
 </body>
 </html>

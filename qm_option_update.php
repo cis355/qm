@@ -12,14 +12,13 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 	
 	# same as create
 	// initialize user input validation variables
-	$idError = null;
 	$quest_idError = null;
 	$opt_textError = null;
 	$opt_isCorrectError = null;
 	
 	// initialize $_POST variables
-	$id = $_POST['id'];    // same as HTML name= attribute in put box
-	$quest_id = $_POST['quest_id'];
+	//$id = $_POST['id'];    // same as HTML name= attribute in put box
+	$quest_id = $_POST['ques_id'];
 	$opt_text = $_POST['opt_text'];
 	$opt_isCorrect = $_POST['opt_isCorrect'];
 	
@@ -32,10 +31,10 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 	
 	// validate user input
 	$valid = true;
-	if (empty($id)) {
+	/* if (empty($id)) {
 		$idError = 'Please choose a volunteer';
 		$valid = false;
-	}
+	} */
 	if (empty($quest_id)) {
 		$quest_idError = 'Please choose an quest_id';
 		$valid = false;
@@ -140,6 +139,9 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 				</div>
 				
 			</form>
+			<br>
+			<br>
+			<span>Andrew Petricevic (ampetric)</span>
 			
 				
 				
