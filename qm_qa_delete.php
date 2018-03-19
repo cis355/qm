@@ -8,7 +8,7 @@
 */
 include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 require '/home/gpcorser/public_html/database/database.php';
-$id = $_GET['id'];
+$id = $_GET['quiz_id'];
 if ( !empty($_POST)) { // if user clicks "yes" (sure to delete), delete record
 	$id = $_POST['id'];
 	
