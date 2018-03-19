@@ -73,6 +73,8 @@
 				  
                   </tbody>
             </table>
+			<br/>
+			<p>Dakota Ward, dlward@svsu</p>
         </div>
     </div> <!-- /container -->
   </body>

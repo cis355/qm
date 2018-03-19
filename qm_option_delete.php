@@ -93,5 +93,6 @@ else { // otherwise, pre-populate fields to show data to be deleted
 		</div> <!-- end div: class="span10 offset1" -->
 				
     </div> <!-- end div: class="container" -->
+	<footer>Created by: Robert Zinger</footer>
   </body>
 </html>

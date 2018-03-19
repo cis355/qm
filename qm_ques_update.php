@@ -100,6 +100,15 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
     <link   href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 	<link rel="icon" href="cardinal_logo.png" type="image/png" />
+	<style>
+	.footer {
+		position: fixed;
+		left: 0;
+		bottom: 0;
+		width: 100%;
+		
+}
+</style>
 </head>
 
 <body style="background-color: lightblue !important";>
@@ -161,6 +170,8 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 		</div><!-- end div: class="span10 offset1" -->
 		
     </div> <!-- end div: class="container" -->
-	
+	<div class="footer">
+		<p>Aashish Shrestha : ashrest8@svsu.edu</p>
+	</div>
 </body>
 </html>

@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # To run type python3 submitGit.py
 # made by Brandon Gage
 from subprocess import call

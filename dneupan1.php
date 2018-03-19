@@ -1,28 +1,27 @@
 <?php
-inlcude '/home/gpcorser/public_html/database/header.php';
+
+include '/home/gpcorser/public_html/database/header.php';
 include '/home/gpcorser/public_html/database/database.php';
+
 class Foo {
     public $aMemberVar = 'aMemberVar Member Variable';
     public $aFuncName = 'aFuncName';
     
-    function aMemberFunc(){
-        print 'Inside `aMemberFunc()`';    
-    }
-
+    
     function perList(){ // person list
         //begining body section of person list
         echo'<body style="background-color: lightblue !important";> <div class="container"><div class="row"><h3>Persons</h3></div><div class="row"><p><a href="qm_per_create.php" class="btn btn-primary">Add Person</a></p><table class="table table-striped table-bordered" style="background-color: lightgrey !important"><thead><tr><th>Lastname</th><th>Firstname</th><th>Email</th><th>Action</th></tr></thead><tbody>';
         
         // populate person list table
         $pdo = Database::connect();
-            $sql = 'SELECT * FROM qm_persons';
+            $sql = 'SELECT * FROM qm_comments';
 
             foreach ($pdo->query($sql) as $row) {
                 echo '<tr>';
-                echo '<td>'. trim($row['lname']) . '</td>';
-                echo '<td>'. trim($row['fname']) . '</td>';
-                echo '<td>'. trim($row['email']) . '</td>';
-                
+                echo '<td>'. trim($row['per_id']) . '</td>';
+                echo '<td>'. trim($row['ques_id']) . '</td>';
+                echo '<td>'. trim($row['comment']) . '</td>';
+                echo '<td>'. trim($row['rating']) . '</td>';
                 
                 //echo '<td width=250>';
                 echo '<td>';
@@ -40,6 +39,15 @@ class Foo {
             // end of body
                 echo'</tbody></table> </div></div></body>';
     }
+    
+    
+    
+    function perRead(){ // person read
+        
+        
+    
+    
+    }
 }
 Foo::aMemberFunc();
 //echo"<br />";
@@ -48,6 +56,6 @@ Foo::aMemberFunc();
 
 //$foo ->aMemberFunc();
 
-Foo::perList();
+if($GET_
 
 ?>
