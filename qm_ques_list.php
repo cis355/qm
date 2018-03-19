@@ -5,16 +5,10 @@
  * description : Question list
  * ---------------------------------------------------------------------------
  */
- /*
-session_start();
-if(!isset($_SESSION["fr_person_id"])){ // if "user" not set,
-	session_destroy();
-	header('Location: login.php');     // go to login page
-	exit;
-}
-$sessionid = $_SESSION['fr_person_id'];
-*/
-include '/home/gpcorser/public_html/database/header.php';
+ include 'session.php';
+ include '/home/gpcorser/public_html/database/header.php';
+ // include '/home/gpcorser/public_html/database/database.php';
+ $_SESSION['quiz_id'] = $_GET['quiz_id'];
 ?>
 
 <body style="background-color: lightblue !important";>
@@ -42,8 +36,8 @@ include '/home/gpcorser/public_html/database/header.php';
 					<?php 
 						include '/home/gpcorser/public_html/database/database.php';
 						$pdo = Database::connect();
-						$sql = 'SELECT * FROM qm_questions, qm_persons WHERE quiz_id=' . $_GET['quiz_id'] ;
-						
+						//$sql = 'SELECT * FROM qm_questions, qm_persons WHERE quiz_id=' . $_GET['quiz_id'] ;
+						$sql = 'SELECT * FROM qm_questions WHERE quiz_id=' . $_GET['quiz_id'] ;
 						foreach ($pdo->query($sql) as $row) {
 							echo '<tr>';
 							echo '<td>'. trim($row['id']) . '</td>';
@@ -58,8 +52,7 @@ include '/home/gpcorser/public_html/database/header.php';
                                 echo ' ';
                                 echo '<a class="btn btn-danger" href="qm_ques_delete.php?id='.$row['id'].'">Delete</a>';
 								echo ' ';
-								echo '<a class="btn" href="qm_option_list.php?id='.$row['id'].'">Options</a>';
-								// review comments
+								echo '<a class="btn" href="qm_option_list.php?ques_id='.$row['id'] . '&per_id=' . $row['per_id'] . '">Options</a>';
 								echo ' ';
 								echo '<a class="btn" href="gpcorser.php?ques_id=' . $row['id'] . '&per_id=' . $row['per_id'] . '">Comments</a>';
                             echo '</td>';

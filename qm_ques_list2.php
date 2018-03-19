@@ -8,19 +8,9 @@
  * ---------------------------------------------------------------------------
  */
 
-/*
-session_start();
-if(!isset($_SESSION["qm_person_id"])){ // if "user" not set,
-	session_destroy();
-	header('Location: login.php');   // go to login page
-	exit;
-}
- */
-$id = $_GET['id']; 
-$per_id = $_GET['per_id'];
-// $sessionid = $_SESSION['qm_person_id'];
+include 'session.php';
 
-include '/home/gpcorser/public_html/database/header.php' // Add html header
+include '/home/gpcorser/public_html/database/header.php'; // Add html header
 ?>
 
 
@@ -39,9 +29,9 @@ include '/home/gpcorser/public_html/database/header.php' // Add html header
 					<tr>
 						<th>ID</th>
 						<th>Quiz ID</th>
-						<th>Quiz Name</th>
-						<th>Name</th>
+						<th>Question Name</th>
 						<th>Text</th>
+						<th>Operation</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -49,25 +39,17 @@ include '/home/gpcorser/public_html/database/header.php' // Add html header
 	include '/home/gpcorser/public_html/database/database.php';
 $pdo = Database::connect();
 
-// 					$sql = "SELECT qm_questions.*,qm_quizzes.quiz_name FROM qm_questions,qm_quizzes WHERE qm_questions.quiz_id = qm_quizzes.id";
-$sql = "SELECT qs.*, qz.* FROM qm_questions qs, qm_quizzes qz WHERE qs.quiz_id = qz.id AND qz.id = $id";
+$sql = "SELECT * FROM qm_questions WHERE quiz_id = " . $_GET['quiz_id'];
 foreach ($pdo->query($sql) as $row) {
 	echo '<tr>';
 	echo '<td>'. $row['id'] . '</td>';
 	echo '<td>'. $row['quiz_id'] . '</td>';
-	echo '<td>'. $row['quiz_name'] . '</td>';
 	echo '<td>'. $row['ques_name'] . '</td>';
 	echo '<td>'. $row['ques_text'] . '</td>';
 	echo '<td width=270>';
-	# use $row[0] because there are 3 fields called "id"
 	echo '<a class="btn btn-primary" href="qm_ques_read.php?id='.$row[0].'">Details</a>';
-	/*if ($_SESSION['qm_person_title']=='Administrator' )*/
 	echo '&nbsp;<a class="btn btn-success" href="qm_ques_update.php?id='.$row[0].'">Update</a>';
-						/*if ($_SESSION['qm_person_title']=='Administrator' 
-						|| $_SESSION['qm_person_id']==$row['quiz_per_id'])*/
 	echo '&nbsp;<a class="btn btn-danger" href="qm_ques_delete.php?id='.$row[0].'">Delete</a>';
-						/*if($_SESSION["fr_person_id"] == $row['assign_per_id']) 
-						echo " &nbsp;&nbsp;Me";*/
 	echo '</td>';
 	echo '</tr>';
 }
