@@ -12,7 +12,7 @@ require '/home/gpcorser/public_html/database/database.php';
 
 $id = $_GET['id'];
 
-if ( !empty($_POST)) { // if user clicks "yes" (sure to delete), delete record
+if ( !empty($_POST)) { 
 	$id = $_POST['id'];
 	
 	$pdo = Database::connect();
@@ -22,6 +22,8 @@ if ( !empty($_POST)) { // if user clicks "yes" (sure to delete), delete record
 	$q->execute(array($id));
 	Database::disconnect();
 	header("Location: qm_options_list.php");
+	
+	
 	
 } 
 else { // otherwise, pre-populate fields to show data to be deleted
@@ -95,6 +97,7 @@ else { // otherwise, pre-populate fields to show data to be deleted
 		</div> <!-- end div: class="span10 offset1" -->
 				
     </div> <!-- end div: class="container" -->
+	<br />	<br />	
 	<div>Created by: Robert Zinger</div>
 	<footer>Contact: rjzinger@svsu.edu</footer>
   </body>
