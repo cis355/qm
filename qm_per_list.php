@@ -14,6 +14,7 @@ if(!isset($_SESSION["fr_person_id"])){ // if "user" not set,
 }
 $sessionid = $_SESSION['fr_person_id'];
 */
+include 'session.php';
 include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 ?>
 
