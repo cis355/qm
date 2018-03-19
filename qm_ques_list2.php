@@ -10,122 +10,74 @@
 
 /*
 session_start();
-if(!isset($_SESSION["fr_person_id"])){ // if "user" not set,
+if(!isset($_SESSION["qm_person_id"])){ // if "user" not set,
 	session_destroy();
 	header('Location: login.php');   // go to login page
 	exit;
 }
-$id = $_GET['id']; // for MyAssignments
-$sessionid = $_SESSION['fr_person_id'];
 */
-
+$id = $_GET['id']; 
+$per_id = $_GET['per_id'];
+// $sessionid = $_SESSION['qm_person_id'];
+ 
+include '/home/gpcorser/public_html/database/header.php' // Add html header
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <link   href="css/bootstrap.min.css" rel="stylesheet">
-    <script src="js/bootstrap.min.js"></script>
-	<link rel="icon" href="cardinal_logo.png" type="image/png" />
-</head>
 
-<body>
-    <div class="container">
-	
-
-		<!--		
-		<?php 
-		//gets logo
-			include 'functions.php';
-			functions::logoDisplay2();
-		?>
+<body style="background-color: lightblue !important">
+	<div class="container">
 		<div class="row">
-			<h3><?php if($id) echo 'My'; ?>Shifts</h3>
+			<h3>Questions List</h3>
+			</br>
 		</div>
-		
 		<div class="row">
-			<p>Each shift is 4 hours.</p>
-		-->
 			<p>
-		<!--
-				<?php if($_SESSION['fr_person_title']=='Administrator')
-					echo '<a href="fr_assign_create.php" class="btn btn-primary">Add Assignment</a>';
-				?>
-				<a href="logout.php" class="btn btn-warning">Logout</a> &nbsp;&nbsp;&nbsp;
-				<?php if($_SESSION['fr_person_title']=='Administrator')
-					echo '<a href="fr_persons.php">Volunteers</a> &nbsp;';
-				?>
-				<a href="fr_events.php">Shifts</a> &nbsp;
-				<?php if($_SESSION['fr_person_title']=='Administrator')
-					echo '<a href="fr_assignments.php">AllShifts</a>&nbsp;';
-				?>
-				<a href="fr_assignments.php?id=<?php echo $sessionid; ?>">MyShifts</a>&nbsp;
-				<?php if($_SESSION['fr_person_title']=='Volunteer')
-					echo '<a href="fr_events.php" class="btn btn-primary">Volunteer</a>';
-				?>
-			-->
+				<a href="qm_ques_create.php" class="btn btn-primary">Add Question</a>
 			</p>
-			
-			<table class="table table-striped table-bordered" style="background-color: lightgrey !important">
+		<table class="table table-striped table-bordered" style="background-color: lightgrey !important">
 				<thead>
 					<tr>
 						<th>ID</th>
-						<th>Quiz</th>
+						<th>Quiz ID</th>
+						<th>Quiz Name</th>
 						<th>Name</th>
 						<th>Text</th>
 					</tr>
 				</thead>
 				<tbody>
-				<?php 
-					include '../../database/database.php';
+					<?php 
+					include '/home/gpcorser/public_html/database/database.php';
 					$pdo = Database::connect();
 					
-					/*
-					if($id) 
-						$sql = "SELECT * FROM qm_questions
-						LEFT JOIN fr_persons ON fr_persons.id = fr_assignments.assign_per_id 
-						LEFT JOIN fr_events ON fr_events.id = fr_assignments.assign_event_id
-						WHERE fr_persons.id = $id 
-						ORDER BY event_date ASC, event_time ASC, lname ASC, lname ASC;";
-					else
-					 */
-						$sql = "SELECT * FROM qm_questions";
-						/*	
-						LEFT JOIN fr_persons ON fr_persons.id = fr_assignments.assign_per_id 
-						LEFT JOIN fr_events ON fr_events.id = fr_assignments.assign_event_id
-						ORDER BY event_date ASC, event_time ASC, lname ASC, lname ASC;";*/
-
+// 					$sql = "SELECT qm_questions.*,qm_quizzes.quiz_name FROM qm_questions,qm_quizzes WHERE qm_questions.quiz_id = qm_quizzes.id";
+					$sql = "SELECT qs.*, qz.* FROM qm_questions qs, qm_quizzes qz WHERE qs.quiz_id = qz.id AND qz.id = $id";
 					foreach ($pdo->query($sql) as $row) {
 						echo '<tr>';
 						echo '<td>'. $row['id'] . '</td>';
 						echo '<td>'. $row['quiz_id'] . '</td>';
+						echo '<td>'. $row['quiz_name'] . '</td>';
 						echo '<td>'. $row['ques_name'] . '</td>';
 						echo '<td>'. $row['ques_text'] . '</td>';
-						/*echo '<td>'. Functions::timeAmPm($row['event_time']) . '</td>';
-						echo '<td>'. $row['event_location'] . '</td>';
-						echo '<td>'. $row['event_description'] . '</td>';
-						echo '<td>'. $row['lname'] . ', ' . $row['fname'] . '</td>';
-						echo '<td width=250>';
+						echo '<td width=270>';
 						# use $row[0] because there are 3 fields called "id"
-						echo '<a class="btn" href="fr_assign_read.php?id='.$row[0].'">Details</a>';
-						if ($_SESSION['fr_person_title']=='Administrator' )
-							echo '&nbsp;<a class="btn btn-success" href="fr_assign_update.php?id='.$row[0].'">Update</a>';
-						if ($_SESSION['fr_person_title']=='Administrator' 
-							|| $_SESSION['fr_person_id']==$row['assign_per_id'])
-							echo '&nbsp;<a class="btn btn-danger" href="fr_assign_delete.php?id='.$row[0].'">Delete</a>';
-						if($_SESSION["fr_person_id"] == $row['assign_per_id']) 		echo " &nbsp;&nbsp;Me";
+						echo '<a class="btn btn-primary" href="qm_ques_read.php?id='.$row[0].'">Details</a>';
+						/*if ($_SESSION['qm_person_title']=='Administrator' )*/
+							echo '&nbsp;<a class="btn btn-success" href="qm_ques_update.php?id='.$row[0].'">Update</a>';
+						/*if ($_SESSION['qm_person_title']=='Administrator' 
+							|| $_SESSION['qm_person_id']==$row['quiz_per_id'])*/
+							echo '&nbsp;<a class="btn btn-danger" href="qm_ques_delete.php?id='.$row[0].'">Delete</a>';
+						/*if($_SESSION["fr_person_id"] == $row['assign_per_id']) 
+							echo " &nbsp;&nbsp;Me";*/
 						echo '</td>';
-						 */
 						echo '</tr>';
 					}
 					Database::disconnect();
-				?>
+					?>
 				</tbody>
 			</table>
-    	</div>
+	</div>
 
     </div> <!-- end div: class="container" -->
-	
+
 </body>
 </html>

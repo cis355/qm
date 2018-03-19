@@ -5,8 +5,8 @@
  * description : This reads and displays a selected record.
  * ---------------------------------------------------------------------------
  */
- include  '../../database/header.php'; // html <head> section 
- require '../../database/databse.php';
+ include  '/home/gpcorser/public_html/database/header.php'; // html <head> section 
+ require '/home/gpcorser/public_html/database/database.php';
  
  $id = $_GET['id'];
  
@@ -42,13 +42,13 @@
 					<label class="control-label">Option Text</label>
 					<div class="controls ">
 						<label class="checkbox">
-							<?php echo $data['option_text'];?> 
+							<?php echo $data['opt_text'];?> 
 						</label>
 					</div>
 					<label class="control-label">Option is Correct?</label>
 					<div class="controls ">
 						<label class="checkbox">
-							<?php echo $data['option_isCorrect'];?> 
+							<?php echo $data['opt_isCorrect'];?> 
 						</label>
 					</div>
 					<div class="form-actions">
@@ -57,7 +57,7 @@
 					
 				
 				</div>	 <!-- end div: class="form-horizontal" -->
-		
+		<p>Shrijesh Siwakoti</p>
     </div> <!-- /container -->
   </body>
 </html>
