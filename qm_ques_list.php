@@ -5,9 +5,10 @@
  * description : Question list
  * ---------------------------------------------------------------------------
  */
-
-include 'session.php';
-include '/home/gpcorser/public_html/database/header.php';
+ include 'session.php';
+ include '/home/gpcorser/public_html/database/header.php';
+ // include '/home/gpcorser/public_html/database/database.php';
+ $_SESSION['quiz_id'] = $_GET['quiz_id'];
 ?>
 
 <body style="background-color: lightblue !important";>
