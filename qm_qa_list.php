@@ -23,7 +23,7 @@ include '/home/gpcorser/public_html/database/header.php'; // html <head> section
       <?php
       include '/home/gpcorser/public_html/database/database.php';
       $pdo = Database::connect();
-      $sql = 'SELECT quiz_name, fname, lname FROM qm_attempts WHERE qm_attempts.quiz_id =' .  $_GET("quiz_id") . 'Join qm_quizzes on qm_attempts.quiz_id = qm_quizzes.quiz_id Join qm_persons on qm_quizzes.per_id = qm_persons.id';
+      $sql = 'SELECT quiz_name, fname, lname FROM qm_attempts WHERE qm_attempts.quiz_id =' .  $_GET['quiz_id'] . 'Join qm_quizzes ON qm_attempts.quiz_id = qm_quizzes.quiz_id Join qm_persons ON qm_quizzes.per_id = qm_persons.id';
       $q = $pdo->prepare($sql);
       $q->execute(array($id));
       $data = $q->fetch(PDO::FETCH_ASSOC);
@@ -49,9 +49,9 @@ include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 				</thead>
 				<tbody>
 					<?php
-						require '../../database/database.php';
+						require '/home/gpcorser/public_html/database/database.php';
 						$pdo = Database::connect();
-						$sql = 'SELECT qa_score, qa_start_date, qa_start_time, qa_end_date, qa_end_time FROM qm_attempts WHERE quiz_id = ' . $_GET("quiz_id");
+						$sql = 'SELECT qa_score, qa_start_date, qa_start_time, qa_end_date, qa_end_time FROM qm_attempts WHERE quiz_id = 1';
 						foreach ($pdo->query($sql) as $row) {
 							echo '<tr>';
 							echo '<td>'. trim($row['qa_score']) . '</td>';
@@ -59,7 +59,8 @@ include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 							echo '<td>'. trim($row['qa_start_time']) . '</td>';
               echo '<td>'. trim($row['qa_end_date']) . '</td>';
               echo '<td>'. trim($row['qa_end_time']) . '</td>';
-							echo '<td>'. '<a href="qm_qa_read.php?quiz_id=' . $_GET("quiz_id").'">Read</a>'. '<a href="qm_qa_delete?quiz_id='. $_GET("quiz_id").'" class="btn btn_delete">Delete</a>' . '</td>';
+							echo '<td>'. '<a href="qm_qa_read.php?quiz_id=1>Read</a>'. '<a href="qm_qa_delete?quiz_id= 1 class="btn btn_delete">Delete</a>' . '</td>';
+              echo '</tr>';
 						}
 						Database::disconnect();
 					?>

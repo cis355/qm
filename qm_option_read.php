@@ -5,7 +5,8 @@
  * description : This reads and displays a selected record.
  * ---------------------------------------------------------------------------
  */
- include  '/home/gpcorser/public_html/database/header.php'; // html <head> section 
+ include  '/home/gpcorser/public_html/database/header.php'; // html <head> section
+ include 'session.php'; 
  require '/home/gpcorser/public_html/database/database.php';
  
  $id = $_GET['id'];
