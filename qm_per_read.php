@@ -47,7 +47,7 @@
                 <div class="span10 offset1">
                     <div class="row">
                         <h2>Person Details</h2>
-							<div><h3>dneupan1<h3></div>
+						
                     </div>
                      
                     <div class="form-horizontal" >
@@ -70,4 +70,5 @@
                  
     </div> <!-- /container -->
   </body>
+	<footer><p>Page by Deepak Neupane</p></footer>
 </html>
