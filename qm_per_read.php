@@ -1,5 +1,7 @@
 <?php
     require '/home/gpcorser/public_html/database/database.php';
+    include 'session.php';
+    
     $id = null;
     if ( !empty($_GET['id'])) {
         $id = $_REQUEST['id'];
