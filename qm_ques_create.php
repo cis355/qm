@@ -22,6 +22,7 @@ if ( !empty($_POST)) { // if not first time through
 	// initialize $_POST variables
 	//$id = $_POST['id'];
 	$qid = $_SESSION['quiz_id'];
+	
 	$qName = $_POST['ques_name'];
 	$qText = $_POST['ques_text'];		
 	
@@ -61,15 +62,16 @@ if ( !empty($_POST)) { // if not first time through
 		
 			<div class="row">
 				<h3>Add New Question</h3>
+				
 			</div>
 	
 			<form class="form-horizontal" action="qm_ques_list.php" method="post">						  
-				<div class="control-group <?php echo !empty($quiz_nameError)?'error':'';?>">
+				<div class="control-group <?php echo !empty($ques_nameError)?'error':'';?>">
 					<label class="control-label">Question Name</label>
 					<div class="controls">
 						<input name="ques_name" type="text" placeholder="Question Name" value="<?php echo !empty($qName)?$qName:'';?>">
-						<?php if (!empty($quiz_nameError)): ?>
-							<span class="help-inline"><?php echo $quiz_nameError;?></span>
+						<?php if (!empty($ques_nameError)): ?>
+							<span class="help-inline"><?php echo $ques_nameError;?></span>
 						<?php endif;?>
 					</div>
 				</div>
@@ -86,7 +88,7 @@ if ( !empty($_POST)) { // if not first time through
 				
 				<div class="form-actions">
 					<button type="submit" class="btn btn-success">Create</button>
-					<a class="btn" href="qm_ques_list.php">Back</a>
+					<a class="btn" href="qm_ques_list.php?quiz_id=<?php echo $qid;?>">Back</a>
 				</div>
 				
 			</form>

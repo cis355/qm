@@ -12,7 +12,7 @@
 // }
 	include 'session.php';
 require '/home/gpcorser/public_html/database/database.php';
-include '/home/gpcorser/public_html/database.header.php';
+include '/home/gpcorser/public_html/database/header.php';
 
 $id = $_GET['id'];
 
@@ -94,10 +94,7 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <link   href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-	<link rel="icon" href="cardinal_logo.png" type="image/png" />
+    
 	<style>
 	.footer {
 		position: fixed;
@@ -149,7 +146,7 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 				
 				<div class="form-actions">
 					<button type="submit" class="btn btn-success">Update</button>
-					<a class="btn btn-primary" href="qm_ques_list.php">Back</a>
+					<a class="btn btn-primary" href="qm_ques_list.php?quiz_id=<?php echo $quiz_id; ?>">Back</a>
 				</div>
 				
 			</form>
