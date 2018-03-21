@@ -56,31 +56,12 @@ if ( !empty($_POST)) { // if not first time through
     <div class="container">
 
 		<div class="span10 offset1">
-			<br>
 			<div class="row">
 				<h3>Add New Option</h3>
 			</div>
 
-			<form class="form-horizontal" action="qm_option_create.php" method="post">
-
-				<div class="control-group <?php echo !empty($ques_idError)?'error':'';?>">
-					<label class="control-label">Question</label>
-					<div class="controls">
-						<select name="ques_id" type="text">
-							<?php
-								$pdo = Database::connect();
-								$sql = 'SELECT * FROM qm_questions';
-								foreach ($pdo->query($sql) as $row) {
-									echo '<option value="' . $row['id'] . '">' . $row['id'] . ' ' . $row['ques_text'] . '</option>';
-								}
-								Database::disconnect();
-							?>
-						</select>
-					</div>
-				</div>
-
+			<form class="form-horizontal" action="qm_option_create.php?=<?php echo $ques_id;?>" method="post">
 				<div class="control-group <?php echo !empty($opt_textError)?'error':'';?>">
-					<br>
 					<label class="control-label">Option Text</label>
 					<div class="controls">
 						<input name="opt_text" type="text" placeholder="Option Text" value="<?php echo !empty($opt_text)?$opt_text:'';?>">
