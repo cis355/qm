@@ -53,7 +53,7 @@
 						</label>
 					</div>
 					<div class="form-actions">
-						<a class="btn" href="qm_option_list.php">Back</a>
+						<a class="btn" href="qm_option_list.php?ques_id=<?php echo $_GET['ques_id'];?>">Back</a>
 					</div>
 					
 				
