@@ -135,7 +135,7 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 				<!-- -->
 				<div class="form-actions">
 					<button type="submit" class="btn btn-success">Update</button>
-					<a class="btn btn-secondary" href="qm_option_list.php?ques_id=<?php echo $_GET['ques_id'];?>">Back</a>
+					<a class="btn btn-secondary" href="qm_option_list.php?ques_id=<?php echo $data['ques_id'];?>">Back</a>
 				</div>
 				
 			</form>
