@@ -5,20 +5,16 @@
  * description : This php file will create a new quiz attempt.
  * ---------------------------------------------------------------------------
  */
- /*
-   session_start();
-if(!isset($_SESSION["fr_person_id"])){ // if "user" not set,
-	session_destroy();
-	header('Location: login.php');     // go to login page
-	exit;
-}
-*/
+ 
 //require '../../database/database.php';
+include 'session.php';
+require '/home/gpcorser/public_html/database/header.php'; //html <head> section
 require '/home/gpcorser/public_html/database/database.php';
+
+
 if ( !empty($_POST)) { // if not first time through
 	// initialize user input validation variables
 	$idError = null;
-	$quiz_idError = null;
 	$qa_scoreError = null;
 	$qa_start_dateError = null;
 	$qa_end_dateError = null;
@@ -28,7 +24,6 @@ if ( !empty($_POST)) { // if not first time through
 	
 	// initialize $_POST variables
 	$id = $_POST['id'];
-	$quiz_id = $_POST['quiz_id'];
 	$qa_score = $_POST['qa_score'];
 	$qa_start_date = $_POST['qa_start_date'];		
 	$qa_end_date = $_POST['qa_end_date'];
@@ -41,10 +36,7 @@ if ( !empty($_POST)) { // if not first time through
 		$idError = 'Please enter person ID';
 		$valid = false;
 	}
-	if (empty($quiz_id)) {
-		$per_idError = 'Please enter Quiz ID';
-		$valid = false;
-	} 		
+
 	if (empty($qa_score)) {
 		$per_idError = 'Please enter Quiz score';
 		$valid = false;
@@ -79,35 +71,35 @@ if ( !empty($_POST)) { // if not first time through
 	}
 }
 //include '../../database/header.php'; //html <head> section
-include '/home/gpcorser/public_html/database/header.php'; //html <head> section
 ?>
-<body>
+<body style ="background-color: lightblue !important";>
+	
     <div class="container">
 		<div class="span10 offset1">
 		
 			<div class="row">
 				<h3>Add New Quiz Attempt</h3>
 			</div>
+			<div>
+				<h5>What Quiz would you like to attempt?</h5>
+				 <select name="sometext" multiple="multiple">
+					<option>Quiz1</option>
+					<option>Quiz2</option>
+					<option>Quiz3</option>
+					<option>Quiz4</option>
+					<option>Quiz5</option>
+				 </select>
+			</div>
 	
 			<form class="form-horizontal" action="qm_qa_create.php" method="post">
 			
 				<div class="control-group <?php echo !empty($idError)?'error':'';?>">
-					<label class="control-label">id</label>
+					<label class="control-label">Person ID</label>
 					<div class="controls">
 						<input name="id" type="text"  placeholder="ID" value="<?php echo !empty($id)?$id:'';?>">
 						<?php if (!empty($idError)): ?>
 							<span class="help-inline"><?php echo $idError;?></span>
 						<?php endif; ?>
-					</div>
-				</div>
-			  
-				<div class="control-group <?php echo !empty($quiz_idError)?'error':'';?>">
-					<label class="control-label">Quiz ID</label>
-					<div class="controls">
-						<input name="quiz_id" type="text" placeholder="Quiz ID" value="<?php echo !empty($quiz_id)?$quiz_id:'';?>">
-						<?php if (!empty($quiz_idError)): ?>
-							<span class="help-inline"><?php echo $quiz_idError;?></span>
-						<?php endif;?>
 					</div>
 				</div>
 				
@@ -173,6 +165,7 @@ include '/home/gpcorser/public_html/database/header.php'; //html <head> section
 		</div> <!-- div: class="container" -->
 				
     </div> <!-- div: class="container" -->
-	
+	</br>
+	<p>&nbsp apolisan@svsu.edu<p>
 </body>
 </html>
