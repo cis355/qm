@@ -1,7 +1,7 @@
 <?php
 /* ---------------------------------------------------------------------------
  * filename    : qm_qa_create.php
- * author      : Anthony Polisno, apolisan@svsu.edu
+ * author      : Anthony Polisano, apolisan@svsu.edu
  * description : This php file will create a new quiz attempt.
  * ---------------------------------------------------------------------------
  */
@@ -21,6 +21,9 @@ if ( !empty($_POST)) { // if not first time through
 	$qa_start_timeError = null;
 	$qa_end_timeError = null;
 	
+	//          !!!            
+	$quiz = $_POST['quiz']; 
+	
 	
 	$qa_score = $_POST['qa_score'];
 	$qa_start_date = $_POST['qa_start_date'];		
@@ -33,6 +36,7 @@ if ( !empty($_POST)) { // if not first time through
 
 	// person id is provided in the URL
 	$id = $_GET['per_id'];
+	$per_id = $id;
 	$quiz_id = '2';
 
 	// The rest are provided by user
@@ -57,7 +61,8 @@ if ( !empty($_POST)) { // if not first time through
 		$per_idError = 'Please enter End Time';
 		$valid = false;
 	} 			
-	
+	$i = 9;
+	$location = "Location: qm_qa_list.php?per_id=$id";
 	// insert data
 	if ($valid) {
 		$pdo = Database::connect();
@@ -66,7 +71,7 @@ if ( !empty($_POST)) { // if not first time through
 		$q = $pdo->prepare($sql);
 		$q->execute(array($id,$quiz_id,$qa_score,$qa_start_date,$qa_end_date, $qa_start_time, $qa_end_time));
 		Database::disconnect();
-		header("Location: qm_qa_list.php?per_id=" . $id);
+	header($location);
 	}
 }
 
@@ -81,12 +86,12 @@ if ( !empty($_POST)) { // if not first time through
 			</div>
 			<div>
 				<h5>What Quiz would you like to attempt?</h5>
-				 <select name="sometext" multiple="multiple">
-					<option>Need</option>
-					<option>The</option>
-					<option>Quiz</option>
-					<option>IDs</option>
-					<option>From Somewhere else</option>
+				 <select name="quiz" multiple="multiple">
+					<option value = "1" selected> &nbsp 1  &nbsp </option>
+					<option value = "2"> &nbsp 2 &nbsp </option>
+					<option value = "3"> &nbsp 3 &nbsp </option>
+					<option value = "4"> &nbsp 4 &nbsp </option>
+					<option value = "5"> &nbsp 5 &nbsp </option>
 				 </select>
 			</div>
 	
@@ -158,7 +163,7 @@ if ( !empty($_POST)) { // if not first time through
 		
 				<div class="form-actions">
 					<button type="submit" class="btn btn-success">Create</button>
-					<a class="btn" href="qm_qa_list.php">Back</a>
+					<a class="btn" href="qm_qa_list.php?per_id=<?php echo $_GET[per_id];?>" >Back</a>
 				</div>
 				
 			</form>
