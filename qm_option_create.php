@@ -45,7 +45,7 @@ if ( !empty($_POST)) { // if not first time through
 		$q->execute(array($ques_id, $opt_text,$opt_isCorrect));
 		Database::disconnect();
 
-		header("Location: qm_option_list.php");
+		header("Location: qm_option_list.php?ques_id=" . $_SESSION['ques_id']);
 
 	}
 }
@@ -60,7 +60,7 @@ if ( !empty($_POST)) { // if not first time through
 				<h3>Add New Option</h3>
 			</div>
 
-			<form class="form-horizontal" action="qm_option_create.php?=<?php echo $ques_id;?>" method="post">
+			<form class="form-horizontal" action="qm_option_create.php?ques_id=<?php echo $_SESSION['ques_id']?>" method="post">
 				<div class="control-group <?php echo !empty($opt_textError)?'error':'';?>">
 					<label class="control-label">Option Text</label>
 					<div class="controls">
@@ -84,7 +84,7 @@ if ( !empty($_POST)) { // if not first time through
 				<div class="form-actions">
 					<br><br>
 					<button type="submit" class="btn btn-success">Create</button>
-					<a class="btn btn-secondary" href="qm_option_list.php?ques_id=<?php echo $ques_id;?>">Back</a>
+					<a class="btn btn-secondary" href="qm_option_list.php?ques_id=<?php echo $_SESSION['ques_id'];?>">Back</a>
 				</div>
 
 			</form>
