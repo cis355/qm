@@ -5,15 +5,7 @@
  * description : This program displays a list of Options from the table qm_options
  * ---------------------------------------------------------------------------
  */
- /*
-session_start();
-if(!isset($_SESSION["qm_person_id"])){ // if "user" not set,
-	session_destroy();
-	header('Location: login.php');     // go to login page
-	exit;
-}
-$sessionid = $_SESSION['qm_person_id'];
-*/
+
 include 'session.php';
 include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 $_SESSION['ques_id'] = $_GET['ques_id'];
@@ -26,7 +18,7 @@ $ques_id = $_GET['ques_id'];
     <div class="container">
 
 		<div class="row">
-			<h3>Options</h3>
+			<h3>Options for Question <?php echo $ques_id;?></h3>
 		</div>
 		<div class="row">
 			<a href="qm_option_create.php" class = "btn btn-primary">Add Option</a>
