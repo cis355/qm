@@ -14,11 +14,11 @@ if(!isset($_SESSION["qm_person_id"])){ // if "user" not set,
 }
 $sessionid = $_SESSION['qm_person_id'];
 */
-
-$id = $_GET['id']; 
-$per_id = $_GET['per_id'];
 include 'session.php';
 include '/home/gpcorser/public_html/database/header.php'; // html <head> section
+$_SESSION['ques_id'] = $_GET['ques_id'];
+$id = $_GET['id']; 
+$ques_id = $_GET['ques_id'];
 ?>
 
 
@@ -43,7 +43,7 @@ include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 					<?php 
 						include '/home/gpcorser/public_html/database/database.php';
 						$pdo = Database::connect();
-						$sql = 'SELECT * FROM qm_options WHERE id = ' . $id;
+						$sql = 'SELECT * FROM qm_options WHERE ques_id = ' . $ques_id;
 						foreach ($pdo->query($sql) as $row) {
 							echo '<tr>';
 							echo '<td>'. trim($row['id']) . '</td>'; 
@@ -56,7 +56,6 @@ include '/home/gpcorser/public_html/database/header.php'; // html <head> section
                                 echo '<a class="btn btn-success" href="qm_option_update.php?id='.$row['id'].'">Update</a>';
                                 echo ' ';
                                 echo '<a class="btn btn-danger" href="qm_option_delete.php?id='.$row['id'].'">Delete</a>';
-                                echo '<a href="qm_ques_list.php?id='.$row['ques_id'].'">Question</a>';
 								echo '</td>';
                             echo '</tr>';
 						}
