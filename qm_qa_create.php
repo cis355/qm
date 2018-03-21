@@ -22,6 +22,8 @@ if ( !empty($_POST)) { // if not first time through
 	$qa_end_timeError = null;
 	
 	
+	// initialize $_POST variables
+	$id = $_POST['id'];
 	$qa_score = $_POST['qa_score'];
 	$qa_start_date = $_POST['qa_start_date'];		
 	$qa_end_date = $_POST['qa_end_date'];
@@ -30,17 +32,15 @@ if ( !empty($_POST)) { // if not first time through
 	
 	// validate user input
 	$valid = true;
+	if (empty($id)) {
+		$idError = 'Please enter person ID';
+		$valid = false;
+	}
 
-	// person id is provided in the URL
-	$id = $_GET['per_id'];
-	$quiz_id = '2';
-
-	// The rest are provided by user
 	if (empty($qa_score)) {
 		$per_idError = 'Please enter Quiz score';
 		$valid = false;
 	} 		
-	
 	if (empty($qa_start_date)) {
 		$per_idError = 'Please enter Start Date';
 		$valid = false;
@@ -66,10 +66,11 @@ if ( !empty($_POST)) { // if not first time through
 		$q = $pdo->prepare($sql);
 		$q->execute(array($id,$quiz_id,$qa_score,$qa_start_date,$qa_end_date, $qa_start_time, $qa_end_time));
 		Database::disconnect();
-		header("Location: qm_qa_list.php?per_id=" . $id);
+		//header("Location: qm_quiz.php");
+		header("Location: qm_qa_list.php?per_id=$data['id']");
 	}
 }
-
+//include '../../database/header.php'; //html <head> section
 ?>
 <body style ="background-color: lightblue !important";>
 	
@@ -82,18 +83,16 @@ if ( !empty($_POST)) { // if not first time through
 			<div>
 				<h5>What Quiz would you like to attempt?</h5>
 				 <select name="sometext" multiple="multiple">
-					<option>Need</option>
-					<option>The</option>
-					<option>Quiz</option>
-					<option>IDs</option>
-					<option>From Somewhere else</option>
+					<option>Quiz1</option>
+					<option>Quiz2</option>
+					<option>Quiz3</option>
+					<option>Quiz4</option>
+					<option>Quiz5</option>
 				 </select>
 			</div>
 	
-	
 			<form class="form-horizontal" action="qm_qa_create.php" method="post">
 			
-		<!--	NO NEED FOR THIS NOW. PERSON ID SHOULD BE PROVIDED.	
 				<div class="control-group <?php echo !empty($idError)?'error':'';?>">
 					<label class="control-label">Person ID</label>
 					<div class="controls">
@@ -103,7 +102,7 @@ if ( !empty($_POST)) { // if not first time through
 						<?php endif; ?>
 					</div>
 				</div>
-	-->
+				
 				<div class="control-group <?php echo !empty($qa_scoreError)?'error':'';?>">
 					<label class="control-label">Quiz Score</label>
 					<div class="controls">
@@ -158,7 +157,7 @@ if ( !empty($_POST)) { // if not first time through
 		
 				<div class="form-actions">
 					<button type="submit" class="btn btn-success">Create</button>
-					<a class="btn" href="qm_qa_list.php">Back</a>
+					<a class="btn" href="qm_qa_list.php?per_id=$data['id']">Back</a>
 				</div>
 				
 			</form>
