@@ -7,13 +7,14 @@
  */
  
 include '/home/gpcorser/public_html/database/header.php'; // html <head> section
-include '/home/gpcorser/public_html/database/session.php';
+include 'session.php';
 require '/home/gpcorser/public_html/database/database.php';
 
 $id = $_GET['id'];
 
 if ( !empty($_POST)) { 
 	$id = $_POST['id'];
+	$ques_id = $_POST['ques_id'];
 	
 	$pdo = Database::connect();
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -21,7 +22,7 @@ if ( !empty($_POST)) {
 	$q = $pdo->prepare($sql);
 	$q->execute(array($id));
 	Database::disconnect();
-	header("Location: qm_options_list.php");
+	header("Location: qm_option_list.php?ques_id=" . $_SESSION['ques_id']);
 	
 	
 	
@@ -52,7 +53,7 @@ else { // otherwise, pre-populate fields to show data to be deleted
 				<h3>Delete Option</h3>
 			</div>
 			
-			<form class="form-horizontal" action="qm_options_list.php" method="post">
+			<form class="form-horizontal" action="qm_option_delete.php?id=<?php echo $_GET['id'];?>" method="post">
 				<input type="hidden" name="id" value="<?php echo $id;?>"/>
 				<p class="alert alert-error">Are you sure you want to delete ?</p>
 				<div class="form-actions">
