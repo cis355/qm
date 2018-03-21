@@ -83,6 +83,8 @@ Database::disconnect();
 
 		</div> <!-- end div: class="container" -->
 		
+		<p>Wyatt Towne - wmtowne</p>
+		
 	</body> 
 	
 </html>

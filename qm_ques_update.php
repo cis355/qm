@@ -10,8 +10,9 @@
 	// header('Location: login.php');     // go to login page
 	// exit;
 // }
-	
+	include 'session.php';
 require '/home/gpcorser/public_html/database/database.php';
+include '/home/gpcorser/public_html/database/header.php';
 
 $id = $_GET['id'];
 
@@ -20,13 +21,13 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 	# initialize/validate (same as file: fr_per_create.php)
 
 	// initialize user input validation variables
-	$quiz_idError = null;
+	
 	$ques_nameError = null;
 	$ques_textError = null;
 	
 	
 	// initialize $_POST variables
-	$quiz_id = $_POST['quiz_id'];
+	$quiz_id = $_SESSION['quiz_id'];
 	$ques_name = $_POST['ques_name'];
 	$ques_text = $_POST['ques_text'];
 	
@@ -40,10 +41,7 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 
 	// validate user input
 	$valid = true;
-	if (empty($quiz_id)) {
-		$quiz_idError = 'Please enter Quiz ID';
-		$valid = false;
-	}
+	
 	if (empty($ques_name)) {
 		$ques_nameError = 'Please enter Question Name';
 		$valid = false;
@@ -66,7 +64,7 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 			$q = $pdo->prepare($sql);
 			$q->execute(array($quiz_id, $ques_name, $ques_text, $id));
 			Database::disconnect();
-			header("Location: qm_ques_list.php");
+			header("Location: qm_ques_list.php?quiz_id=" . $quiz_id);
 		}
 		else { // otherwise, update all fields EXCEPT file fields
 			$pdo = Database::connect();
@@ -75,7 +73,7 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 			$q = $pdo->prepare($sql);
 			$q->execute(array($quiz_id, $ques_name, $ques_text, $id));
 			Database::disconnect();
-			header("Location: qm_ques_list.php");
+			header("Location: qm_ques_list.php?quiz_id=" . $quiz_id);
 		}
 	}
 } else { // if $_POST NOT filled then pre-populate the form
@@ -96,10 +94,7 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <link   href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-	<link rel="icon" href="cardinal_logo.png" type="image/png" />
+    
 	<style>
 	.footer {
 		position: fixed;
@@ -125,16 +120,7 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 			
 				
 
-				<div class="control-group <?php echo !empty($quiz_idError)?'error':'';?>">
-					<label class="control-label"><h6>Quiz ID</h6></label>
-					<div class="controls">
-						<input style="background-color: lightgrey !important; width: 40%;" name="quiz_id" type="text"  placeholder="Quiz ID" value="<?php echo !empty($quiz_id)?$quiz_id:'';?>">
-						<?php if (!empty($quiz_idError)): ?>
-							<span class="help-inline"><?php echo $quiz_idError;?></span>
-						<?php endif; ?>
-						
-					</div>
-				</div>
+				
 				
 				<div class="control-group <?php echo !empty($ques_name)?'error':'';?>">
 					<label class="control-label"><h6>Question Name</h6></label>
@@ -160,7 +146,7 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 				
 				<div class="form-actions">
 					<button type="submit" class="btn btn-success">Update</button>
-					<a class="btn btn-primary" href="qm_ques_list.php">Back</a>
+					<a class="btn btn-primary" href="qm_ques_list.php?quiz_id=<?php echo $quiz_id; ?>">Back</a>
 				</div>
 				
 			</form>

@@ -5,9 +5,10 @@
  * description : Question list
  * ---------------------------------------------------------------------------
  */
-
-include 'session.php';
-include '/home/gpcorser/public_html/database/header.php';
+ include 'session.php';
+ include '/home/gpcorser/public_html/database/header.php';
+ include '/home/gpcorser/public_html/database/database.php';
+ $_SESSION['quiz_id'] = $_GET['quiz_id'];
 ?>
 
 <body style="background-color: lightblue !important";>
@@ -17,7 +18,7 @@ include '/home/gpcorser/public_html/database/header.php';
 		</div>
 		<div class="row">
 			<p>
-				<a href="qm_ques_create.php" class="btn btn-primary">Add Question</a>
+				<a href="qm_ques_create.php?" class="btn btn-primary">Add Question</a>
 
 			</p>
 				
@@ -33,7 +34,7 @@ include '/home/gpcorser/public_html/database/header.php';
 				</thead>
 				<tbody>
 					<?php 
-						include '/home/gpcorser/public_html/database/database.php';
+						//include '/home/gpcorser/public_html/database/database.php';
 						$pdo = Database::connect();
 						$sql = 'SELECT * FROM qm_questions WHERE quiz_id=' . $_GET['quiz_id'] ;
 						foreach ($pdo->query($sql) as $row) {
