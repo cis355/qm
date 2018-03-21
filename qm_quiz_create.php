@@ -81,7 +81,7 @@ if ( !empty($_POST)) { // if not first time through
 				
 				<div class="form-actions">
 					<button type="submit" class="btn btn-success">Create</button>
-					<a class="btn" href="qm_quiz_list.php?per_id=<?php $_SESSION['per_id'] ?>">Back</a>
+					<a class="btn" href="qm_quiz_list.php?per_id=<?php echo $_SESSION['per_id']; ?>">Back</a>
 				</div>
 				
 			</form>
