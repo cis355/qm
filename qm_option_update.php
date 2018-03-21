@@ -99,16 +99,6 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 			<form class="form-horizontal" action="qm_option_update.php?id=<?php echo $_GET['id'];?>" method="post" enctype="multipart/form-data">
 			
 				
-
-				 <div class="control-group <?php echo !empty($ques_idError)?'error':'';?>">
-					<label class="control-label">Ques ID</label>
-					<div class="controls">
-						<input style="background-color: lightgrey !important" name="ques_id" type="text"  placeholder="Ques ID" value="<?php echo !empty($ques_id)?$ques_id:'';?>">
-						<?php if (!empty($ques_idError)): ?>
-							<span class="help-inline"><?php echo $ques_idError;?></span>
-						<?php endif; ?>
-					</div>
-				</div>
 				
 				<div class="control-group <?php echo !empty($opt_textError)?'error':'';?>">
 					<label class="control-label">Option Text</label>
