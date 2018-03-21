@@ -67,7 +67,7 @@ if ( !empty($_POST)) { // if not first time through
 		$q->execute(array($id,$quiz_id,$qa_score,$qa_start_date,$qa_end_date, $qa_start_time, $qa_end_time));
 		Database::disconnect();
 		//header("Location: qm_quiz.php");
-		header("Location: qm_qa_list.php?per_id=$data['id']");
+		header("Location: qm_qa_list.php");
 	}
 }
 //include '../../database/header.php'; //html <head> section
@@ -157,7 +157,7 @@ if ( !empty($_POST)) { // if not first time through
 		
 				<div class="form-actions">
 					<button type="submit" class="btn btn-success">Create</button>
-					<a class="btn" href="qm_qa_list.php?per_id=$data['id']">Back</a>
+					<a class="btn" href="qm_qa_list.php">Back</a>
 				</div>
 				
 			</form>
