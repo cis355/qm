@@ -103,7 +103,7 @@ if ( !empty($_POST)) { // if not first time through
 				<div class="form-actions">
 					<br><br>
 					<button type="submit" class="btn btn-success">Create</button>
-					<a class="btn btn-secondary" href="qm_option_list.php">Back</a>
+					<a class="btn btn-secondary" href="qm_option_list.php?ques_id=<?php echo $ques_id;?>">Back</a>
 				</div>
 
 			</form>
