@@ -57,7 +57,7 @@ else { // otherwise, pre-populate fields to show data to be deleted
 			<p class="alert alert-error">Are you sure you want to delete?</p>
 			<div class="form-actions">
 				<button type="submit" class="btn btn-danger">Yes</button>
-				<a class="btn" href="qm_qa_list.php">No</a>
+				<a class="btn" href="qm_qa_list.php?per_id=$per_id">No</a>
 			</div>
 		</form>
 		

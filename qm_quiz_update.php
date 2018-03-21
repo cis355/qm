@@ -52,18 +52,18 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 		if($fileSize > 0) { // if file was updated, update all fields
 			$pdo = Database::connect();
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = "UPDATE qm_quizzes  set quiz_id = ?, ques_name = ?, ques_text = ? WHERE id = ?";
+			$sql = 'UPDATE qm_quizzes  set quiz_name = ?, quiz_description = ? WHERE id = ?';
 			$q = $pdo->prepare($sql);
-			$q->execute(array($quiz_name, $qm_persons, $ques_text, $id));
+			$q->execute(array($quiz_name, $ques_description));
 			Database::disconnect();
-			header("Location: qm_ques_list.php");
+			header("Location: qm_ques_list.php?per_id='.$_SESSION[per_id].'");
 		}
 		else { // otherwise, update all fields EXCEPT file fields
 			$pdo = Database::connect();
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = "UPDATE qm_quizzes  set quiz_id = ?, ques_name = ?, ques_text = ? WHERE id = ?";
+			$sql = 'UPDATE qm_quizzes  set quiz_name = ?, quiz_description = ? WHERE id = ?';
 			$q = $pdo->prepare($sql);
-			$q->execute(array($quiz_name, $qm_persons, $ques_text, $id));
+			$q->execute(array($quiz_name, $ques_description));
 			Database::disconnect();
 			header("Location: qm_ques_list.php");
 		}

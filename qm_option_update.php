@@ -57,7 +57,7 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 			$q = $pdo->prepare($sql);
 			$q->execute(array($ques_id, $opt_text, $opt_isCorrect, $id));
 			Database::disconnect();
-			header("Location: qm_option_list.php?ques_id=" . ques_id);
+			header("Location: qm_option_list.php?ques_id=" . $_SESSION['ques_id']);
 		}
 		else { // otherwise, update all fields EXCEPT file fields
 			$pdo = Database::connect();
@@ -66,7 +66,7 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 			$q = $pdo->prepare($sql);
 			$q->execute(array($ques_id, $opt_text, $opt_isCorrect, $id));
 			Database::disconnect();
-			header("Location: qm_option_list.php?ques_id=" . ques_id);
+			header("Location: qm_option_list.php?ques_id=" . $ques_id);
 		}
 	}
 } else { // if $_POST NOT filled then pre-populate the form
@@ -96,7 +96,7 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 				<h3>Update Options</h3>
 			</div>
 	
-			<form class="form-horizontal" action="qm_option_list.php?ques_id=<?php echo $_GET['ques_id'];?>" method="post" enctype="multipart/form-data">
+			<form class="form-horizontal" action="qm_option_update.php?id=<?php echo $_GET['id'];?>" method="post" enctype="multipart/form-data">
 			
 				
 
