@@ -26,7 +26,7 @@ if ( !empty($_POST)) { // if user clicks "yes" (sure to delete), delete record
 	$q = $pdo->prepare($sql);
 	$q->execute(array($id));
 	Database::disconnect();
-	header("Location: qm_quiz_list.php");
+header('Location: qm_quiz_list.php?per_id='.$_SESSION['per_id']);
 	
 } 
 else { // otherwise, pre-populate fields to show data to be deleted
@@ -60,7 +60,7 @@ else { // otherwise, pre-populate fields to show data to be deleted
 			<p class="alert alert-error">Are you sure you want to delete ?</p>
 			<div class="form-actions">
 				<button type="submit" class="btn btn-danger">Yes</button>
-				<a class="btn" href="qm_quiz_list.php">No</a>
+				<a class="btn" href="qm_quiz_list.php?">No</a>
 			</div>
 		</form>
 		
