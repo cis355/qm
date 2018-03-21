@@ -30,7 +30,9 @@ include '/home/gpcorser/public_html/database/header.php';
 						<th>Quiz Number</th>
 						<th>Question Name</th>
 						<th>Question Text</th>
-						<th>Action</th>
+						<th>Question Actions</th>
+						<th>Question Options</th>
+						<th>Question Comments</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -44,18 +46,23 @@ include '/home/gpcorser/public_html/database/header.php';
 							echo '<td>'. trim($row['quiz_id']) . '</td>';
 							echo '<td>'. trim($row['ques_name']) . '</td>';
 							echo '<td>'. trim($row['ques_text']) . '</td>';
-							echo '<td width=340>';
+							echo '<td width=240>';
 								
-							    echo '<a class="btn" href="qm_ques_list_read.php?id='.$row['id'].'">Read</a>';
+							    echo '<a class="btn btn-primary" href="qm_ques_list_read.php?id='.$row['id'].'">Read</a>';
                                 echo ' ';
                                 echo '<a class="btn btn-success" href="qm_ques_update.php?id='.$row['id'].'">Update</a>';
                                 echo ' ';
                                 echo '<a class="btn btn-danger" href="qm_ques_delete.php?id='.$row['id'].'">Delete</a>';
-								echo ' ';
-								echo '<a class="btn" href="qm_option_list.php?ques_id='.$row['id'] .'">Options</a>';
-								echo ' ';
-								echo '<a class="btn" href="gpcorser.php?ques_id=' . $row['id'] .'">Comments</a>';
                             echo '</td>';
+							
+							
+							echo '<td>';
+								echo '<a class="btn" href="qm_option_list.php?ques_id='.$row['id'] .'">Question Options</a>';
+							echo '</td>';
+							echo '<td>';
+								echo '<a class="btn" href="gpcorser.php?ques_id=' . $row['id'] .'">Question Comments</a>';
+                            echo '</td>';
+							
 							echo '</tr>';
 								
 						}
@@ -64,9 +71,9 @@ include '/home/gpcorser/public_html/database/header.php';
 					?>
 				</tbody>
 			</table>
-			
+			<br /><p>Cody Frost, clfrost@svsu.edu</p>
     	</div>
     </div> <!-- /container -->
-	<p>Cody Frost, clfrost</p>
+	
   </body>
 </html>
