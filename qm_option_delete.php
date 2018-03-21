@@ -52,12 +52,12 @@ else { // otherwise, pre-populate fields to show data to be deleted
 				<h3>Delete Option</h3>
 			</div>
 			
-			<form class="form-horizontal" action="qm_option_list.php" method="post">
+			<form class="form-horizontal" action="qm_options_list.php" method="post">
 				<input type="hidden" name="id" value="<?php echo $id;?>"/>
 				<p class="alert alert-error">Are you sure you want to delete ?</p>
 				<div class="form-actions">
 					<button type="submit" class="btn btn-danger">Yes</button>
-					<a class="btn" href="qm_option_list.php">No</a>
+					<a class="btn" href="qm_option_list.php?ques_id=<?php echo $ques_id;?>">No</a>
 				</div>
 			</form>
 			
