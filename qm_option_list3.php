@@ -14,17 +14,18 @@
 -->
 
 <?php
-/*
-session_start();
-if(!isset($_SESSION["qm_person_id"])){ // if "user" not set,
+include '/home/gpcorser/public_html/database/header.php'; // html <head> section
+include 'session.php';
+//session_start();
+if(!isset($_SESSION["per_id"])){ // if "user" not set,
 	session_destroy();
-	header('Location: login.php');     // go to login page
+	//header('Location: login.php');     // go to login page
 	exit;
 }
-$sessionid = $_SESSION['qm_person_id'];
-*/
+$sessionid = $_SESSION['per_id'];
+$id = $_GET['id'];
 
-include '/home/gpcorser/public_html/database/header.php'; // html <head> section
+
 ?>
 
 
