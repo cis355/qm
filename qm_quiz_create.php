@@ -15,7 +15,7 @@ include 'session.php';
 require '/home/gpcorser/public_html/database/database.php';
 include '/home/gpcorser/public_html/database/header.php'; //html <head> section
 if ( !empty($_POST)) { // if not first time through
-
+	session_start();
 	// initialize user input validation variables
 	$quiz_nameError = null;
 	$quiz_descriptionError = null;
@@ -81,7 +81,7 @@ if ( !empty($_POST)) { // if not first time through
 				
 				<div class="form-actions">
 					<button type="submit" class="btn btn-success">Create</button>
-					<a class="btn" href="qm_quiz_list.php">Back</a>
+					<a class="btn" href="qm_quiz_list.php?per_id=<?php $_SESSION['per_id'] ?>">Back</a>
 				</div>
 				
 			</form>
