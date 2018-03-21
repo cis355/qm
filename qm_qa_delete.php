@@ -45,7 +45,7 @@ else { // otherwise, pre-populate fields to show data to be deleted
 
 <!--<link rel="icon" href="ohno.jpg" type="image/jpg" />-->
 
-<body>
+<body style="background-color: lightblue !important";>
     <div class="container">
 		<div class="row">
 			<h3><br><br>Delete Quiz Attempt</h3>
