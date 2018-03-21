@@ -25,8 +25,6 @@ if ( !empty($_POST)) { // if not first time through
 	$quiz = $_POST['quiz']; 
 	
 	
-	// initialize $_POST variables
-	$id = $_POST['id'];
 	$qa_score = $_POST['qa_score'];
 	$qa_start_date = $_POST['qa_start_date'];		
 	$qa_end_date = $_POST['qa_end_date'];
@@ -35,24 +33,18 @@ if ( !empty($_POST)) { // if not first time through
 	
 	// validate user input
 	$valid = true;
-	if (empty($id)) {
-		$idError = 'Please enter person ID';
-		$valid = false;
-	}
 
-<<<<<<< HEAD
 	// person id is provided in the URL
 	$id = $_GET['per_id'];
 	$per_id = $id;
 	$quiz_id = '2';
 
 	// The rest are provided by user
-=======
->>>>>>> d11bd58599fd34f579f31805f85a58c820286969
 	if (empty($qa_score)) {
 		$per_idError = 'Please enter Quiz score';
 		$valid = false;
 	} 		
+	
 	if (empty($qa_start_date)) {
 		$per_idError = 'Please enter Start Date';
 		$valid = false;
@@ -79,15 +71,10 @@ if ( !empty($_POST)) { // if not first time through
 		$q = $pdo->prepare($sql);
 		$q->execute(array($id,$quiz_id,$qa_score,$qa_start_date,$qa_end_date, $qa_start_time, $qa_end_time));
 		Database::disconnect();
-<<<<<<< HEAD
 	header($location);
-=======
-		//header("Location: qm_quiz.php");
-		header("Location: qm_qa_list.php");
->>>>>>> d11bd58599fd34f579f31805f85a58c820286969
 	}
 }
-//include '../../database/header.php'; //html <head> section
+
 ?>
 <body style ="background-color: lightblue !important";>
 	
@@ -99,26 +86,19 @@ if ( !empty($_POST)) { // if not first time through
 			</div>
 			<div>
 				<h5>What Quiz would you like to attempt?</h5>
-<<<<<<< HEAD
 				 <select name="quiz" multiple="multiple">
-					<option value = "1" selected> &nbsp 1  &nbsp </option>
-					<option value = "2"> &nbsp 2 &nbsp </option>
-					<option value = "3"> &nbsp 3 &nbsp </option>
-					<option value = "4"> &nbsp 4 &nbsp </option>
-					<option value = "5"> &nbsp 5 &nbsp </option>
-=======
-				 <select name="sometext" multiple="multiple">
-					<option>Quiz1</option>
-					<option>Quiz2</option>
-					<option>Quiz3</option>
-					<option>Quiz4</option>
-					<option>Quiz5</option>
->>>>>>> d11bd58599fd34f579f31805f85a58c820286969
+					<option value = "1" selected>&nbsp 1 &nbsp </option>
+					<option value = "2">&nbsp 2 &nbsp </option>
+					<option value = "3">&nbsp 3 &nbsp </option>
+					<option value = "4">&nbsp 4 &nbsp </option>
+					<option value = "5">&nbsp 5 &nbsp </option>
 				 </select>
 			</div>
 	
+	
 			<form class="form-horizontal" action="qm_qa_create.php" method="post">
 			
+		<!--	NO NEED FOR THIS NOW. PERSON ID SHOULD BE PROVIDED.	
 				<div class="control-group <?php echo !empty($idError)?'error':'';?>">
 					<label class="control-label">Person ID</label>
 					<div class="controls">
@@ -128,7 +108,7 @@ if ( !empty($_POST)) { // if not first time through
 						<?php endif; ?>
 					</div>
 				</div>
-				
+	-->
 				<div class="control-group <?php echo !empty($qa_scoreError)?'error':'';?>">
 					<label class="control-label">Quiz Score</label>
 					<div class="controls">
