@@ -18,7 +18,7 @@ if ( !empty($_POST)) { // if not first time through
 	$opt_isCorrectError = null;
 
 	// initialize $_POST variables
-	$ques_id = $_POST['ques_id'];
+	$ques_id = $_SESSION['ques_id'];
 	$opt_text = $_POST['opt_text'];
 	$opt_isCorrect = $_POST['opt_isCorrect'];
 
