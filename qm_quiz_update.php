@@ -10,7 +10,7 @@
 	// header('Location: login.php');     // go to login page
 	// exit;
 // }
-	
+include session.php;	
 require '/home/gpcorser/public_html/database/database.php';
 $id = $_GET['id'];
 if ( !empty($_POST)) { // if $_POST filled then process the form
