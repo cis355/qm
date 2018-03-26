@@ -1,14 +1,32 @@
 <?php 
 include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 include '/home/gpcorser/public_html/database/database.php'; // 
+include 'session.php';
 
 class Foo { 
-    public $aMemberVar = 'aMemberVar Member Variable'; 
-    public $aFuncName = 'aMemberFunc'; 
+    //public $aMemberVar = 'aMemberVar Member Variable'; 
+    //public $aFuncName = 'aMemberFunc'; 
     
-    function aMemberFunc() { 
-        print 'Inside `aMemberFunc()`'; 
-    } 
+    //function aMemberFunc() { 
+        //print 'Inside `aMemberFunc()`'; 
+    //} 
+	
+	function perRead($id){ //person read
+		//get info from database
+		//$id = $_GET['id'];
+			$pdo = Database::connect();
+			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			$sql = "SELECT * FROM qm_persons where id = ?";
+			$q = $pdo->prepare($sql);
+			$q->execute(array($id));
+			$data = $q->fetch(PDO::FETCH_ASSOC);
+			Database::disconnect();
+		
+		//dsplay first part of body section
+		echo '<body style="background-color: lightblue !important"; > <div class="container"> <div class="span10 offset1"> <div class="row"> <h3>Person Details</h3> </div><div class="form-horizontal" > <div class="control-group"> <label class="control-label">First Name: </label>';
+		
+		echo ' ' . $data['fname'].'<br/>';
+	}
 	
 	function perList(){ //person list
 	
@@ -52,5 +70,6 @@ class Foo {
 
 // $foo->aMemberFunc();
 
-Foo::perList();
+if($_GET['operation']==1) {Foo::perRead($_GET['id']);}
+else {Foo::perList();}
 ?> 
