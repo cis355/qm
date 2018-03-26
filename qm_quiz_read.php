@@ -15,7 +15,7 @@
     }
      
     if ( null==$id ) {
-        header("Location: qm_quiz_list.php?per_id=" . $_SESSION['per_id']. "");
+        header("Location: qm_quiz_list.php?per_id=" . $_SESSION['per_id'] . "");
     } else {
         $pdo = Database::connect();
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -65,7 +65,7 @@
 					</div>
 				</div>
 				    <div class="form-actions">
-						  <a class="btn" href="qm_quiz_list.php?per_id=" <?php echo $_SESSION['per_id']?>">Back</a>
+						  <a class="btn" href="qm_quiz_list.php?per_id=<?php echo $_SESSION['per_id']?>">Back</a>
 				   </div>
 		
     </div> <!-- end div: class="container" -->
