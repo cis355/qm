@@ -49,7 +49,11 @@ require '/home/gpcorser/public_html/database/database.php';
         echo '<td>'. trim($row['qa_start_time']) . '</td>';
         echo '<td>'. trim($row['qa_end_date']) . '</td>';
         echo '<td>'. trim($row['qa_end_time']) . '</td>';
+<<<<<<< HEAD
         echo '<td>'.'<a href="qm_qa_read.php?attempt_id='. trim($row['id']).'" class="btn btn-success">Read</a> <a href="qm_qa_delete.php?attempt_id=' . trim($row['id']) . '" class="btn btn-danger">Delete</a>' . '</td>';
+=======
+        echo '<td>'.'<a href="qm_qa_read.php?attempt_id='. trim($row['id']).'&per_id=' . $per_id .'" class="btn btn-success">Read</a> <a href="qm_qa_update.php?attempt_id=' . trim($row['id']) . '&per_id='. $per_id . '" class="btn btn-warning">Update</a> <a href="qm_qa_delete.php?attempt_id=' . trim($row['id']) . '&per_id='. $per_id . '" class="btn btn-danger">Delete</a> ' . '</td>';
+>>>>>>> cf616e2da1cd47a0107e80387ef280d64c851148
         echo '</tr>';
       }
       echo '</tbody></table> </div><p>Made by: Brandon Gage bgage@svsu.edu</p>';

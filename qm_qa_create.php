@@ -12,6 +12,12 @@ require '/home/gpcorser/public_html/database/header.php'; //html <head> section
 require '/home/gpcorser/public_html/database/database.php';
 
 
+// person id is provided in the URL
+$id = $_GET['per_id'];
+$per_id = $id;
+
+$per_id = $_GET['per_id'];
+
 if ( !empty($_POST)) { // if not first time through
 	// initialize user input validation variables
 	$idError = null;
@@ -34,9 +40,6 @@ if ( !empty($_POST)) { // if not first time through
 	// validate user input
 	$valid = true;
 
-	// person id is provided in the URL
-	$id = $_GET['per_id'];
-	$per_id = $id;
 	$quiz_id = '2';
 
 	// The rest are provided by user
@@ -62,7 +65,7 @@ if ( !empty($_POST)) { // if not first time through
 		$valid = false;
 	} 			
 	$i = 9;
-	$location = "Location: qm_qa_list.php?per_id=$id";
+	$location = "Location: qm_qa_list.php?per_id=$per_id";
 	// insert data
 	if ($valid) {
 		$pdo = Database::connect();
@@ -71,7 +74,7 @@ if ( !empty($_POST)) { // if not first time through
 		$q = $pdo->prepare($sql);
 		$q->execute(array($id,$quiz_id,$qa_score,$qa_start_date,$qa_end_date, $qa_start_time, $qa_end_time));
 		Database::disconnect();
-	header($location);
+	header("Location: qm_qa_list.php?per_id=$per_id");
 	}
 }
 
@@ -96,7 +99,7 @@ if ( !empty($_POST)) { // if not first time through
 			</div>
 	
 	
-			<form class="form-horizontal" action="qm_qa_create.php" method="post">
+			<form class="form-horizontal" action="qm_qa_create.php?per_id=<?php echo $per_id;?>" method="post">
 			
 		<!--	NO NEED FOR THIS NOW. PERSON ID SHOULD BE PROVIDED.	
 				<div class="control-group <?php echo !empty($idError)?'error':'';?>">

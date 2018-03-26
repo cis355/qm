@@ -46,7 +46,7 @@ include '/home/gpcorser/public_html/database/header.php';
 							echo '<td>'. trim($row['quiz_id']) . '</td>';
 							echo '<td>'. trim($row['ques_name']) . '</td>';
 							echo '<td>'. trim($row['ques_text']) . '</td>';
-							echo '<td width=240>';
+							echo '<td width=245>';
 								
 							    echo '<a class="btn btn-primary" href="qm_ques_list_read.php?id='.$row['id'].'">Read</a>';
                                 echo ' ';
@@ -60,7 +60,7 @@ include '/home/gpcorser/public_html/database/header.php';
 								echo '<a class="btn" href="qm_option_list.php?ques_id='.$row['id'] .'">Question Options</a>';
 							echo '</td>';
 							echo '<td>';
-								echo '<a class="btn" href="gpcorser.php?ques_id=' . $row['id'] .'">Question Comments</a>';
+								echo '<a class="btn" href="qm_comments.php?ques_id=' . $row['id'] .'">Question Comments</a>';
                             echo '</td>';
 							
 							echo '</tr>';
