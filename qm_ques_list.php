@@ -60,7 +60,7 @@ include '/home/gpcorser/public_html/database/header.php';
 								echo '<a class="btn" href="qm_option_list.php?ques_id='.$row['id'] .'">Question Options</a>';
 							echo '</td>';
 							echo '<td>';
-								echo '<a class="btn" href="gpcorser.php?ques_id=' . $row['id'] .'">Question Comments</a>';
+								echo '<a class="btn" href="qm_comments.php?ques_id=' . $row['id'] .'">Question Comments</a>';
                             echo '</td>';
 							
 							echo '</tr>';
