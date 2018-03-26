@@ -15,7 +15,7 @@
 
 <?php
 include '/home/gpcorser/public_html/database/header.php'; // html <head> section
-include 'session.php';
+/*include 'session.php';
 //session_start();
 if(!isset($_SESSION["per_id"])){ // if "user" not set,
 	session_destroy();
@@ -23,7 +23,7 @@ if(!isset($_SESSION["per_id"])){ // if "user" not set,
 	exit;
 }
 $sessionid = $_SESSION['per_id'];
-$id = $_GET['id'];
+$id = $_GET['id'];*/
 
 
 ?>
