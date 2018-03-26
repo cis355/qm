@@ -25,6 +25,11 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 	$lname    = $_POST['lname'];
 	$email    = $_POST['email'];
 	$password = $_POST['password'];
+	/* nagaffne:
+	 * added the following line of code as the previous version caused a bug
+	 * the password was being stored as plain text into database but being checked as if hash
+	 */
+    $password_hash = MD5($password);
 
 	// validate user input
 	$valid = true;
@@ -62,7 +67,9 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$sql = "UPDATE qm_persons  set fname = ?, lname = ?, email = ?, password_hash = ? WHERE id = ?";
 			$q = $pdo->prepare($sql);
-			$q->execute(array($fname, $lname, $email, $password, $id));
+			//$q->execute(array($fname, $lname, $email, $password, $id));
+			//nagaffne: changed the following line to send the $password_hash to the database instead of $password
+			$q->execute(array($fname, $lname, $email, $password_hash, $id));
 			Database::disconnect();
 			header("Location: qm_per_list.php");
   }
