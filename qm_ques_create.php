@@ -21,7 +21,7 @@ if ( !empty($_POST)) { // if not first time through
 	
 	// initialize $_POST variables
 	//$id = $_POST['id'];
-	$qid = $_SESSION['quiz_id'];
+	$quiz_id = $_SESSION['quiz_id'];
 	
 	$qName = $_POST['ques_name'];
 	$qText = $_POST['ques_text'];		
@@ -47,9 +47,9 @@ if ( !empty($_POST)) { // if not first time through
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		$sql = "INSERT INTO qm_questions (quiz_id, ques_name, ques_text) values(?, ?, ?)";
 		$q = $pdo->prepare($sql);
-		$q->execute(array($qid,$qName,$qText));
+		$q->execute(array($quiz_id,$qName,$qText));
 		Database::disconnect();
-		header("Location: qm_ques_list.php?quiz_id=" . $qid);
+		header("Location: qm_ques_list.php?quiz_id=" . $quiz_id);
 	}
 }
 //include '../../database/header.php'; //html <head> section
@@ -62,10 +62,11 @@ if ( !empty($_POST)) { // if not first time through
 		
 			<div class="row">
 				<h3>Add New Question</h3>
+				<h3><?php echo $quiz_id . "this"; ?></h3>
 				
 			</div>
 	
-			<form class="form-horizontal" action="qm_ques_list.php" method="post">						  
+			<form class="form-horizontal" action="qm_ques_create.php" method="post">						  
 				<div class="control-group <?php echo !empty($ques_nameError)?'error':'';?>">
 					<label class="control-label">Question Name</label>
 					<div class="controls">
@@ -88,7 +89,7 @@ if ( !empty($_POST)) { // if not first time through
 				
 				<div class="form-actions">
 					<button type="submit" class="btn btn-success">Create</button>
-					<a class="btn" href="qm_ques_list.php?quiz_id=<?php echo $qid;?>">Back</a>
+					<a class="btn" href="qm_ques_list.php?quiz_id=<?php echo $_SESSION['quiz_id'];?>">Back</a>
 				</div>
 				
 			</form>
