@@ -76,7 +76,7 @@ Database::disconnect();
 					</div>     
 					
 					<div class="form-actions">
-						<a class="btn btn-success" href="qm_ques_list.php?$data['quiz_id']">Back</a>
+						<a class="btn btn-success" href="qm_ques_list.php?quiz_id=<?php echo $data['quiz_id'];?>&per_id=<?php echo $data['per_id'];?>">Back</a>
 					</div>
 				
 			</div>  <!-- end div: class="form-horizontal" 
