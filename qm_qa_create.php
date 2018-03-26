@@ -11,13 +11,13 @@ include 'session.php';
 require '/home/gpcorser/public_html/database/header.php'; //html <head> section
 require '/home/gpcorser/public_html/database/database.php';
 
-<<<<<<< HEAD
+
 // person id is provided in the URL
 $id = $_GET['per_id'];
 $per_id = $id;
-=======
+
 $per_id = $_GET['per_id'];
->>>>>>> b154cfebf0b17c4c3b4f9965568a2a7f08016eb8
+
 if ( !empty($_POST)) { // if not first time through
 	// initialize user input validation variables
 	$idError = null;
