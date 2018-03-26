@@ -46,7 +46,7 @@ include '/home/gpcorser/public_html/database/header.php';
 							echo '<td>'. trim($row['quiz_id']) . '</td>';
 							echo '<td>'. trim($row['ques_name']) . '</td>';
 							echo '<td>'. trim($row['ques_text']) . '</td>';
-							echo '<td width=260>';
+							echo '<td width=245>';
 								
 							    echo '<a class="btn btn-primary" href="qm_ques_list_read.php?id='.$row['id'].'">Read</a>';
                                 echo ' ';
