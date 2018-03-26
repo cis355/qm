@@ -10,21 +10,20 @@
 	// header('Location: login.php');     // go to login page
 	// exit;
 // }
-include session.php;	
+include 'session.php';	
 require '/home/gpcorser/public_html/database/database.php';
 $id = $_GET['id'];
 if ( !empty($_POST)) { // if $_POST filled then process the form
 	# initialize/validate (same as file: fr_per_create.php)
 	// initialize user input validation variables
-	$quiz_idError = null;
-	$ques_nameError = null;
-	$ques_textError = null;
+	$quiz_nameError = null;
+	$quiz_descriptionError = null;
 	
 	
 	// initialize $_POST variables
 	$quiz_id = $_POST['quiz_id'];
-	$ques_name = $_POST['qm_persons'];
-	$ques_text = $_POST['ques_text'];
+	$quiz_name = $_POST['quiz_name'];
+	$quiz_description = $_POST['quiz_description'];
 	
 	//
 	// initialize $_FILES variables
@@ -36,11 +35,11 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 	// validate user input
 	$valid = true;
 	if (empty($quiz_name)) {
-		$quiz_idError = 'Please enter Quiz ID';
+		$quiz_nameError = 'Please enter Quiz ID';
 		$valid = false;
 	}
-	if (empty($qm_persons)) {
-		$ques_nameError = 'Please enter Question Name';
+	if (empty($quiz_description)) {
+		$quiz_descriptionError = 'Please enter Quiz Description';
 		$valid = false;
 	}
 
@@ -52,32 +51,31 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 		if($fileSize > 0) { // if file was updated, update all fields
 			$pdo = Database::connect();
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = 'UPDATE qm_quizzes  set quiz_name = ?, quiz_description = ? WHERE id = ?';
+			$sql = "UPDATE qm_quizzes  set quiz_name = ?, quiz_description = ? WHERE id = ?";
 			$q = $pdo->prepare($sql);
-			$q->execute(array($quiz_name, $ques_description));
+			$q->execute(array($quiz_name, $quiz_description));
 			Database::disconnect();
-			header("Location: qm_ques_list.php?per_id='.$_SESSION[per_id].'");
+			header("Location: qm_quiz_list.php?per_id=".$_SESSION['per_id']);
 		}
 		else { // otherwise, update all fields EXCEPT file fields
 			$pdo = Database::connect();
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = 'UPDATE qm_quizzes  set quiz_name = ?, quiz_description = ? WHERE id = ?';
+			$sql = "UPDATE qm_quizzes  set quiz_name = ?, quiz_description = ? WHERE id = ?";
 			$q = $pdo->prepare($sql);
-			$q->execute(array($quiz_name, $ques_description));
+			$q->execute(array($quiz_name, $quiz_description));
 			Database::disconnect();
-			header("Location: qm_ques_list.php");
+			header("Location: qm_quiz_list.php?per_id=".$_SESSION['per_id']);
 		}
 	}
 } else { // if $_POST NOT filled then pre-populate the form
 	$pdo = Database::connect();
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	$sql = "SELECT * FROM qm_questions where id = ?";
+	$sql = "SELECT * FROM qm_quizzes where id = ?";
 	$q = $pdo->prepare($sql);
 	$q->execute(array($id));
 	$data = $q->fetch(PDO::FETCH_ASSOC);
 	$quiz_name = $data['quiz_name'];
-	$qm_persons = $data['qm_persons'];
-	$ques_text = $data['ques_text'];
+	$quiz_description = $data['quiz_description'];
 	Database::disconnect();
 }
 
@@ -116,22 +114,22 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 			
 			
 				
-				<div class="control-group <?php echo !empty($ques_name)?'error':'';?>">
+				<div class="control-group <?php echo !empty($quiz_name)?'error':'';?>">
 					<label class="control-label"><h6>Quiz Name</h6></label>
 					<div class="controls">
-						<input style="background-color: lightgrey !important; width: 40%;" name="ques_name" type="text"  placeholder="Quiz Name" value="<?php echo !empty($ques_name)?$ques_name:'';?>">
-						<?php if (!empty($ques_nameError)): ?>
-							<span class="help-inline"><?php echo $ques_nameError;?></span>
+						<input style="background-color: lightgrey !important; width: 40%;" name="quiz_name" type="text"  placeholder="Quiz Name" value="<?php echo !empty($quiz_name)?$quiz_name:'';?>">
+						<?php if (!empty($quiz_nameError)): ?>
+							<span class="help-inline"><?php echo $quiz_nameError;?></span>
 						<?php endif; ?>
 					</div>
 				</div>
 				
-				<div class="control-group <?php echo !empty($ques_textError)?'error':'';?>">
+				<div class="control-group <?php echo !empty($quiz_description)?'error':'';?>">
 					<label class="control-label"><h6>Quiz Text</h6></label>
 					<div class="controls">
-						<input style="background-color: lightgrey !important; width: 40%;" name="ques_text" type="text" placeholder="Quiz Text" value="<?php echo !empty($ques_text)?$ques_text:'';?>">
-						<?php if (!empty($ques_textError)): ?>
-							<span class="help-inline"><?php echo $ques_textError;?></span>
+						<input style="background-color: lightgrey !important; width: 40%;" name="quiz_description" type="text" placeholder="Quiz Text" value="<?php echo !empty($quiz_description)?$quiz_description:'';?>">
+						<?php if (!empty($quiz_descriptionError)): ?>
+							<span class="help-inline"><?php echo $quiz_descriptionError;?></span>
 						<?php endif;?>
 					</div>
 				</div>
