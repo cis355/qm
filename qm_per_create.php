@@ -25,11 +25,14 @@ include '/home/gpcorser/public_html/database/header.php'; // html <head> section
         $fnameError = null;
 		$lnameError = null;
         $emailError = null;
+		$passwordError = null;
          
         // keep track post values
         $fname = $_POST['fname'];
 		$lname = $_POST['lname'];
         $email = $_POST['email'];
+		$password = $_POST['password'];
+		$password_hash = MD5($password);
          
         // validate input
         $valid = true;
@@ -49,6 +52,10 @@ include '/home/gpcorser/public_html/database/header.php'; // html <head> section
             $emailError = 'Please enter a valid Email Address';
             $valid = false;
         }
+		if (empty($password)) {
+            $passwordError = 'Please enter password';
+            $valid = false;
+        }
          
          
         // insert data
@@ -56,9 +63,9 @@ include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 			
             $pdo = Database::connect();
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $sql = "INSERT INTO qm_persons (fname, lname, email) values(?, ?, ?)";
+            $sql = "INSERT INTO qm_persons (fname, lname, email, password_hash) values(?, ?, ?, ?)";
             $q = $pdo->prepare($sql);
-            $q->execute(array($fname, $lname, $email));
+            $q->execute(array($fname, $lname, $email, $password_hash));
             Database::disconnect();
             header("Location: qm_per_list.php");
         }
@@ -100,6 +107,16 @@ include '/home/gpcorser/public_html/database/header.php'; // html <head> section
                             <input required name="email" type="text" placeholder="Email Address" value="<?php echo !empty($email)?$email:'';?>">
                             <?php if (!empty($emailError)): ?>
                                 <span class="help-inline"><?php echo $emailError;?></span>
+                            <?php endif;?>
+                        </div>
+                      </div>
+					  <br>
+                      <div class="control-group <?php echo !empty($passwordError)?'error':'';?>">
+                        <label class="control-label">Password</label>
+                        <div class="controls">
+                            <input required name="password" type="password" placeholder="password" value="<?php echo !empty($password)?$password:'';?>">
+                            <?php if (!empty($passwordError)): ?>
+                                <span class="help-inline"><?php echo $passwordError;?></span>
                             <?php endif;?>
                         </div>
                       </div>

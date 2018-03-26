@@ -12,6 +12,7 @@
 include 'session.php';
 include '/home/gpcorser/public_html/database/header.php';
 include '/home/gpcorser/public_html/database/database.php';
+
 if ( !empty($_POST)) { // if not first time through
 	// initialize user input validation variables
   //$idError = null;
@@ -22,6 +23,7 @@ if ( !empty($_POST)) { // if not first time through
 	// initialize $_POST variables
 	//$id = $_POST['id'];
 	$qid = $_SESSION['quiz_id'];
+	echo $qid . "<br />";
 	
 	$qName = $_POST['ques_name'];
 	$qText = $_POST['ques_text'];		
@@ -65,7 +67,7 @@ if ( !empty($_POST)) { // if not first time through
 				
 			</div>
 	
-			<form class="form-horizontal" action="qm_ques_list.php" method="post">						  
+			<form class="form-horizontal" action="qm_ques_create.php" method="post">						  
 				<div class="control-group <?php echo !empty($ques_nameError)?'error':'';?>">
 					<label class="control-label">Question Name</label>
 					<div class="controls">
