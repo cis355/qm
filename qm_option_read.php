@@ -5,7 +5,8 @@
  * description : This reads and displays a selected record.
  * ---------------------------------------------------------------------------
  */
- include  '/home/gpcorser/public_html/database/header.php'; // html <head> section 
+ include  '/home/gpcorser/public_html/database/header.php'; // html <head> section
+ include 'session.php'; 
  require '/home/gpcorser/public_html/database/database.php';
  
  $id = $_GET['id'];
@@ -52,12 +53,12 @@
 						</label>
 					</div>
 					<div class="form-actions">
-						<a class="btn" href="qm_option_list.php">Back</a>
+						<a class="btn" href="qm_option_list.php?ques_id=<?php echo $data['ques_id'];?>">Back</a>
 					</div>
 					
 				
 				</div>	 <!-- end div: class="form-horizontal" -->
-		
+		<p>Shrijesh Siwakoti</p>
     </div> <!-- /container -->
   </body>
 </html>

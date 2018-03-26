@@ -9,34 +9,23 @@
  * quiz_name
  * quiz_description
  * ---------------------------------------------------------------------------
+ * 
  */
- /*
-   session_start();
-if(!isset($_SESSION["fr_person_id"])){ // if "user" not set,
-	session_destroy();
-	header('Location: login.php');     // go to login page
-	exit;
-}
-*/
-//require '../../database/database.php';
+include 'session.php';
 require '/home/gpcorser/public_html/database/database.php';
+include '/home/gpcorser/public_html/database/header.php'; //html <head> section
 if ( !empty($_POST)) { // if not first time through
-
+	session_start();
 	// initialize user input validation variables
-	$per_idError = null;
 	$quiz_nameError = null;
 	$quiz_descriptionError = null;
 	
 	// initialize $_POST variables
-	$pid = $_POST['per_id'];
+	$per_id = $_SESSION['per_id'];
 	$qName = $_POST['quiz_name'];
 	$description = $_POST['quiz_description'];		
 	$valid = true;
-	// validate user input
-	if (empty($pid)) {
-		$per_idError = 'Please enter Person ID';
-		$valid = false;
-	} 		
+	// validate user input 		
 	if (empty($qName)) {
 		$quiz_nameError = 'Please enter Quiz Name';
 		$valid = false;
@@ -52,15 +41,15 @@ if ( !empty($_POST)) { // if not first time through
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		$sql = "INSERT INTO qm_quizzes (per_id, quiz_name, quiz_description) values(?, ?, ?)";
 		$q = $pdo->prepare($sql);
-		$q->execute(array($pid,$qName,$description));
+		$q->execute(array($per_id,$qName,$description));
 		Database::disconnect();
-		header("Location: qm_quiz_list.php");
+		header("Location: qm_quiz_list.php?per_id=" . $per_id);	
 	}
 }
 //include '../../database/header.php'; //html <head> section
-include '/home/gpcorser/public_html/database/header.php'; //html <head> section
+
 ?>
-<body>
+<body style="background-color: lightblue !important";>
     <div class="container">
 		<div class="span10 offset1">
 		
@@ -69,16 +58,6 @@ include '/home/gpcorser/public_html/database/header.php'; //html <head> section
 			</div>
 	
 			<form class="form-horizontal" action="qm_quiz_create.php" method="post">
-			  
-				<div class="control-group <?php echo !empty($per_idError)?'error':'';?>">
-					<label class="control-label">Persons ID</label>
-					<div class="controls">
-						<input name="per_id" type="text" placeholder="Persons ID" value="<?php echo !empty($time)?$time:'';?>">
-						<?php if (!empty($per_idError)): ?>
-							<span class="help-inline"><?php echo $per_idError;?></span>
-						<?php endif;?>
-					</div>
-				</div>
 				
 				<div class="control-group <?php echo !empty($quiz_nameError)?'error':'';?>">
 					<label class="control-label">Quiz Name</label>
@@ -102,7 +81,7 @@ include '/home/gpcorser/public_html/database/header.php'; //html <head> section
 				
 				<div class="form-actions">
 					<button type="submit" class="btn btn-success">Create</button>
-					<a class="btn" href="qm_quiz_list.php">Back</a>
+					<a class="btn" href="qm_quiz_list.php?per_id=<?php echo $_SESSION['per_id']; ?>">Back</a>
 				</div>
 				
 			</form>
@@ -110,6 +89,6 @@ include '/home/gpcorser/public_html/database/header.php'; //html <head> section
 		</div> <!-- div: class="container" -->
 				
     </div> <!-- div: class="container" -->
-	
+	<p>Nathan Gaffney (nagaffne)</p>
 </body>
 </html>

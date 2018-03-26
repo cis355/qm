@@ -5,14 +5,10 @@
  * description : This program updates one person in Quiz Manager
  * ---------------------------------------------------------------------------
  */
-//session_start();
-//if(!isset($_SESSION["fr_person_id"])){ // if "user" not set,
-//	session_destroy();
-//	header('Location: login.php');     // go to login page
-//	exit;
-//}
-	
+
+require 'session.php';
 require '/home/gpcorser/public_html/database/database.php';
+include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 
 $id = $_GET['id'];
 
@@ -29,6 +25,11 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 	$lname    = $_POST['lname'];
 	$email    = $_POST['email'];
 	$password = $_POST['password'];
+	/* nagaffne:
+	 * added the following line of code as the previous version caused a bug
+	 * the password was being stored as plain text into database but being checked as if hash
+	 */
+    $password_hash = MD5($password);
 
 	// validate user input
 	$valid = true;
@@ -66,7 +67,9 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$sql = "UPDATE qm_persons  set fname = ?, lname = ?, email = ?, password_hash = ? WHERE id = ?";
 			$q = $pdo->prepare($sql);
-			$q->execute(array($fname, $lname, $email, $password, $id));
+			//$q->execute(array($fname, $lname, $email, $password, $id));
+			//nagaffne: changed the following line to send the $password_hash to the database instead of $password
+			$q->execute(array($fname, $lname, $email, $password_hash, $id));
 			Database::disconnect();
 			header("Location: qm_per_list.php");
   }
@@ -84,10 +87,9 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 	Database::disconnect();
 }
 
-include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 ?>
 
-  <body>
+  <body style="background-color: lightblue !important";>
     <div class="container">
       <div class="span10 offset1">
 			
@@ -141,10 +143,11 @@ include '/home/gpcorser/public_html/database/header.php'; // html <head> section
         <div class="control-group <?php echo !empty($passwordError)?'error':'';?>">
 					<label class="control-label">Password</label>
 					<div class="controls">
-						<input id="password" name="password" type="text"  placeholder="Password" value="<?php echo !empty($password)?$password:'';?>">
+						<input id="password" name="password" type="password"  placeholder="Password" value="<?php echo !empty($password)?$password:'';?>">
 						<?php if (!empty($passwordError)): ?>
 							<span class="help-inline"><?php echo $passwordError;?></span>
 						<?php endif;?>
+            <button type="button" onclick="togglePassword()" class="btn btn-secondary" style="height: 40px">Toggle Password</p>
 					</div>
 				</div>
 						  
@@ -158,5 +161,16 @@ include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 		  </div><!-- end div: class="span10 offset1" -->
 		
     </div> <!-- end div: class="container" -->
+    <p>fcduvend</p>
+
+<script>
+
+function togglePassword() {
+  var password = document.getElementById("password");
+  password.type = (password.type == "text" ? "password" : "text");
+}
+
+</script>
+
   </body>
 </html>

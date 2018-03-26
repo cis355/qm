@@ -4,7 +4,7 @@
  *filename	: qm_per_create.php
  *author	: George Beeman, gabeeman@svsu.edu
  *description: "Create" page for persons
-
+ * This is exactly the same as per_create EXCEPT navigates to LOGIN after successful insert
  *-----------------------------------------------
  */
  
@@ -34,6 +34,11 @@ include '/home/gpcorser/public_html/database/header.php'; // html <head> section
         $email = $_POST['email'];
 		$password = $_POST['password'];
 		$password_hash = MD5($password);
+		$role = $_POST['role'];
+		$role_teacher = 0;
+		$role_student = 0;
+		if (!strcmp($role,"t")) $role_teacher = 1;
+		if (!strcmp($role,"s")) $role_student = 1;
          
         // validate input
         $valid = true;
@@ -57,6 +62,7 @@ include '/home/gpcorser/public_html/database/header.php'; // html <head> section
             $passwordError = 'Please enter password';
             $valid = false;
         }
+		//not validated
          
          
         // insert data
@@ -64,11 +70,11 @@ include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 			
             $pdo = Database::connect();
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $sql = "INSERT INTO qm_persons (fname, lname, email, password_hash) values(?, ?, ?, ?)";
+            $sql = "INSERT INTO qm_persons (fname, lname, email,  password_hash, role_teacher, role_student) values(?, ?, ?, ?, ?, ?)";
             $q = $pdo->prepare($sql);
-            $q->execute(array($fname, $lname, $email, $password_hash));
+            $q->execute(array($fname, $lname, $email, $password_hash,$role_teacher,$role_student));
             Database::disconnect();
-            header("Location: qm_per_list.php");
+            header("Location: login.php");
         }
     }
  
@@ -83,7 +89,7 @@ include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 		<div class="row">
 			<h3>Create a Person</h3>
 		</div>
-			 <form class="form-horizontal" action="qm_per_create.php" method="post">
+			 <form class="form-horizontal" action="qm_per_create2.php" method="post">
                       <div class="control-group <?php echo !empty($fnameError)?'error':'';?>">
                         <label class="control-label">First Name</label>
                         <div class="controls">
@@ -120,6 +126,14 @@ include '/home/gpcorser/public_html/database/header.php'; // html <head> section
                                 <span class="help-inline"><?php echo $passwordError;?></span>
                             <?php endif;?>
                         </div>
+                      </div>
+					  <br>
+					  <div class="control-group ">
+                        <label class="control-label">Role</label>
+                        <div class="controls">
+					    <input type="radio" name="role" value="t" checked> Teacher<br>
+						<input type="radio" name="role" value="s"> Student<br>
+					  </div>
                       </div>
 					  <br>
                       <div class="form-actions">

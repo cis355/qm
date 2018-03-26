@@ -1,3 +1,4 @@
+<html>
 <?php
 /* ---------------------------------------------------------------------------
  * filename    : qm_ques_list.php
@@ -5,16 +6,10 @@
  * description : Question list
  * ---------------------------------------------------------------------------
  */
- /*
-session_start();
-if(!isset($_SESSION["fr_person_id"])){ // if "user" not set,
-	session_destroy();
-	header('Location: login.php');     // go to login page
-	exit;
-}
-$sessionid = $_SESSION['fr_person_id'];
-*/
+
+include 'session.php';
 include '/home/gpcorser/public_html/database/header.php';
+ $_SESSION['quiz_id'] = $_GET['quiz_id'];
 ?>
 
 <body style="background-color: lightblue !important";>
@@ -35,37 +30,50 @@ include '/home/gpcorser/public_html/database/header.php';
 						<th>Quiz Number</th>
 						<th>Question Name</th>
 						<th>Question Text</th>
-						<th>Action</th>
+						<th>Question Actions</th>
+						<th>Question Options</th>
+						<th>Question Comments</th>
 					</tr>
 				</thead>
 				<tbody>
 					<?php 
 						include '/home/gpcorser/public_html/database/database.php';
 						$pdo = Database::connect();
-						$sql = 'SELECT * FROM qm_questions ORDER BY id';
-						// $sql = 'SELECT * FROM qm_questions WHERE quiz_id = ' . $_GET['quiz_id'];
+						$sql = 'SELECT * FROM qm_questions WHERE quiz_id=' . $_GET['quiz_id'] ;
 						foreach ($pdo->query($sql) as $row) {
 							echo '<tr>';
 							echo '<td>'. trim($row['id']) . '</td>';
 							echo '<td>'. trim($row['quiz_id']) . '</td>';
 							echo '<td>'. trim($row['ques_name']) . '</td>';
 							echo '<td>'. trim($row['ques_text']) . '</td>';
-							echo '<td width=250>';
-							    echo '<a class="btn" href="qm_ques_list_read.php?id='.$row['id'].'">Read</a>';
+							echo '<td width=245>';
+								
+							    echo '<a class="btn btn-primary" href="qm_ques_list_read.php?id='.$row['id'].'">Read</a>';
                                 echo ' ';
                                 echo '<a class="btn btn-success" href="qm_ques_update.php?id='.$row['id'].'">Update</a>';
                                 echo ' ';
                                 echo '<a class="btn btn-danger" href="qm_ques_delete.php?id='.$row['id'].'">Delete</a>';
                             echo '</td>';
+							
+							
+							echo '<td>';
+								echo '<a class="btn" href="qm_option_list.php?ques_id='.$row['id'] .'">Question Options</a>';
+							echo '</td>';
+							echo '<td>';
+								echo '<a class="btn" href="qm_comments.php?ques_id=' . $row['id'] .'">Question Comments</a>';
+                            echo '</td>';
+							
 							echo '</tr>';
 								
 						}
+						
 						Database::disconnect();
 					?>
 				</tbody>
 			</table>
-			
+			<br /><p>Cody Frost, clfrost@svsu.edu</p>
     	</div>
     </div> <!-- /container -->
+	
   </body>
 </html>

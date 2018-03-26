@@ -1,11 +1,13 @@
 <?php 
 /* ---------------------------------------------------------------------------
- * filename    : qm_Quizzes_read.php
+ * filename    : qm_quiz_read.php
  * author      : Christine Torres, cmtorre1@svsu.edu
  * description : This program displays the read page for quiz database 
  *               (table: qm_quizes, qm_persons)
  * ---------------------------------------------------------------------------
  */
+    include 'session.php';
+	include '/home/gpcorser/public_html/database/header.php'; //html <head> section
  	require '/home/gpcorser/public_html/database/database.php';
     $id = null;
     if ( !empty($_GET['id'])) {
@@ -13,7 +15,7 @@
     }
      
     if ( null==$id ) {
-        header("Location: qm_quiz_list.php");
+        header("Location: qm_quiz_list.php?per_id=" . $_SESSION['per_id'] . "");
     } else {
         $pdo = Database::connect();
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -23,17 +25,12 @@
         $data = $q->fetch(PDO::FETCH_ASSOC);
         Database::disconnect();
     }
-//include '/home/~gpcorser/public_html/database/database/header.php'; //html <head> section
+
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="utf-8">
-	<link   href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-</head>
-<body>
+<body style="background-color: lightblue !important";>
     <div class="container">
 
 		    <div class="row">
@@ -68,9 +65,13 @@
 					</div>
 				</div>
 				    <div class="form-actions">
-						  <a class="btn" href="qm_quiz_list.php">Back</a>
-				    </div>
+						  <a class="btn" href="qm_quiz_list.php?per_id=<?php echo $_SESSION['per_id']?>">Back</a>
+				   </div>
 		
     </div> <!-- end div: class="container" -->
+	
+	<br></br><br></br><br></br>
+	Posted by: Christine Torres <br></br>
+	Contact information: cmtorre1@svsu.edu
 </body>
 </html>

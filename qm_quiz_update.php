@@ -4,82 +4,72 @@
  * author      : Todd Lovas III - tslovas
  * ---------------------------------------------------------------------------
  */
-// session_start();
-// if(!isset($_SESSION["fr_person_id"])){ // if "user" not set,
-	// session_destroy();
-	// header('Location: login.php');     // go to login page
-	// exit;
-// }
-	
+
+include 'session.php';	
 require '/home/gpcorser/public_html/database/database.php';
-$id = $_GET['id'];
+
+
+$id = $_GET['id']; // quiz id
+
 if ( !empty($_POST)) { // if $_POST filled then process the form
-	# initialize/validate (same as file: fr_per_create.php)
+
 	// initialize user input validation variables
-	$quiz_idError = null;
-	$ques_nameError = null;
-	$ques_textError = null;
-	
+	$quiz_nameError = null;
+	$quiz_descriptionError = null;
 	
 	// initialize $_POST variables
-	$quiz_id = $_POST['quiz_id'];
-	$ques_name = $_POST['qm_persons'];
-	$ques_text = $_POST['ques_text'];
+	//$quiz_id = $_POST['quiz_id'];
+	$quiz_name = $_POST['quiz_name'];
+	$quiz_description = $_POST['quiz_description'];
 	
 	//
-	// initialize $_FILES variables
-	$fileName = $_FILES['userfile']['name'];
-	$tmpName  = $_FILES['userfile']['tmp_name'];
-	$fileSize = $_FILES['userfile']['size'];
-	$fileType = $_FILES['userfile']['type'];
-	$content = file_get_contents($tmpName);
+
 	// validate user input
 	$valid = true;
 	if (empty($quiz_name)) {
-		$quiz_idError = 'Please enter Quiz ID';
+		$quiz_nameError = 'Please enter Quiz ID';
 		$valid = false;
 	}
-	if (empty($qm_persons)) {
-		$ques_nameError = 'Please enter Question Name';
+	if (empty($quiz_description)) {
+		$quiz_descriptionError = 'Please enter Quiz Description';
 		$valid = false;
 	}
 
-	
-	// restrict file types for upload
+
 	
 	if ($valid) { // if valid user input update the database
 	
 		if($fileSize > 0) { // if file was updated, update all fields
 			$pdo = Database::connect();
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = "UPDATE qm_quizzes  set quiz_id = ?, ques_name = ?, ques_text = ? WHERE id = ?";
+			$sql = "UPDATE qm_quizzes  set quiz_name = ?, quiz_description = ? WHERE id = ?";
 			$q = $pdo->prepare($sql);
-			$q->execute(array($quiz_name, $qm_persons, $ques_text, $id));
+			$q->execute(array($quiz_name, $quiz_description,$id));
 			Database::disconnect();
-			header("Location: qm_ques_list.php");
+			header("Location: qm_quiz_list.php?per_id=".$_SESSION['per_id']);
 		}
 		else { // otherwise, update all fields EXCEPT file fields
 			$pdo = Database::connect();
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = "UPDATE qm_quizzes  set quiz_id = ?, ques_name = ?, ques_text = ? WHERE id = ?";
+			$sql = "UPDATE qm_quizzes  set quiz_name = ?, quiz_description = ? WHERE id = ?";
 			$q = $pdo->prepare($sql);
-			$q->execute(array($quiz_name, $qm_persons, $ques_text, $id));
+			$q->execute(array($quiz_name, $quiz_description,$id));
 			Database::disconnect();
-			header("Location: qm_ques_list.php");
+			header("Location: qm_quiz_list.php?per_id=".$_SESSION['per_id']);
 		}
 	}
 } else { // if $_POST NOT filled then pre-populate the form
 	$pdo = Database::connect();
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	$sql = "SELECT * FROM qm_questions where id = ?";
+	$sql = "SELECT * FROM qm_quizzes where id = ?";
 	$q = $pdo->prepare($sql);
 	$q->execute(array($id));
 	$data = $q->fetch(PDO::FETCH_ASSOC);
 	$quiz_name = $data['quiz_name'];
-	$qm_persons = $data['qm_persons'];
-	$ques_text = $data['ques_text'];
+	$quiz_description = $data['quiz_description'];
 	Database::disconnect();
 }
+
 ?>
 
 
@@ -87,9 +77,18 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <link   href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-	<link rel="icon" href="cardinal_logo.png" type="image/png" />
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 </head>
 
 <body style="background-color: lightblue !important";>
@@ -106,22 +105,22 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 			
 			
 				
-				<div class="control-group <?php echo !empty($ques_name)?'error':'';?>">
+				<div class="control-group <?php echo !empty($quiz_name)?'error':'';?>">
 					<label class="control-label"><h6>Quiz Name</h6></label>
 					<div class="controls">
-						<input style="background-color: lightgrey !important; width: 40%;" name="ques_name" type="text"  placeholder="Quiz Name" value="<?php echo !empty($ques_name)?$ques_name:'';?>">
-						<?php if (!empty($ques_nameError)): ?>
-							<span class="help-inline"><?php echo $ques_nameError;?></span>
+						<input style="background-color: lightgrey !important; width: 40%;" name="quiz_name" type="text"  placeholder="Quiz Name" value="<?php echo !empty($quiz_name)?$quiz_name:'';?>">
+						<?php if (!empty($quiz_nameError)): ?>
+							<span class="help-inline"><?php echo $quiz_nameError;?></span>
 						<?php endif; ?>
 					</div>
 				</div>
 				
-				<div class="control-group <?php echo !empty($ques_textError)?'error':'';?>">
+				<div class="control-group <?php echo !empty($quiz_description)?'error':'';?>">
 					<label class="control-label"><h6>Quiz Text</h6></label>
 					<div class="controls">
-						<input style="background-color: lightgrey !important; width: 40%;" name="ques_text" type="text" placeholder="Quiz Text" value="<?php echo !empty($ques_text)?$ques_text:'';?>">
-						<?php if (!empty($ques_textError)): ?>
-							<span class="help-inline"><?php echo $ques_textError;?></span>
+						<input style="background-color: lightgrey !important; width: 40%;" name="quiz_description" type="text" placeholder="Quiz Text" value="<?php echo !empty($quiz_description)?$quiz_description:'';?>">
+						<?php if (!empty($quiz_descriptionError)): ?>
+							<span class="help-inline"><?php echo $quiz_descriptionError;?></span>
 						<?php endif;?>
 					</div>
 				</div>
@@ -142,4 +141,9 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
     </div> <!-- end div: class="container" -->
 	
 </body>
+	 <footer>
+  <p>Posted by: Todd Lovas III</p>
+  <p>Contact information: <a href="mailto:tslovas@svsu.edu">
+	tslovas@svsu.edu</a>.</p>
+</footer> 
 </html>

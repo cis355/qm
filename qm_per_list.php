@@ -14,7 +14,9 @@ if(!isset($_SESSION["fr_person_id"])){ // if "user" not set,
 }
 $sessionid = $_SESSION['fr_person_id'];
 */
+include 'session.php';
 include '/home/gpcorser/public_html/database/header.php'; // html <head> section
+include '/home/gpcorser/public_html/database/database.php';
 ?>
 
 <body style="background-color: lightblue !important";>
@@ -38,7 +40,7 @@ include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 				</thead>
 				<tbody>
 					<?php 
-						include '/home/gpcorser/public_html/database/database.php';
+						
 						$pdo = Database::connect();
 						$sql = 'SELECT * FROM qm_persons';
 
@@ -68,5 +70,10 @@ include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 			
     	</div>
     </div> <!-- /container -->
+	 <footer>
+  <p>Posted by: Guadalupe Ruiz</p>
+  <p>Contact information: <a href="mailto:gruiz@svsu.edu">
+	gruiz@svsu.edu</a>.</p>
+</footer> 
   </body>
 </html>

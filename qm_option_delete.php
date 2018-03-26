@@ -7,44 +7,44 @@
  */
  
 include '/home/gpcorser/public_html/database/header.php'; // html <head> section
+include 'session.php';
 require '/home/gpcorser/public_html/database/database.php';
 
 $id = $_GET['id'];
 
-	$ques_id = $_POST['ques_id'];
-	$opt_text = $_POST['opt_text'];
-
-if ( !empty($_POST)) { // if user clicks "yes" (sure to delete), delete record
+if ( !empty($_POST)) { 
 	$id = $_POST['id'];
+	$ques_id = $_POST['ques_id'];
 	
-	// delete data
 	$pdo = Database::connect();
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	$sql = "DELETE FROM qm_options  WHERE id = ?";
+	$sql = "DELETE FROM qm_options WHERE id = ?";
 	$q = $pdo->prepare($sql);
 	$q->execute(array($id));
 	Database::disconnect();
-	header("Location: qm_options.php");
+	header("Location: qm_option_list.php?ques_id=" . $_SESSION['ques_id']);
+	
+	
+	
 } 
 else { // otherwise, pre-populate fields to show data to be deleted
 	$pdo = Database::connect();
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	
-	# get option details
 	$sql = "SELECT * FROM qm_options where id = ?";
 	$q = $pdo->prepare($sql);
 	$q->execute(array($id));
 	$data = $q->fetch(PDO::FETCH_ASSOC);
+	Database::disconnect();
 	
 	$ques_id = $data['ques_id'];
 	$opt_text = $data['opt_text'];
 	
-	Database::disconnect();
+	
 }
 
 ?>
 
-<body>
+<body style="background-color: lightblue !important";>
     <div class="container">
 
 		<div class="span10 offset1">
@@ -53,12 +53,12 @@ else { // otherwise, pre-populate fields to show data to be deleted
 				<h3>Delete Option</h3>
 			</div>
 			
-			<form class="form-horizontal" action="qm_option_list.php" method="post">
+			<form class="form-horizontal" action="qm_option_delete.php?id=<?php echo $_GET['id'];?>" method="post">
 				<input type="hidden" name="id" value="<?php echo $id;?>"/>
 				<p class="alert alert-error">Are you sure you want to delete ?</p>
 				<div class="form-actions">
 					<button type="submit" class="btn btn-danger">Yes</button>
-					<a class="btn" href="qm_option_list.php">No</a>
+					<a class="btn" href="qm_option_list.php?ques_id=<?php echo $ques_id;?>">No</a>
 				</div>
 			</form>
 			
@@ -98,5 +98,8 @@ else { // otherwise, pre-populate fields to show data to be deleted
 		</div> <!-- end div: class="span10 offset1" -->
 				
     </div> <!-- end div: class="container" -->
+	<br />	<br />	
+	<div>Created by: Robert Zinger</div>
+	<footer>Contact: rjzinger@svsu.edu</footer>
   </body>
 </html>
