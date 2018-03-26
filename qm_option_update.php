@@ -15,33 +15,19 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 	
 	# same as create
 	// initialize user input validation variables
-	$ques_idError = null;
+	//$ques_idError = null;
 	$opt_textError = null;
 	$opt_isCorrectError = null;
 	
 	// initialize $_POST variables
 	//$id = $_POST['id'];    // same as HTML name= attribute in put box
-	$ques_id = $_POST['ques_id'];
+	//$ques_id = $_POST['ques_id'];
 	$opt_text = $_POST['opt_text'];
 	$opt_isCorrect = $_POST['opt_isCorrect'];
 	
-	 // initialize $_FILES variables
-	$fileName = $_FILES['userfile']['name'];
-	$tmpName  = $_FILES['userfile']['tmp_name'];
-	$fileSize = $_FILES['userfile']['size'];
-	$fileType = $_FILES['userfile']['type'];
-	$content = file_get_contents($tmpName); 
-	
 	// validate user input
 	$valid = true;
-	/* if (empty($id)) {
-		$idError = 'Please choose a volunteer';
-		$valid = false;
-	} */
-	if (empty($ques_id)) {
-		$ques_idError = 'Please choose an ques_id';
-		$valid = false;
-	} 
+
 	if (empty($opt_text)) {
 		$opt_textError = 'Please choose an opt_text';
 		$valid = false;
@@ -55,18 +41,18 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$sql = "UPDATE qm_options  set ques_id = ?, opt_text = ?, opt_isCorrect = ? WHERE id = ?";
 			$q = $pdo->prepare($sql);
-			$q->execute(array($ques_id, $opt_text, $opt_isCorrect, $id));
+			$q->execute(array($_SESSION['ques_id'], $opt_text, $opt_isCorrect, $id));
 			Database::disconnect();
-			header("Location: qm_option_list.php?ques_id=" . $_SESSION['ques_id']);
+			header();
 		}
 		else { // otherwise, update all fields EXCEPT file fields
 			$pdo = Database::connect();
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$sql = "UPDATE qm_options  set ques_id = ?, opt_text = ?, opt_isCorrect = ? WHERE id = ?";
 			$q = $pdo->prepare($sql);
-			$q->execute(array($ques_id, $opt_text, $opt_isCorrect, $id));
+			$q->execute(array($_SESSION['ques_id'], $opt_text, $opt_isCorrect, $id));
 			Database::disconnect();
-			header("Location: qm_option_list.php?ques_id=" . $ques_id);
+			header("Location: qm_option_list.php?ques_id=". $_SESSION['ques_id']);
 		}
 	}
 } else { // if $_POST NOT filled then pre-populate the form
@@ -99,6 +85,8 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 			<form class="form-horizontal" action="qm_option_update.php?id=<?php echo $_GET['id'];?>" method="post" enctype="multipart/form-data">
 			
 				
+
+				 
 				
 				<div class="control-group <?php echo !empty($opt_textError)?'error':'';?>">
 					<label class="control-label">Option Text</label>
