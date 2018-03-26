@@ -7,16 +7,28 @@
  */
  
 //require '../../database/database.php';
+
+
+session_start();
+if(!isset($_SESSION["per_id"])){ // if "user" not set,
+	session_destroy();
+	header('Location: login.php');     // go to login page
+	exit;
+}
+
+$per_id = $_SESSION['per_id'];
+
 include 'session.php';
 require '/home/gpcorser/public_html/database/header.php'; //html <head> section
 require '/home/gpcorser/public_html/database/database.php';
 
 
 // person id is provided in the URL
-$id = $_GET['per_id'];
+/*$id = $_GET['per_id'];
 $per_id = $id;
 
 $per_id = $_GET['per_id'];
+*/
 
 if ( !empty($_POST)) { // if not first time through
 	// initialize user input validation variables
@@ -39,7 +51,7 @@ if ( !empty($_POST)) { // if not first time through
 	
 	// validate user input
 	$valid = true;
-
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	$quiz_id = '2';
 
 	// The rest are provided by user
