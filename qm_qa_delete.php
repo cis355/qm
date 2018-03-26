@@ -8,8 +8,15 @@
 */
 include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 require '/home/gpcorser/public_html/database/database.php';
+session_start();
+/*if(!isset($_SESSION['per_id'])){
+	session_destroy();
+	header('Location: login.php');
+	exit;
+}*/
+
 $id = $_GET['attempt_id'];
-$per_id = $_GET['per_id'];
+$per_id = $_SESSION['per_id'];
 if ( !empty($_POST)) { // if user clicks "yes" (sure to delete), delete record
 	$id = $_POST['id'];
 	
