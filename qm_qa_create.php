@@ -11,7 +11,9 @@ include 'session.php';
 require '/home/gpcorser/public_html/database/header.php'; //html <head> section
 require '/home/gpcorser/public_html/database/database.php';
 
-
+// person id is provided in the URL
+$id = $_GET['per_id'];
+$per_id = $id;
 if ( !empty($_POST)) { // if not first time through
 	// initialize user input validation variables
 	$idError = null;
@@ -34,9 +36,6 @@ if ( !empty($_POST)) { // if not first time through
 	// validate user input
 	$valid = true;
 
-	// person id is provided in the URL
-	$id = $_GET['per_id'];
-	$per_id = $id;
 	$quiz_id = '2';
 
 	// The rest are provided by user
