@@ -89,6 +89,6 @@ if ( !empty($_POST)) { // if not first time through
 		</div> <!-- div: class="container" -->
 				
     </div> <!-- div: class="container" -->
-	
+	<p>Nathan Gaffney (nagaffne)</p>
 </body>
 </html>
