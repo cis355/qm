@@ -6,7 +6,8 @@
  ---------------------------------------------------------------------------
 -->
 <?php
-
+require 'session.php';
+include '/home/gpcorser/public_html/database/header.php';
  include '/home/gpcorser/public_html/database/database.php';
  $_SESSION['per_id'] = $_GET['per_id'];
 ?>
