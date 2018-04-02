@@ -8,7 +8,6 @@
  
 //require '../../database/database.php';
 
-
 session_start();
 if(!isset($_SESSION["per_id"])){ // if "user" not set,
 	session_destroy();
@@ -21,7 +20,6 @@ $per_id = $_SESSION['per_id'];
 include 'session.php';
 require '/home/gpcorser/public_html/database/header.php'; //html <head> section
 require '/home/gpcorser/public_html/database/database.php';
-
 
 // person id is provided in the URL
 /*$id = $_GET['per_id'];
@@ -41,6 +39,7 @@ if ( !empty($_POST)) { // if not first time through
 	
 	//          !!!            
 	$quiz = $_POST['quiz']; 
+	echo $quiz;
 	
 	
 	$qa_score = $_POST['qa_score'];
@@ -76,7 +75,6 @@ if ( !empty($_POST)) { // if not first time through
 		$per_idError = 'Please enter End Time';
 		$valid = false;
 	} 			
-	$i = 9;
 	$location = "Location: qm_qa_list.php?per_id=$per_id";
 	// insert data
 	if ($valid) {
@@ -100,7 +98,9 @@ if ( !empty($_POST)) { // if not first time through
 				<h3>Add New Quiz Attempt</h3>
 			</div>
 			<div>
-				<h5>What Quiz would you like to attempt?</h5>
+
+
+			<h5>What Quiz would you like to attempt?</h5>
 				 <select name="quiz" multiple="multiple">
 					<option value = "1" selected>&nbsp 1 &nbsp </option>
 					<option value = "2">&nbsp 2 &nbsp </option>
@@ -109,7 +109,7 @@ if ( !empty($_POST)) { // if not first time through
 					<option value = "5">&nbsp 5 &nbsp </option>
 				 </select>
 			</div>
-	
+
 	
 			<form class="form-horizontal" action="qm_qa_create.php?per_id=<?php echo $per_id;?>" method="post">
 			
