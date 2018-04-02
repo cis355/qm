@@ -35,7 +35,7 @@ require '/home/gpcorser/public_html/database/database.php';
       echo '<div class="row"><p><a href="qm_qa_create.php?per_id=' . $per_id .'" class="btn btn-primary">Add Attempt</a></p><table class="table table-striped table-bordered" style="background-color: lightgrey !important"><thead><tr><th>Quiz Name</th><th>Quiz Score</th><th>Start Date</th> <th>Start Time</th> <th>End Date</th> <th>End Time</th><th>Action</th></tr></thead><tbody>';
       // '. trim($row['quiz_name']) . '
       // INNER JOIN qm_quizzes WHERE qm_quizzes.per_id=$per_id qm_attempts.quiz_id=qm_quizzes.id
-      $sql = "SELECT quiz_name, qa_score, qa_start_date, qa_start_time, qa_end_date, qa_end_time, qm_attempts.id  FROM qm_attempts INNER JOIN qm_quizzes ON qm_quizzes.per_id=$per_id ORDER BY qm_quizzes.quiz_name";
+      $sql = "SELECT * FROM qm_persons, qm_quizzes, qm_attempts WHERE qm_quizzes.id=qm_attempts.quiz_id AND WHERE $per_id = qm_quizzes.per_id ORDER BY qm_quizzes.quiz_name";
       foreach ($pdo->query($sql) as $row) {
         echo '<tr>';
         echo '<td>' . trim($row['quiz_name']) . '</td>';

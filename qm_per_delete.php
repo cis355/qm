@@ -7,6 +7,7 @@
 */
 include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 require '/home/gpcorser/public_html/database/database.php';
+/*
 include 'session.php';
 
 $id = $_GET['id']; // person id
@@ -16,6 +17,16 @@ if ( !empty($_POST)) { // delete
 	$pdo = Database::connect();
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	$sql = "SELECT * FROM qm_quizzes WHERE per_id = ? LIMIT 1";
+*/
+include 'session.php';
+$id = $_GET['id'];
+if ( !empty($_POST)) { // if user clicks "yes" (sure to delete), delete record
+	$id = $_POST['id'];
+	//
+	$pdo = Database::connect();
+	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	$sql = "UPDATE qm_persons  set archive_flag = true WHERE id = ?";
+
 	$q = $pdo->prepare($sql);
 	$q->execute(array($per_id));
 	$data = $q->fetch(PDO::FETCH_ASSOC);
