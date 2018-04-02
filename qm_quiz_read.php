@@ -6,7 +6,7 @@
  *               (table: qm_quizes, qm_persons)
  * ---------------------------------------------------------------------------
  */
-    include session.php;
+    include 'session.php';
 	include '/home/gpcorser/public_html/database/header.php'; //html <head> section
  	require '/home/gpcorser/public_html/database/database.php';
     $id = null;
@@ -15,7 +15,7 @@
     }
      
     if ( null==$id ) {
-        header("Location: qm_quiz_list.php");
+        header("Location: qm_quiz_list.php?per_id=" . $_SESSION['per_id'] . "");
     } else {
         $pdo = Database::connect();
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -30,7 +30,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<body>
+<body style="background-color: lightblue !important";>
     <div class="container">
 
 		    <div class="row">
@@ -65,8 +65,8 @@
 					</div>
 				</div>
 				    <div class="form-actions">
-						  <a class="btn" href="qm_quiz_list.php">Back</a>
-				    </div>
+						  <a class="btn" href="qm_quiz_list.php?per_id=<?php echo $_SESSION['per_id']?>">Back</a>
+				   </div>
 		
     </div> <!-- end div: class="container" -->
 	

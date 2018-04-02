@@ -8,7 +8,15 @@
 */
 include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 require '/home/gpcorser/public_html/database/database.php';
-$id = $_GET['id'];
+session_start();
+/*if(!isset($_SESSION['per_id'])){
+	session_destroy();
+	header('Location: login.php');
+	exit;
+}*/
+
+$id = $_GET['attempt_id'];
+$per_id = $_SESSION['per_id'];
 if ( !empty($_POST)) { // if user clicks "yes" (sure to delete), delete record
 	$id = $_POST['id'];
 	
@@ -18,7 +26,7 @@ if ( !empty($_POST)) { // if user clicks "yes" (sure to delete), delete record
 	$q = $pdo->prepare($sql);
 	$q->execute(array($id));
 	Database::disconnect();
-	header("Location: qm_qa_list.php");
+	header("Location: qm_qa_list.php?per_id='.$_SESSION[per_id].'");
 	
 } 
 else { // otherwise, pre-populate fields to show data to be deleted
@@ -45,19 +53,19 @@ else { // otherwise, pre-populate fields to show data to be deleted
 
 <!--<link rel="icon" href="ohno.jpg" type="image/jpg" />-->
 
-<body>
+<body style="background-color: lightblue !important";>
     <div class="container">
 		<div class="row">
 			<h3><br><br>Delete Quiz Attempt</h3>
 			<!--<h2>&nbsp&nbsp<img src="ohno.jpg" alt="Oh No Dude"/></h2>-->
 		</div>
 		
-		<form class="form-horizontal" action="qm_qa_delete.php" method="post">
+		<form class="form-horizontal" action="qm_qa_delete.php?per_id=<?php echo $_SESSION['per_id'];?>" method="post">
 			<input type="hidden" name="id" value="<?php echo $id;?>"/>
 			<p class="alert alert-error">Are you sure you want to delete?</p>
 			<div class="form-actions">
 				<button type="submit" class="btn btn-danger">Yes</button>
-				<a class="btn" href="qm_qa_list.php">No</a>
+				<a class="btn" href="qm_qa_list.php?per_id=<?php echo $_SESSION['per_id'];?>">No</a>
 			</div>
 		</form>
 		
@@ -121,7 +129,7 @@ else { // otherwise, pre-populate fields to show data to be deleted
 			</div>
 				
 		</div>  <!-- end div: class="form-horizontal" -->
-
+		<p>Made by: Ryan Ott raott@svsu.edu</p>
     </div> <!-- end div: class="container" -->
 	
 </body>

@@ -5,20 +5,12 @@
  * description : This program displays a list of Options from the table qm_options
  * ---------------------------------------------------------------------------
  */
- /*
-session_start();
-if(!isset($_SESSION["qm_person_id"])){ // if "user" not set,
-	session_destroy();
-	header('Location: login.php');     // go to login page
-	exit;
-}
-$sessionid = $_SESSION['qm_person_id'];
-*/
 
-$id = $_GET['id']; 
-$per_id = $_GET['per_id'];
 include 'session.php';
 include '/home/gpcorser/public_html/database/header.php'; // html <head> section
+$_SESSION['ques_id'] = $_GET['ques_id'];
+$id = $_GET['id']; 
+$ques_id = $_GET['ques_id'];
 ?>
 
 
@@ -26,7 +18,7 @@ include '/home/gpcorser/public_html/database/header.php'; // html <head> section
     <div class="container">
 
 		<div class="row">
-			<h3>Options</h3>
+			<h3>Options for Question <?php echo $ques_id;?></h3>
 		</div>
 		<div class="row">
 			<a href="qm_option_create.php" class = "btn btn-primary">Add Option</a>
@@ -43,7 +35,7 @@ include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 					<?php 
 						include '/home/gpcorser/public_html/database/database.php';
 						$pdo = Database::connect();
-						$sql = 'SELECT * FROM qm_options WHERE id = ' . $id;
+						$sql = 'SELECT * FROM qm_options WHERE ques_id = ' . $ques_id;
 						foreach ($pdo->query($sql) as $row) {
 							echo '<tr>';
 							echo '<td>'. trim($row['id']) . '</td>'; 
@@ -56,7 +48,6 @@ include '/home/gpcorser/public_html/database/header.php'; // html <head> section
                                 echo '<a class="btn btn-success" href="qm_option_update.php?id='.$row['id'].'">Update</a>';
                                 echo ' ';
                                 echo '<a class="btn btn-danger" href="qm_option_delete.php?id='.$row['id'].'">Delete</a>';
-                                echo '<a href="qm_ques_list.php?id='.$row['ques_id'].'">Question</a>';
 								echo '</td>';
                             echo '</tr>';
 						}

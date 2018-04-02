@@ -6,18 +6,11 @@
  ---------------------------------------------------------------------------
 -->
 <?php
-include 'session.php';
+
  include '/home/gpcorser/public_html/database/database.php';
  $_SESSION['per_id'] = $_GET['per_id'];
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <link   href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-</head>
- 
+
 <body style="background-color: lightblue !important";>
     <div class="container">
             <div class="row">
@@ -69,7 +62,7 @@ include 'session.php';
 							echo ' ';
                             echo '</td>';
 							echo '<td>';
-							echo '<a class="btn" href="qm_ques_list.php?id='.$row['id'].'">Questions List</a>';
+							echo '<a class="btn" href="qm_ques_list.php?quiz_id='.$row['id'].'">Questions List</a>';
 							echo '</td>';
 							echo '<td>';
 							echo '<a class="btn" href="qm_qa_list.php?id='.$row['id'].'">Quiz Attempts</a>';

@@ -18,7 +18,7 @@ if ( !empty($_POST)) { // if not first time through
 	$opt_isCorrectError = null;
 
 	// initialize $_POST variables
-	$ques_id = $_POST['ques_id'];
+	$ques_id = $_SESSION['ques_id'];
 	$opt_text = $_POST['opt_text'];
 	$opt_isCorrect = $_POST['opt_isCorrect'];
 
@@ -45,7 +45,7 @@ if ( !empty($_POST)) { // if not first time through
 		$q->execute(array($ques_id, $opt_text,$opt_isCorrect));
 		Database::disconnect();
 
-		header("Location: qm_option_list.php");
+		header("Location: qm_option_list.php?ques_id=" . $_SESSION['ques_id']);
 
 	}
 }
@@ -56,31 +56,12 @@ if ( !empty($_POST)) { // if not first time through
     <div class="container">
 
 		<div class="span10 offset1">
-			<br>
 			<div class="row">
 				<h3>Add New Option</h3>
 			</div>
 
-			<form class="form-horizontal" action="qm_option_create.php" method="post">
-
-				<div class="control-group <?php echo !empty($ques_idError)?'error':'';?>">
-					<label class="control-label">Question</label>
-					<div class="controls">
-						<select name="ques_id" type="text">
-							<?php
-								$pdo = Database::connect();
-								$sql = 'SELECT * FROM qm_questions';
-								foreach ($pdo->query($sql) as $row) {
-									echo '<option value="' . $row['id'] . '">' . $row['id'] . ' ' . $row['ques_text'] . '</option>';
-								}
-								Database::disconnect();
-							?>
-						</select>
-					</div>
-				</div>
-
+			<form class="form-horizontal" action="qm_option_create.php?ques_id=<?php echo $_SESSION['ques_id']?>" method="post">
 				<div class="control-group <?php echo !empty($opt_textError)?'error':'';?>">
-					<br>
 					<label class="control-label">Option Text</label>
 					<div class="controls">
 						<input name="opt_text" type="text" placeholder="Option Text" value="<?php echo !empty($opt_text)?$opt_text:'';?>">
@@ -103,7 +84,7 @@ if ( !empty($_POST)) { // if not first time through
 				<div class="form-actions">
 					<br><br>
 					<button type="submit" class="btn btn-success">Create</button>
-					<a class="btn btn-secondary" href="qm_option_list.php">Back</a>
+					<a class="btn btn-secondary" href="qm_option_list.php?ques_id=<?php echo $_SESSION['ques_id'];?>">Back</a>
 				</div>
 
 			</form>

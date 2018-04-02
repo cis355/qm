@@ -11,24 +11,17 @@
  * ---------------------------------------------------------------------------
  * 
  */
- /*
-   session_start();
-if(!isset($_SESSION["fr_person_id"])){ // if "user" not set,
-	session_destroy();
-	header('Location: login.php');     // go to login page
-	exit;
-}
-*/
-//require '../../database/database.php';
+include 'session.php';
 require '/home/gpcorser/public_html/database/database.php';
 include '/home/gpcorser/public_html/database/header.php'; //html <head> section
 if ( !empty($_POST)) { // if not first time through
-
+	session_start();
 	// initialize user input validation variables
 	$quiz_nameError = null;
 	$quiz_descriptionError = null;
 	
 	// initialize $_POST variables
+	$per_id = $_SESSION['per_id'];
 	$qName = $_POST['quiz_name'];
 	$description = $_POST['quiz_description'];		
 	$valid = true;
@@ -46,11 +39,11 @@ if ( !empty($_POST)) { // if not first time through
 	if ($valid) {
 		$pdo = Database::connect();
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = "INSERT INTO qm_quizzes (quiz_name, quiz_description) values(?, ?)";
+		$sql = "INSERT INTO qm_quizzes (per_id, quiz_name, quiz_description) values(?, ?, ?)";
 		$q = $pdo->prepare($sql);
-		$q->execute(array($qName,$description));
+		$q->execute(array($per_id,$qName,$description));
 		Database::disconnect();
-		header("Location: qm_quiz_list.php");
+		header("Location: qm_quiz_list.php?per_id=" . $per_id);	
 	}
 }
 //include '../../database/header.php'; //html <head> section
@@ -88,7 +81,7 @@ if ( !empty($_POST)) { // if not first time through
 				
 				<div class="form-actions">
 					<button type="submit" class="btn btn-success">Create</button>
-					<a class="btn" href="qm_quiz_list.php">Back</a>
+					<a class="btn" href="qm_quiz_list.php?per_id=<?php echo $_SESSION['per_id']; ?>">Back</a>
 				</div>
 				
 			</form>
@@ -96,6 +89,6 @@ if ( !empty($_POST)) { // if not first time through
 		</div> <!-- div: class="container" -->
 				
     </div> <!-- div: class="container" -->
-	
+	<p>Nathan Gaffney (nagaffne)</p>
 </body>
 </html>

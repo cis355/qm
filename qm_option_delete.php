@@ -7,13 +7,14 @@
  */
  
 include '/home/gpcorser/public_html/database/header.php'; // html <head> section
-include '/home/gpcorser/public_html/database/session.php';
+include 'session.php';
 require '/home/gpcorser/public_html/database/database.php';
 
 $id = $_GET['id'];
 
-if ( !empty($_POST)) { // if user clicks "yes" (sure to delete), delete record
+if ( !empty($_POST)) { 
 	$id = $_POST['id'];
+	$ques_id = $_POST['ques_id'];
 	
 	$pdo = Database::connect();
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -21,7 +22,9 @@ if ( !empty($_POST)) { // if user clicks "yes" (sure to delete), delete record
 	$q = $pdo->prepare($sql);
 	$q->execute(array($id));
 	Database::disconnect();
-	header("Location: qm_options_list.php");
+	header("Location: qm_option_list.php?ques_id=" . $_SESSION['ques_id']);
+	
+	
 	
 } 
 else { // otherwise, pre-populate fields to show data to be deleted
@@ -50,12 +53,12 @@ else { // otherwise, pre-populate fields to show data to be deleted
 				<h3>Delete Option</h3>
 			</div>
 			
-			<form class="form-horizontal" action="qm_option_list.php" method="post">
+			<form class="form-horizontal" action="qm_option_delete.php?id=<?php echo $_GET['id'];?>" method="post">
 				<input type="hidden" name="id" value="<?php echo $id;?>"/>
 				<p class="alert alert-error">Are you sure you want to delete ?</p>
 				<div class="form-actions">
 					<button type="submit" class="btn btn-danger">Yes</button>
-					<a class="btn" href="qm_option_list.php">No</a>
+					<a class="btn" href="qm_option_list.php?ques_id=<?php echo $ques_id;?>">No</a>
 				</div>
 			</form>
 			
@@ -95,6 +98,7 @@ else { // otherwise, pre-populate fields to show data to be deleted
 		</div> <!-- end div: class="span10 offset1" -->
 				
     </div> <!-- end div: class="container" -->
+	<br />	<br />	
 	<div>Created by: Robert Zinger</div>
 	<footer>Contact: rjzinger@svsu.edu</footer>
   </body>

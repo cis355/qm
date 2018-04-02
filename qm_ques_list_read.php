@@ -76,12 +76,14 @@ Database::disconnect();
 					</div>     
 					
 					<div class="form-actions">
-						<a class="btn" href="qm_ques_list.php">Back</a>
+						<a class="btn btn-success" href="qm_ques_list.php?quiz_id=<?php echo $data['quiz_id'];?>&per_id=<?php echo $data['per_id'];?>">Back</a>
 					</div>
 				
 			</div>  <!-- end div: class="form-horizontal" 
 
 		</div> <!-- end div: class="container" -->
+		
+		<p>Wyatt Towne - wmtowne</p>
 		
 	</body> 
 	
