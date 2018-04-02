@@ -54,13 +54,10 @@ include '/home/gpcorser/public_html/database/header.php';
 
                    foreach ($pdo->query($sql) as $row) {
                             echo '<tr>';
-<<<<<<< HEAD
-                            
-                            echo '<td width=200>'. $row['quiz_name'] . '</td>';
-							echo '<td width=200>'. $row['archive_flag'] . '</td>';//archive
-=======
+
+                            echo '<td width=250>'. $row['quiz_name'] . '</td>';
                             echo '<td width=500>'. $row['quiz_name'] . '</td>';
->>>>>>> 975f31dcaa818867f59869ef1794f278353378b9
+
 							echo '<td width=250>';
                             echo '<a class="btn" href="qm_quiz_read.php?id='.$row['id'].'">Read</a>';
                             echo ' ';
