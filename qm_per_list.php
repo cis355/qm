@@ -17,6 +17,7 @@ include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 		<div class="row">
 			<p>
 				<a href="qm_per_create.php" class="btn btn-primary">Add Person</a>
+				<a href="qm_per_list_archive.php" class="btn btn-secondary">View Archive</a>
 			</p>
 				
 			<table class="table table-striped table-bordered" style="background-color: lightgrey !important">
