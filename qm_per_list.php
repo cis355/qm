@@ -5,18 +5,8 @@
  * description : 
  * ---------------------------------------------------------------------------
  */
- /*
-session_start();
-if(!isset($_SESSION["fr_person_id"])){ // if "user" not set,
-	session_destroy();
-	header('Location: login.php');     // go to login page
-	exit;
-}
-$sessionid = $_SESSION['fr_person_id'];
-*/
 include 'session.php';
 include '/home/gpcorser/public_html/database/header.php'; // html <head> section
-include '/home/gpcorser/public_html/database/database.php';
 ?>
 
 <body style="background-color: lightblue !important";>
@@ -40,7 +30,7 @@ include '/home/gpcorser/public_html/database/database.php';
 				</thead>
 				<tbody>
 					<?php 
-						
+						include '/home/gpcorser/public_html/database/database.php';
 						$pdo = Database::connect();
 						$sql = 'SELECT * FROM qm_persons WHERE archive_flag = FALSE';
                        
@@ -70,10 +60,5 @@ include '/home/gpcorser/public_html/database/database.php';
 			
     	</div>
     </div> <!-- /container -->
-	 <footer>
-  <p>Posted by: Guadalupe Ruiz</p>
-  <p>Contact information: <a href="mailto:gruiz@svsu.edu">
-	gruiz@svsu.edu</a>.</p>
-</footer> 
   </body>
 </html>
