@@ -7,7 +7,9 @@
  */
 // Start or resume session, and create: $_SESSION[] array
 session_start(); 
+
 include '/home/gpcorser/public_html/database/database.php';
+
 if ( !empty($_POST)) { // if $_POST filled then process the form
 	// initialize $_POST variables
 	$username = $_POST['username']; // username is email address, db field is email
@@ -15,9 +17,11 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 	$passwordhash = MD5($password);
 	// echo $password . " " . $passwordhash; exit();
 	// robot 87b7cb79481f317bde90c116cf36084b
-	$role = $_POST['role']; // role is a, t, or s, for Admin, Teacher or Student
-										// db field names are role_admin, role_teacher, role_student
-		
+	
+	// role is a, t, or s, for Admin, Teacher or Student
+	// db field names are role_admin, role_teacher, role_student
+	$role = $_POST['role']; 
+
 	// verify the username/password
 	$pdo = Database::connect();
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -27,17 +31,28 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 	$data = $q->fetch(PDO::FETCH_ASSOC);
 	
 	if($data) { // if successful login set session variables
-		echo "success!";
-		$_SESSION['admin_id'] = $data['id'];
-		if (!strcmp($role, 'a')) { // if person requested Admin role and IS admin then go to per_list
-			if ($data['role_admin']) header("Location: qm_per_list.php");
+		
+		// if person requested Admin role and is admin then go to per_list
+		if (!strcmp($role, 'a') && $data['role_admin']) { 
+			$_SESSION['admin_id'] = $data['id'];
+			$_SESSION['role'] = $role; // a
+			header("Location: qm_per_list.php");
 		}
-		else 
-			if (!strcmp($role, 't')) {
-				if ($data['role_admin'] || $data['role_teacher'] ) header("Location: qm_quiz_list.php?per_id=" . $data['id']);
+		
+		else {
+			// else if person is admin or teacher and requests teacher, go to quiz list for person
+			if (!strcmp($role, 't') && $data['role_teacher'] ) {
 				$_SESSION['per_id']=$data['id'];
+				$_SESSION['role'] = $role; // t
+				header("Location: qm_quiz_list.php?per_id=" . $data['id']);
 			}
-			// student condiotn not yet coded
+			// student was requested. Catch all. Let anyone log in as student.
+			else {
+				$_SESSION['per_id']=$data['id'];
+				$_SESSION['role'] = $role; // s 
+				header("Location: qm_qa_list.php"); // uses session variable
+			}
+		}
 
 		Database::disconnect();
 		//header("Location: qm_per_list.php");
