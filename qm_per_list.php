@@ -32,8 +32,8 @@ include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 					<?php 
 						include '/home/gpcorser/public_html/database/database.php';
 						$pdo = Database::connect();
-						$sql = 'SELECT * FROM qm_persons';
-
+						$sql = 'SELECT * FROM qm_persons WHERE archive_flag = FALSE';
+                       
 						foreach ($pdo->query($sql) as $row) {
 							echo '<tr>';
 							echo '<td>'. trim($row['lname']) . '</td>'; 
