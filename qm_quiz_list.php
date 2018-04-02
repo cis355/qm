@@ -38,6 +38,7 @@
                   <thead>
                     <tr>
                       <th>Quiz Name</th>
+					  <th>Archived?</th><!--check if archived-->
 					  <th>Options</th>
 					  <th>Quiz Questions</th>
 					  <th>Quiz Attempts</th>
@@ -53,13 +54,14 @@
                    foreach ($pdo->query($sql) as $row) {
                             echo '<tr>';
                             
-                            echo '<td width=500>'. $row['quiz_name'] . '</td>';
+                            echo '<td width=200>'. $row['quiz_name'] . '</td>';
+							echo '<td width=200>'. $row['archive_flag'] . '</td>';//archive
 							echo '<td width=250>';
                             echo '<a class="btn" href="qm_quiz_read.php?id='.$row['id'].'">Read</a>';
                             echo ' ';
                             echo '<a class="btn btn-success" href="qm_quiz_update.php?id='.$row['id'].'">Update</a>';
                             echo ' ';
-                            echo '<a class="btn btn-danger" href="qm_quiz_delete.php?id='.$row['id'].'">Delete</a>';
+                            echo '<a class="btn btn-danger" href="qm_quiz_archive.php?id='.$row['id'].'">Delete</a>'; //changed delete to archive
 							echo ' ';
                             echo '</td>';
 							echo '<td>';
