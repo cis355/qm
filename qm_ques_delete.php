@@ -16,27 +16,40 @@ include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 require '/home/gpcorser/public_html/database/database.php';
 include 'session.php';
 $id = $_GET['id'];
-if ( !empty($_POST)) { // if user clicks "yes" (sure to delete), delete record
+if ( !empty($_POST)) { // if user clicks "Delete" (sure to delete), delete record
 	$id = $_POST['id'];
 	
 	$pdo = Database::connect();
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	$sql = "DELETE FROM qm_questions  WHERE id = ?";
+	$sql = "DELETE FROM  qm_options WHERE ques_id = ? ";
 	$q = $pdo->prepare($sql);
 	$q->execute(array($id));
 	Database::disconnect();
+ 
+  // delete from the ques table
+  $pdo = Database::connect();
+	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	$sql = "DELETE FROM  qm_questions WHERE id = ? ";
+	$q = $pdo->prepare($sql);
+	$q->execute(array($id));
+	Database::disconnect();
+ 
 	header("Location: qm_ques_list.php?quiz_id=" . $_SESSION['quiz_id']);
 	
-} 
-else { // otherwise, pre-populate fields to show data to be deleted
-	$pdo = Database::connect();
+} else {
+
+  $pdo = Database::connect();
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	$sql = "SELECT * FROM qm_questions where id = ?";
 	$q = $pdo->prepare($sql);
 	$q->execute(array($id));
 	$data = $q->fetch(PDO::FETCH_ASSOC);
 	Database::disconnect();
+ 
 }
+
+
+  
 ?>
 
 <!DOCTYPE html>
@@ -66,8 +79,8 @@ else { // otherwise, pre-populate fields to show data to be deleted
 							<input type="hidden" name="id" value="<?php echo $id;?>"/>
 							<p class="alert alert-error">Are you sure you want to delete?</p>
 							<div class="form-actions">
-								<button type="submit" class="btn btn-success">Yes</button>
-								<a class="btn btn-danger" href="qm_ques_list.php?quiz_id=<?php echo $_SESSION['quiz_id'];?>">No</a>
+								<button type="submit" class="btn btn-danger">Delete</button>
+								<a class="btn btn-success" href="qm_ques_archive.php?quiz_id=<?php echo $_SESSION['quiz_id'];?>&ques_id=<?php echo $_SESSION['ques_id']?>">Archive</a>
 							</div>
 						</form></td>
 						

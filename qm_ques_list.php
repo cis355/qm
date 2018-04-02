@@ -39,7 +39,7 @@ include '/home/gpcorser/public_html/database/header.php';
 					<?php 
 						include '/home/gpcorser/public_html/database/database.php';
 						$pdo = Database::connect();
-						$sql = 'SELECT * FROM qm_questions WHERE quiz_id=' . $_GET['quiz_id'] ;
+						$sql = 'SELECT * FROM qm_questions WHERE quiz_id=' . $_GET['quiz_id'] .' AND NOT archive_flag = 1' ;
 						foreach ($pdo->query($sql) as $row) {
 							echo '<tr>';
 							echo '<td>'. trim($row['id']) . '</td>';
