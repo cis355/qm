@@ -25,7 +25,10 @@ include '/home/gpcorser/public_html/database/database.php';
 			<h3>Persons</h3>
 		</div>
 		<div class="row">
-			
+			<p>
+				<a href="qm_per_list.php" class="btn btn-primary">Person List</a>
+				
+			</p>
 				
 			<table class="table table-striped table-bordered" style="background-color: lightgrey !important">
 				<thead>
