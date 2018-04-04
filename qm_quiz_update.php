@@ -4,26 +4,34 @@
  * author      : Todd Lovas III - tslovas
  * ---------------------------------------------------------------------------
  */
-
+// session_start();
+// if(!isset($_SESSION["fr_person_id"])){ // if "user" not set,
+	// session_destroy();
+	// header('Location: login.php');     // go to login page
+	// exit;
+// }
 include 'session.php';	
 require '/home/gpcorser/public_html/database/database.php';
-
-
-$id = $_GET['id']; // quiz id
-
+$id = $_GET['id'];
 if ( !empty($_POST)) { // if $_POST filled then process the form
-
+	# initialize/validate (same as file: fr_per_create.php)
 	// initialize user input validation variables
 	$quiz_nameError = null;
 	$quiz_descriptionError = null;
 	
+	
 	// initialize $_POST variables
-	//$quiz_id = $_POST['quiz_id'];
+	$quiz_id = $_POST['quiz_id'];
 	$quiz_name = $_POST['quiz_name'];
 	$quiz_description = $_POST['quiz_description'];
 	
 	//
-
+	// initialize $_FILES variables
+	$fileName = $_FILES['userfile']['name'];
+	$tmpName  = $_FILES['userfile']['tmp_name'];
+	$fileSize = $_FILES['userfile']['size'];
+	$fileType = $_FILES['userfile']['type'];
+	$content = file_get_contents($tmpName);
 	// validate user input
 	$valid = true;
 	if (empty($quiz_name)) {
@@ -35,7 +43,8 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 		$valid = false;
 	}
 
-
+	
+	// restrict file types for upload
 	
 	if ($valid) { // if valid user input update the database
 	
@@ -44,7 +53,7 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$sql = "UPDATE qm_quizzes  set quiz_name = ?, quiz_description = ? WHERE id = ?";
 			$q = $pdo->prepare($sql);
-			$q->execute(array($quiz_name, $quiz_description,$id));
+			$q->execute(array($quiz_name, $quiz_description));
 			Database::disconnect();
 			header("Location: qm_quiz_list.php?per_id=".$_SESSION['per_id']);
 		}
@@ -53,7 +62,7 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$sql = "UPDATE qm_quizzes  set quiz_name = ?, quiz_description = ? WHERE id = ?";
 			$q = $pdo->prepare($sql);
-			$q->execute(array($quiz_name, $quiz_description,$id));
+			$q->execute(array($quiz_name, $quiz_description));
 			Database::disconnect();
 			header("Location: qm_quiz_list.php?per_id=".$_SESSION['per_id']);
 		}
@@ -129,7 +138,7 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 				
 				<div class="form-actions">
 					<button type="submit" class="btn btn-success">Update</button>
-					<a class="btn btn-primary" href="qm_quiz_list.php">Back</a>
+					<a class="btn btn-primary" href="qm_quiz_list.php?per_id= <?php echo $_SESSION['per_id'];?>">Back</a>
 				</div>
 				
 			</form>
