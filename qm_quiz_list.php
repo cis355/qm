@@ -1,4 +1,4 @@
-<!-- 
+<!--
 ---------------------------------------------------------------------------
  filename    : qm_quiz_list.php
  author      : Dakota Ward, dlward@svsu.edu
@@ -18,11 +18,11 @@ include '/home/gpcorser/public_html/database/header.php';
                 <h3>Quiz List For: <?php
                    include '/home/gpcorser/public_html/database/.php';
                    $pdo = Database::connect();
-                   $sql = 'SELECT fname, lname FROM qm_persons WHERE id =' . 
+                   $sql = 'SELECT fname, lname FROM qm_persons WHERE id =' .
 				        $_GET['per_id'];
-							
+
 						foreach ($pdo->query($sql) as $row) {
-							echo $row['fname'], " ", $row['lname']; 
+							echo $row['fname'], " ", $row['lname'];
                    }
                    Database::disconnect();
                   ?></h3>
@@ -33,7 +33,7 @@ include '/home/gpcorser/public_html/database/header.php';
 			    <p>
                     <a href="qm_quiz_create.php?" class="btn btn-success">Create Quiz</a>
                 </p>
-				
+
                 <table class="table table-striped table-bordered" style="background-color: lightgrey !important">
                   <thead>
                     <tr>
@@ -45,11 +45,11 @@ include '/home/gpcorser/public_html/database/header.php';
                     </tr>
                   </thead>
                   <tbody>
-				  
+
                   <?php
-                   $sql = 'SELECT * FROM qm_quizzes WHERE per_id =' . 
-				        $_GET['per_id'].' AND archive_flag = 0 ORDER BY quiz_name'; 
-						
+                   $sql = 'SELECT * FROM qm_quizzes WHERE per_id =' .
+				        $_GET['per_id'].' AND archive_flag = 0 ORDER BY quiz_name';
+
 
 
                    foreach ($pdo->query($sql) as $row) {
@@ -69,13 +69,13 @@ include '/home/gpcorser/public_html/database/header.php';
 							echo '<a class="btn" href="qm_ques_list.php?quiz_id='.$row['id'].'">Questions List</a>';
 							echo '</td>';
 							echo '<td>';
-							echo '<a class="btn" href="qm_qa_list.php?id='.$row['id'].'">Quiz Attempts</a>';
+							echo '<a class="btn" href="qm_qa_list.php?quiz_id='.$row['id'].'">Quiz Attempts</a>';
 							echo '</td>';
                             echo '</tr>';
                    }
                    Database::disconnect();
                   ?>
-				  
+
                   </tbody>
             </table>
 			<br/>

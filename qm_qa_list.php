@@ -6,6 +6,7 @@
  * ---------------------------------------------------------------------------
  */
 
+
 session_start();
 if(!isset($_SESSION["per_id"])){ // if "user" not set,
 	session_destroy();
@@ -13,6 +14,23 @@ if(!isset($_SESSION["per_id"])){ // if "user" not set,
 	exit;
 }
 $per_id = $_SESSION['per_id'];
+
+function adminOrTeacher($f){
+	$f($_GET['quiz_id']);
+}
+
+function student($f){
+	$f();
+}
+
+function showPage($id=NONE){
+	if($id==NONE){
+		// Show view for students
+	}
+	else {
+		// Show view for admins/teachers
+	}
+}
 
 include '/home/gpcorser/public_html/database/header.php'; // html <head> section
 require '/home/gpcorser/public_html/database/database.php';
@@ -36,9 +54,11 @@ require '/home/gpcorser/public_html/database/database.php';
       // '. trim($row['quiz_name']) . '
       // INNER JOIN qm_quizzes WHERE qm_quizzes.per_id=$per_id qm_attempts.quiz_id=qm_quizzes.id
       if ($_GET['id']){
+				adminOrTeacher(showPage());
         $sql = "SELECT quiz_name, qa_score, qa_start_date, qa_start_time, qa_end_date, qa_end_time, qm_attempts.id  FROM qm_attempts INNER JOIN qm_quizzes ON qm_quizzes.per_id=$per_id, qm_quizzes.id=$quiz_id ORDER BY qm_quizzes.quiz_name";
       }
       else {
+				student(showPage());
         $sql = "SELECT quiz_name, qa_score, qa_start_date, qa_start_time, qa_end_date, qa_end_time, qm_attempts.id  FROM qm_attempts INNER JOIN qm_quizzes ON qm_quizzes.per_id=$per_id ORDER BY qm_quizzes.quiz_name";
       }
       foreach ($pdo->query($sql) as $row) {
@@ -49,7 +69,7 @@ require '/home/gpcorser/public_html/database/database.php';
         echo '<td>'. trim($row['qa_start_time']) . '</td>';
         echo '<td>'. trim($row['qa_end_date']) . '</td>';
         echo '<td>'. trim($row['qa_end_time']) . '</td>';
-				
+				echo '<td><a href="qm_qa_delete.php?attempt_id='. trim($row['id']).'" class="btn btn-danger">Delete</a> <a href="qm_qa_update.php?attempt_id='. trim($row['id']) . '" class="btn btn-success">Update</a>' .'</td>'
         echo '</tr>';
       }
       echo '</tbody></table> </div><p>Made by: Brandon Gage bgage@svsu.edu</p>';
