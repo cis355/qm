@@ -41,8 +41,8 @@ include '/home/gpcorser/public_html/database/header.php';
                       <th>Quiz Name</th>
 					  <!--<th>Archived?</th><!--check if archived-->
 					  <th>Options</th>
-					  <th>Quiz Questions</th>
-					  <th>Quiz Attempts</th>
+					 <!-- <th>Quiz Questions</th>
+					  <th>Quiz Attempts</th>-->
                     </tr>
                   </thead>
                   <tbody>
@@ -66,12 +66,12 @@ include '/home/gpcorser/public_html/database/header.php';
                             echo '<a class="btn btn-success" href="qm_quiz_archive.php?id='.$row['id'].'">Restore</a>'; //changed delete to archive
 							echo ' ';
                             echo '</td>';
-							echo '<td>';
-							echo '<a class="btn" href="qm_ques_list.php?quiz_id='.$row['id'].'">Questions List</a>';
-							echo '</td>';
-							echo '<td>';
-							echo '<a class="btn" href="qm_qa_list.php?id='.$row['id'].'">Quiz Attempts</a>';
-							echo '</td>';
+							//echo '<td>';
+							//echo '<a class="btn" href="qm_ques_list.php?quiz_id='.$row['id'].'">Questions List</a>';
+							//echo '</td>';
+							//echo '<td>';
+							//echo '<a class="btn" href="qm_qa_list.php?id='.$row['id'].'">Quiz Attempts</a>';
+							//echo '</td>';
                             echo '</tr>';
                    }
                    Database::disconnect();
