@@ -4,11 +4,14 @@
  * author      : George Corser, gcorser@gmail.com
  * description : This program logs the user in by setting $_SESSION variables
  * ---------------------------------------------------------------------------
+ * The system knows the login is successful if $_SESSION['role'] is set.
  */
 // Start or resume session, and create: $_SESSION[] array
-session_start(); 
+session_destroy(); // destroy any existing session
+session_start(); // and start a new one
 
 include '/home/gpcorser/public_html/database/database.php';
+include '/home/gpcorser/public_html/database/header.php';
 
 if ( !empty($_POST)) { // if $_POST filled then process the form
 	// initialize $_POST variables
@@ -69,33 +72,13 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 // if $_POST NOT filled then display login form, below.
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <link   href="css/bootstrap.min.css" rel="stylesheet">
-    <script src="js/bootstrap.min.js"></script>
-	<link rel="icon" href="cardinal_logo.png" type="image/png" />
-</head>
-
 <body>
     <div class="container">
 
 		<div class="span10 offset1">
-		
-			<div class="row">
-				<img src="svsu_fr_logo.png" />
-			</div>
-			
-			<!--
-			<div class="row">
-				<br />
-				<p style="color: red;">System temporarily unavailable.</p>
-			</div>
-			-->
 
 			<div class="row">
-				<h3>Volunteer Login</h3>
+				<h3>Login</h3>
 			</div>
 
 			<form class="form-horizontal" action="login.php" method="post">
