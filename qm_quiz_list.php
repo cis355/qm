@@ -31,7 +31,8 @@ include '/home/gpcorser/public_html/database/header.php';
             </div>
             <div class="row">
 			    <p>
-                    <a href="qm_quiz_create.php?" class="btn btn-success">Create Quiz</a>
+                    <a href="qm_quiz_create.php?per_id=<?php echo $_GET['per_id'];?>" class="btn btn-success">Create Quiz</a>
+					<a href="qm_quiz_list_archive.php?per_id=<?php echo $_GET['per_id'];?>" class="btn btn-secondary">View Archive</a>
                 </p>
 				
                 <table class="table table-striped table-bordered" style="background-color: lightgrey !important">
