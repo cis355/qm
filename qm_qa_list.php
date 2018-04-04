@@ -13,9 +13,9 @@ if(!isset($_SESSION["per_id"])){ // if "user" not set,
 	header('Location: login.php');     // go to login page
 	exit;
 }
-$per_id = $_SESSION['per_id'];
 
 function adminOrTeacher($f){
+	if()
 	$f($_GET['quiz_id']);
 }
 
@@ -23,12 +23,43 @@ function student($f){
 	$f();
 }
 
-function showPage($id=NONE){
-	if($id==NONE){
+function showPage($quiz_id=NONE){
+	// Student Page
+	$per_id = $_SESSION['per_id'];
+	if($quiz_id==NONE){
 		// Show view for students
+		$pdo = Database::connect();
+
+		$sql = 'SELECT fname, lname FROM qm_persons WHERE id = ?';
+		$q = $pdo->prepare($sql);
+		$q->execute(array($per_id));
+		$data = $q->fetch(PDO::FETCH_ASSOC);
+		echo '<div class="row">By: ' . $data['lname'] . ", " . $data['fname'] . '</div>';
+		echo '<div class="row"><p><a href="qm_qa_create.php?per_id=' . $per_id .'" class="btn btn-primary">Add Attempt</a></p><table class="table table-striped table-bordered" style="background-color: lightgrey !important"><thead><tr><th>Quiz Name</th><th>Quiz Score</th><th>Start Date</th><th>End Date</th><th>Action</th></tr></thead><tbody>';
+		$sql = "SELECT quiz_name, qa_score, qa_start_date, qa_end_date, qm_attempts.id  FROM qm_attempts, qm_quizzes WHERE qm_quizzes.per_id=$per_id ORDER BY qm_quizzes.quiz_name";
+		foreach ($pdo->query($sql) as $row) {
+			echo '<tr>';
+			echo '<td>' . trim($row['quiz_name']) . '</td>';
+			echo '<td>'. trim($row['qa_score']) . '</td>';
+			echo '<td>'. trim($row['qa_start_date']) . '</td>';
+			echo '<td>'. trim($row['qa_end_date']) . '</td>';
+			echo '<td><a href="qm_qa_delete.php?attempt_id='. trim($row['id']).'" class="btn btn-danger">Delete</a> <a href="qm_qa_update.php?attempt_id='. trim($row['id']) . '" class="btn btn-success">Update</a>' .'</td>';
+			echo '</tr>';
+		}
+		echo '</tbody></table> </div><p>Made by: Brandon Gage bgage@svsu.edu</p>';
+		Database::disconnect();
 	}
+	// Admin/Teacher Page
 	else {
 		// Show view for admins/teachers
+		$pdo = Database::connect();
+		$sql = 'SELECT quiz_name FROM qm_quizzes WHERE quiz_id = ?';
+		$q = $pdo->prepare($sql);
+		$q->execute(array($quiz_id));
+		$data = $q->fetch(PDO::FETCH_ASSOC);
+		echo '<div class="row" >Quiz: ' . $data['quiz_name'] . '</div>';
+		$sql = "SELECT qa_score, qa_start_date, qa_end_date, qm_attempts.id  FROM qm_attempts, qm_quizzes WHERE qm_quizzes.per_id=$per_id, qm_quizzes.id=$quiz_id ORDER BY qm_quizzes.quiz_name";
+		Database::disconnect();
 	}
 }
 
@@ -41,39 +72,16 @@ require '/home/gpcorser/public_html/database/database.php';
       <h3>Attempts</h3>
 
       <?php
+      $quiz_id = $_GET['quiz_id'];
 
-      $pdo = Database::connect();
-      $sql = 'SELECT fname, lname FROM qm_persons WHERE id = ?';
-      $quiz_id = $_GET['id'];
-      $q = $pdo->prepare($sql);
-      $q->execute(array($per_id));
-      $data = $q->fetch(PDO::FETCH_ASSOC);
-      echo '<div class="row">By: ' . $data['lname'] . ", " . $data['fname'] . '</div>';
+      if ($_GET['quiz_id']){
+				adminOrTeacher('showPage');
 
-      echo '<div class="row"><p><a href="qm_qa_create.php?per_id=' . $per_id .'" class="btn btn-primary">Add Attempt</a></p><table class="table table-striped table-bordered" style="background-color: lightgrey !important"><thead><tr><th>Quiz Name</th><th>Quiz Score</th><th>Start Date</th> <th>Start Time</th> <th>End Date</th> <th>End Time</th><th>Action</th></tr></thead><tbody>';
-      // '. trim($row['quiz_name']) . '
-      // INNER JOIN qm_quizzes WHERE qm_quizzes.per_id=$per_id qm_attempts.quiz_id=qm_quizzes.id
-      if ($_GET['id']){
-				adminOrTeacher(showPage());
-        $sql = "SELECT quiz_name, qa_score, qa_start_date, qa_start_time, qa_end_date, qa_end_time, qm_attempts.id  FROM qm_attempts INNER JOIN qm_quizzes ON qm_quizzes.per_id=$per_id, qm_quizzes.id=$quiz_id ORDER BY qm_quizzes.quiz_name";
       }
       else {
-				student(showPage());
-        $sql = "SELECT quiz_name, qa_score, qa_start_date, qa_start_time, qa_end_date, qa_end_time, qm_attempts.id  FROM qm_attempts INNER JOIN qm_quizzes ON qm_quizzes.per_id=$per_id ORDER BY qm_quizzes.quiz_name";
+				student('showPage');
       }
-      foreach ($pdo->query($sql) as $row) {
-        echo '<tr>';
-        echo '<td>' . trim($row['quiz_name']) . '</td>';
-        echo '<td>'. trim($row['qa_score']) . '</td>';
-        echo '<td>'. trim($row['qa_start_date']) . '</td>';
-        echo '<td>'. trim($row['qa_start_time']) . '</td>';
-        echo '<td>'. trim($row['qa_end_date']) . '</td>';
-        echo '<td>'. trim($row['qa_end_time']) . '</td>';
-				echo '<td><a href="qm_qa_delete.php?attempt_id='. trim($row['id']).'" class="btn btn-danger">Delete</a> <a href="qm_qa_update.php?attempt_id='. trim($row['id']) . '" class="btn btn-success">Update</a>' .'</td>'
-        echo '</tr>';
-      }
-      echo '</tbody></table> </div><p>Made by: Brandon Gage bgage@svsu.edu</p>';
-      Database::disconnect();
+
       ?>
 		</div>
 
