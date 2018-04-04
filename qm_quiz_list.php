@@ -38,7 +38,7 @@ include '/home/gpcorser/public_html/database/header.php';
                   <thead>
                     <tr>
                       <th>Quiz Name</th>
-					  <th>Archived?</th><!--check if archived-->
+					  <!--<th>Archived?</th><!--check if archived-->
 					  <th>Options</th>
 					  <th>Quiz Questions</th>
 					  <th>Quiz Attempts</th>
