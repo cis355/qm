@@ -49,7 +49,7 @@ require '/home/gpcorser/public_html/database/database.php';
         echo '<td>'. trim($row['qa_start_time']) . '</td>';
         echo '<td>'. trim($row['qa_end_date']) . '</td>';
         echo '<td>'. trim($row['qa_end_time']) . '</td>';
-
+				
         echo '</tr>';
       }
       echo '</tbody></table> </div><p>Made by: Brandon Gage bgage@svsu.edu</p>';
